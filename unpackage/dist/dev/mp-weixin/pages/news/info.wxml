@@ -1,0 +1,1 @@
+<view class="container"><view class="main"><view class="m-title">{{mainData.title}}</view><view class="m-date">{{$root.m0}}</view><rich-text nodes="{{mainData.content}}"></rich-text></view></view>

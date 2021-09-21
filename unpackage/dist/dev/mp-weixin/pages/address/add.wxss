@@ -1,0 +1,93 @@
+
+page {
+	background-color: #ffffff !important;
+}
+.t-box {
+	background-color: #ffffff;
+	width: 92%;
+	margin-left: 4%;
+	padding: 11.25rpx 0 7.5rpx 0;
+}
+.t-item {
+	border-bottom: 1px solid #efefef;
+	clear: both;
+	height: 100rpx;
+	line-height: 100rpx;
+	margin-bottom: 20rpx;
+}
+.t-item .t-tit {
+	height: 100rpx;
+	line-height: 100rpx;
+}
+.t-t {
+	width: 150rpx;
+	text-align: right;
+	float: left;
+	font-size: 30rpx;
+}
+.t-input {
+	height: 100rpx;
+	line-height: 100rpx;
+	font-size: 26rpx;
+}
+.b-box {
+	width: 92%;
+	margin-left: 4%;
+}
+.blt-botton {
+	border: 1px solid #dedede;
+	color: #333333;
+	background-color: #ffffff;
+	margin-bottom: 19rpx;
+	width: 100%;
+	text-align: center;
+	height: 86rpx;
+	line-height: 86rpx;
+	border-radius: 11rpx;
+	font-size: 30rpx;
+}
+.blt-r {
+	color: #5e5e5e;
+	font-size: 22.5rpx;
+	float: left;
+}
+.blt-z {
+	color: #5e5e5e;
+	font-size: 22.5rpx;
+	float: right;
+}
+.sku-tj {
+	width: 86%;
+	margin-left: 7%;
+	text-align: center;
+	position: fixed;
+	bottom: 30rpx;
+	background-color: #2e2d32;
+	height: 90rpx;
+	line-height: 90rpx;
+	color: #ffffff;
+	border-radius: 10rpx;
+}
+.t-tit {
+	float: left;
+	width: 180rpx;
+}
+.t-address {
+	float: left;
+	height: 100rpx;
+	line-height: 100rpx;
+	font-size: 26rpx;
+}
+.ad-r {
+	float: right;
+	height: 100rpx;
+	line-height: 100rpx;
+	color: #cccccc;
+}
+.ito {
+	color: #c4aeba;
+}
+.swr {
+	float: right;
+}
+

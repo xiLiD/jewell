@@ -1,0 +1,23 @@
+
+.con{
+	width: 710rpx;
+	margin: 12rpx 0 20rpx 20rpx;
+}
+.i-t-t{
+	font-size: 34rpx;
+	color: #000000; 
+	display: block;
+	font-weight: bold;
+}
+.i-t{
+	display: block;
+	font-weight: bold;
+	font-size: 30rpx;
+	margin-top: 19rpx;
+}
+.i-intro{
+	display: block;
+	text-indent: 49rpx;
+	margin-top: 7.5rpx;
+}
+

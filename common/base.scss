@@ -1,0 +1,249 @@
+page{
+	height: 99%;
+}
+view{
+	font-size: 28rpx;
+	box-sizing: border-box;
+}
+
+.page{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: #F1F1F3;
+	.layout{
+		flex: 1;
+		overflow-y: auto;
+	}
+	&.pagebg{
+		background: url(./static/images/pagebg.png) no-repeat center top;
+		background-size: 100% 300rpx;
+		.header{
+			background: transparent;
+		}
+	}
+}
+.bg{
+	background: #fff;
+}
+.fw{
+	width: 710rpx !important;
+	margin: 0 auto;
+}
+.wp{
+	width: 100% !important;
+}
+.hp{
+	height: 100% !important;
+}
+.mtb{
+	margin: $mar auto !important;
+}
+.mt{
+	margin-top: $mar !important;
+}
+.ml{
+	margin-left: $mar !important;
+}
+.mr{
+	margin-right: $mar !important;
+}
+.mb{
+	margin-bottom: $mar !important;
+}
+.pad{
+	padding: 0 $pad !important;
+}
+.padtb{
+	padding: $pad 0 !important;
+}
+.shadow{
+	border-radius: $radius;
+	box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+}
+
+
+
+.f{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	&.fs{
+		justify-content: flex-start;
+	}
+	&.fe{
+		justify-content: flex-end;
+	}
+	&.fc{
+		justify-content: center;
+	}
+	&.fa{
+		justify-content: space-around;
+	}
+	&.fb{
+		justify-content: space-between;
+	}
+	&.fn{
+		flex-direction: column;
+	}
+	&.fp{
+		flex-wrap: wrap;
+	}
+	&.vfs{
+		align-items: flex-start;
+	}
+}
+.fl{
+	flex: 1;
+}
+.fln{
+	flex: none;
+}
+.fauto{
+	flex: auto;
+}
+
+.textarea-placeholder,
+.input-placeholder{
+	font-weight: 200;
+	color: #999;
+}
+
+.before{
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100% !important;
+		height: 1px !important;
+		background: $uni-border-color;
+		transform: scaleY(.5);
+	}
+}
+.after{
+	position: relative;
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100% !important;
+		height: 1px !important;
+		background: $uni-border-color;
+		transform: scaleY(.5);
+	}
+}
+
+.searchBar{
+	flex: none;
+	height: 70rpx;
+	margin: $mar auto;
+	.input,.picker{
+		height: 70rpx;
+		padding: 0 20rpx 0 20rpx;
+		line-height: 70rpx;
+		border-radius: 60rpx;
+		&.ml{
+			margin-left: 10rpx !important;
+		}
+	}
+	.picker{
+		position: relative;
+		padding: 0 40rpx 0 20rpx;
+		input{
+			height: 70rpx;
+		}
+		icon{
+			position: absolute;
+			top: 5rpx;
+			right: 10rpx;
+			width: 30rpx;
+			font-size: 28rpx;
+			transform: rotate(180deg);
+		}
+	}
+	.bn{
+		width: 150rpx;
+		height: 70rpx;
+		margin-left: 10rpx;
+		font-size: 32rpx;
+		color: #fff;
+		background: $color;
+		border-radius: 60rpx;
+		&.searchBtn{
+			width: 70rpx;
+			background: $color url(./static/images/search.png) no-repeat center;
+			background-size: 50rpx;
+			border-radius: 70rpx;
+		}
+		icon{
+			width: 40rpx;
+			height: 40rpx;
+			margin-right: 10rpx;
+			&.search{
+				background: url(./static/images/search.png) no-repeat center;
+				background-size: 40rpx;
+			}
+			&.add{
+				background: url(./static/images/add.png) no-repeat center;
+				background-size: 40rpx;
+			}
+			&.report{
+				background: url(./static/images/report.png) no-repeat center;
+				background-size: 40rpx;
+			}
+		}
+	}
+	&.searchBar{
+		.bn{
+			width: auto;
+			padding: 0 20rpx;
+			icon{
+				margin: 0;
+			}
+		}
+	}
+}
+
+.btn{
+	height: 70rpx;
+	padding: 0 30rpx;
+	line-height: 70rpx;
+	color: #fff;
+	background: $color;
+	border-radius: 40rpx;
+	&.btn{
+		margin-left: 10rpx;
+	}
+	&.green{
+		background: #2D8149;
+	}
+}
+
+
+
+.el{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.auto{
+	overflow: auto !important;
+}
+
+
+.nodata{
+	width: 100%;
+	height: 100%;
+	.img{
+		width: 375rpx;
+		height: 270rpx;
+		background: url(./static/images/nodata.png) no-repeat center;
+		background-size: 375rpx 270rpx;
+	}
+	.text{
+		color: #A9A9A9;
+	}
+}

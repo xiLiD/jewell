@@ -1,0 +1,54 @@
+
+.xmx {
+	margin-right: 30rpx;
+	margin-top: 30rpx;
+	color: #545454;
+	font-weight: 600;
+	float: right;
+	clear: both;
+	margin-bottom: 170rpx;
+}
+.main-con {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	clear: both;
+}
+.main-con image {
+	width: 100rpx;
+	height: 100rpx;
+}
+.main-titel {
+	color: #545454;
+	font-size: 35rpx;
+	font-weight: 600;
+	margin-top: 30rpx;
+}
+.main-price {
+	font-size: 75rpx;
+	color: #000000;
+	font-weight: 600;
+}
+.main-price text {
+	font-size: 45rpx;
+}
+.main-bottom {
+	position: absolute;
+	bottom: 200rpx;
+	width: 600rpx;
+	margin-left: 75rpx;
+}
+.btn-con {
+	background-color: #212025;
+	color: #f7d3a1;
+	width: 250rpx;
+	text-align: center;
+	height: 88rpx;
+	line-height: 88rpx;
+	margin: 0 auto;
+}
+
+/* .btn-con:nth-child(1){
+	margin-right: 100upx;
+} */
+

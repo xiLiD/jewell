@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "银元宝",
+  "usingComponents": {
+    "ss-payment-password": "/components/sanshui-payment-password/index"
+  }
+}

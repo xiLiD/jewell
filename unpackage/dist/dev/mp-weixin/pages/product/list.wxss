@@ -1,0 +1,81 @@
+
+.t_se {
+	width: 690rpx;
+	margin: 0 auto;
+	margin-top: 10rpx;
+}
+.t_main {
+	width: 690rpx;
+	margin: 0 auto;
+	border-top: 1px solid #eeeeee;
+	margin-top: 30rpx;
+	clear: both;
+}
+.t_item {
+	width: 330rpx;
+	float: left;
+	margin-top: 20rpx;
+}
+.t_item:nth-child(even) {
+	float: right;
+}
+.t_item .t_img {
+	width: 330rpx;
+	height: 330rpx;
+}
+.t_item .t_img image {
+	width: 330rpx;
+	height: 330rpx;
+}
+.t_b {
+	margin: 15rpx 0;
+}
+.t_b .t_r_t {
+	color: #303241;
+	font-size: 28rpx;
+	width: 330rpx;
+	height: 45rpx;
+	line-height: 45rpx;
+	overflow: hidden;
+}
+.t_b .t_r_i {
+	color: #96979c;
+	font-size: 20rpx;
+	width: 330rpx;
+	height: 35rpx;
+	line-height: 35rpx;
+	overflow: hidden;
+}
+.t_b .t_r_price{
+	font-size: 28rpx;
+	width: 330rpx;
+	height: 45rpx;
+	line-height: 45rpx;
+	overflow: hidden;
+	font-weight: 600;
+}
+.uni-loadmore {
+	clear: both;
+}
+.t-status{
+	position: absolute;
+	z-index: 100;
+	width: 120rpx;
+	text-align: center;
+	height: 50rpx;
+	line-height: 50rpx;
+	border-radius: 25rpx;
+	font-size: 25rpx;
+	margin:20rpx 0 0 200rpx;
+}
+.t-status-a{
+	background-color: #e2ac35;
+	color: #FFFFFF;
+	font-weight: 600;
+}
+.t-status-b{
+	background-color: #EFEFEF;
+	color: #000000;
+	font-weight: 600;
+}
+

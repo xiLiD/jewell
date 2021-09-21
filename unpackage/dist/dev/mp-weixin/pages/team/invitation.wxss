@@ -1,0 +1,108 @@
+
+.tki-qrcode {
+  position: relative;
+}
+.tki-qrcode-canvas {
+  position: fixed;
+  top: -99999rpx;
+  left: -99999rpx;
+  z-index: -99999;
+}
+
+
+.top {
+	background: #e93d3d;
+	width: 100%;
+	height: 300rpx;
+}
+.main {
+	background: #FFFFFF;
+	width: 100%;
+	border-radius: 60rpx;
+	margin-top: -60rpx;
+	text-align: center;
+}
+.main-title {
+	font-size: 45rpx;
+	font-weight: 600;
+	color: #000000;
+	line-height: 70rpx;
+	padding-top: 50rpx;
+}
+.main-intro {
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 35rpx;
+}
+.qr-code {
+	width: 350rpx;
+	height: 350rpx;
+	margin-top: 30rpx;
+}
+.main-center {
+	margin-top: 40rpx;
+}
+.main-center view {
+	color: #FFFFFF;
+	background-color: #32b17e;
+	width: 240rpx;
+	height: 66rpx;
+	line-height: 66rpx;
+	text-align: center;
+	border-radius: 33rpx;
+}
+.center-l {
+	float: left;
+	margin-left: 67rpx;
+}
+.center-r {
+	float: right;
+	margin-right: 67rpx;
+}
+.main-bottom {
+	width: 100%;
+	clear: both;
+	height: 50rpx;
+	line-height: 50rpx;
+	padding-top: 40rpx;
+}
+.main-bottom view {
+	float: left;
+}
+.h-l {
+	height: 5rpx;
+	width: 220rpx;
+	background-color: #dddddd;
+	margin-top: 22rpx;
+	margin-left: 80rpx;
+}
+.h-c {
+	color: #969696;
+	width: 150rpx;
+	text-align: center;
+}
+.h-r {
+	height: 5rpx;
+	width: 220rpx;
+	background-color: #dddddd;
+	margin-top: 22rpx;
+}
+.m-intro {
+	width: 100%;
+	clear: both;
+	text-align: left;
+	text-indent: 100rpx;
+}
+.m-img {
+	margin-top: 20rpx;
+	clear: both;
+	padding-top: 10rpx;
+}
+.m-img image {
+	width: 80rpx;
+	height: 80rpx;
+}
+.m-img image:nth-child(1) {
+	margin-right: 50rpx;
+}
+

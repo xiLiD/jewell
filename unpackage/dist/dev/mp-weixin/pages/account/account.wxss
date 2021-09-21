@@ -1,0 +1,120 @@
+
+.container,
+page {
+	background-color: #f4f5f6;
+}
+.top {
+	width: 100%;
+	height: 300rpx;
+	background-color: #de373e;
+	text-align: center;
+	padding-top: 50rpx;
+}
+.top .money {
+	color: #FFFFFF;
+	font-size: 55rpx;
+	font-weight: 600;
+	height: 80rpx;
+	line-height: 80rpx;
+	margin-bottom: 15rpx;
+}
+.top .intro {
+	color: #FFFFFF;
+	font-size: 25rpx;
+	margin-bottom: 30rpx;
+}
+.bt-box {
+	width: 550rpx;
+	margin: 0 auto;
+	margin-top: 50rpx;
+}
+.top .bt-tx {
+	color: #FFFFFF;
+	font-size: 30rpx;
+	border: 1px solid #FFFFFF;
+	width: 150rpx;
+	margin: 0 auto;
+	height: 56rpx;
+	line-height: 56rpx;
+	border-radius: 28rpx;
+	margin-bottom: 10rpx;
+	float: left;
+}
+.bt-tx:nth-child(1),
+.bt-tx:nth-child(2) {
+	margin-right: 50rpx;
+}
+.m-btn {
+	width: 750rpx;
+	height: 100rpx;
+	line-height: 100rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+.m-btn view {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	text-align: center;
+	height: 100rpx;
+	line-height: 100rpx;
+}
+.m-btn view text {
+	font-size: 34rpx;
+	margin-right: 15rpx;
+}
+.m-btn .m-btn-a {
+	background-color: #e93f42;
+	color: #FFFFFF;
+}
+.m-btn .m-btn-b {
+	background-color: #c92b39;
+	color: #FFFFFF;
+}
+.m-main {
+	width: 680rpx;
+	margin: 0 auto;
+	margin-top: 50rpx;
+}
+.m-main .m-item {
+	width: 320rpx;
+	height: 240rpx;
+	background-color: #FFFFFF;
+	float: left;
+	margin-bottom: 30rpx;
+	border-radius: 25rpx;
+	padding: 20rpx;
+}
+.m-item:nth-child(even) {
+	float: right;
+}
+.m-item .m-title {
+	font-size: 30rpx;
+	height: 55rpx;
+	line-height: 55rpx;
+	color: #000000;
+}
+.m-item .m-num {
+	color: #b43c58;
+	text-align: center;
+	height: 90rpx;
+	line-height: 90rpx;
+	font-weight: 600;
+}
+.m-item .m-link {
+	text-align: center;
+	color: #000000;
+}
+.m-item .m-link text {
+	text-align: center;
+	color: #9d9d9b;
+	font-size: 32rpx;
+}
+.bt-mx {
+	color: #FFFFFF;
+	position: absolute;
+	top: 40rpx;
+	right: 30rpx;
+}
+

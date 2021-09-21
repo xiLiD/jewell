@@ -1,0 +1,117 @@
+
+.container,
+page {
+	background-color: #f4f5f6;
+}
+.top-address {
+	background-color: #ffffff;
+	width: 750rpx;
+	margin: 0 auto;
+	margin-bottom: 20rpx;
+}
+.ad-t {
+	width: 710rpx;
+	margin: 0 auto;
+	margin-top: 20rpx;
+	height: 130rpx;
+	padding-top: 10rpx;
+}
+.ad-b {
+	width: 710rpx;
+	margin: 0 auto;
+	height: 100rpx;
+	line-height: 100rpx;
+	border-top: 1px solid #eeeeee;
+}
+.ad-b .ad-b-l {
+	width: 50%;
+	float: left;
+	height: 100rpx;
+	line-height: 100rpx;
+	color: #666666;
+}
+.ad-b .ad-b-l text {
+	color: #353b50;
+	font-size: 35rpx;
+	padding-right: 20rpx;
+	color: #d2a971;
+}
+.ad-b .ad-b-l .rsh {
+	color: #d5d6d9;
+}
+.ad-b .ad-b-r {
+	width: 50%;
+	float: right;
+	text-align: right;
+	height: 100rpx;
+	line-height: 100rpx;
+}
+.ad-b .ad-b-r text {
+	color: #353b50;
+	font-size: 38rpx;
+	margin-left: 20rpx;
+}
+.top-address .ad-l {
+	height: 50rpx;
+	line-height: 50rpx;
+	width: 50rpx;
+	text-align: center;
+	font-size: 25rpx;
+	float: left;
+	color: #ffffff;
+	background-color: #d5d6d9;
+	border-radius: 25rpx;
+	margin: 35rpx 35rpx 35rpx 0;
+}
+.top-address .ad-default {
+	color: #000000;
+	background-color: #d1a971;
+}
+.top-address .ad-c {
+	float: left;
+	height: 120rpx;
+	line-height: 120rpx;
+	color: #363636;
+	font-size: 30rpx;
+	width: 410rpx;
+}
+.ad-c .ad-c-n {
+	font-size: 30rpx;
+	line-height: 45rpx;
+	margin-top: 15rpx;
+	color: #000000;
+}
+.ad-c .ad-c-n text {
+	font-size: 25rpx;
+	padding-left: 30rpx;
+	color: #999999;
+}
+.ad-c .ad-c-i {
+	font-size: 25rpx;
+	line-height: 45rpx;
+	height: 45rpx;
+	overflow: hidden;
+	color: #999999;
+}
+.top-address .ad-r {
+	float: left;
+	height: 120rpx;
+	line-height: 120rpx;
+	width: 120rpx;
+	text-align: center;
+	float: right;
+	color: #cccccc;
+}
+.sku-tj {
+	width: 86%;
+	margin-left: 7%;
+	text-align: center;
+	position: fixed;
+	bottom: 30rpx;
+	background-color: #2e2d32;
+	height: 90rpx;
+	line-height: 90rpx;
+	color: #ffffff;
+	border-radius: 10rpx;
+}
+

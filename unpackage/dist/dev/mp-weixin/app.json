@@ -1,0 +1,93 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/shop/list",
+    "pages/shop/info",
+    "pages/shop/confirmOrder",
+    "pages/product/list",
+    "pages/product/info",
+    "pages/product/confirmOrder",
+    "pages/address/list",
+    "pages/address/add",
+    "pages/news/list",
+    "pages/news/notice",
+    "pages/news/info",
+    "pages/news/noticeInfo",
+    "pages/account/collection",
+    "pages/account/setCard",
+    "pages/account/details",
+    "pages/account/recommend",
+    "pages/account/team",
+    "pages/account/achievement",
+    "pages/account/withdrawal",
+    "pages/account/withdrawalInfo",
+    "pages/account/give",
+    "pages/account/change",
+    "pages/account/recharge",
+    "pages/account/account",
+    "pages/account/balance",
+    "pages/account/silver",
+    "pages/team/friends",
+    "pages/team/invitation",
+    "pages/order/list",
+    "pages/order/buyList",
+    "pages/order/info",
+    "pages/order/pay",
+    "pages/member/center",
+    "pages/member/details",
+    "pages/member/retrieve",
+    "pages/member/registered",
+    "pages/member/changePwd",
+    "pages/member/setPhone",
+    "pages/member/login",
+    "pages/member/information",
+    "pages/member/protocol",
+    "pages/card/list"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "default",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#EFEFEF",
+    "backgroundColor": "#EFEFEF"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#00a869",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/tab_main_normal.png",
+        "selectedIconPath": "static/images/tab_main_checked.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/shop/list",
+        "iconPath": "static/images/tab_shop_normal.png",
+        "selectedIconPath": "static/images/tab_shop_checked.png",
+        "text": "元宝商城"
+      },
+      {
+        "pagePath": "pages/news/list",
+        "iconPath": "static/images/tab_news_normal.png",
+        "selectedIconPath": "static/images/tab_news_checked.png",
+        "text": "新闻资讯"
+      },
+      {
+        "pagePath": "pages/member/center",
+        "iconPath": "static/images/tab_found_me_normal.png",
+        "selectedIconPath": "static/images/tab_found_me_select.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取用户当前位置，以便最近门店为客户提供服务"
+    }
+  },
+  "usingComponents": {}
+}

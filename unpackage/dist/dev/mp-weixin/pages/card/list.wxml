@@ -1,0 +1,1 @@
+<view class="main"><view class="m-item"><view class="p-l">{{mainItem.money+"元/月"}}</view><view class="p-c"><view class="p-c-t">{{mainItem.name}}</view><view class="p-c-b">{{mainItem.strDate}}</view></view><view data-event-opts="{{[['tap',[['buy',['$event']]]]]}}" class="p-r" bindtap="__e">购买</view></view></view>

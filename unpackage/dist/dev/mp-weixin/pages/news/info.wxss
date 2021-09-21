@@ -1,0 +1,19 @@
+
+.main {
+	width: 710rpx;
+	margin: 0 auto;
+}
+.m-title {
+	line-height: 55rpx;
+	font-size: 33rpx;
+	font-weight: 600;
+	margin-top: 20rpx;
+}
+.m-date {
+	font-size: 25rpx;
+	color: #999999;
+	height: 55rpx;
+	line-height: 55rpx;
+	margin-bottom: 20rpx;
+}
+

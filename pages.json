@@ -1,0 +1,126 @@
+{
+	"pages": [
+		{"path": "pages/index/index","style": {"navigationBarTitleText": "首页","navigationStyle":"custom"}},
+		
+		{"path": "pages/shop/list","style": {"navigationBarTitleText": "元宝商城","navigationStyle":"custom","enablePullDownRefresh": true}},
+		{"path": "pages/shop/info","style": {"navigationBarTitleText": "商品详情"}},
+		{"path": "pages/shop/confirmOrder","style": {"navigationBarTitleText": "提交订单"}},
+		
+		{"path": "pages/product/list","style": {"navigationBarTitleText": "商品列表","enablePullDownRefresh": true}},
+		{"path": "pages/product/info","style": {"navigationBarTitleText": "商品详情"}},
+		{"path": "pages/product/confirmOrder","style": {"navigationBarTitleText": "提交订单"}},
+		
+		{"path": "pages/address/list","style": {"navigationBarTitleText": "收货地址"}},
+		{"path": "pages/address/add","style": {"navigationBarTitleText": "编辑地址"}},
+		
+		{"path": "pages/news/list","style": {"navigationBarTitleText": "新闻资讯","navigationStyle":"custom","enablePullDownRefresh": true}},
+		{"path": "pages/news/notice","style": {"navigationBarTitleText": "公告","enablePullDownRefresh": true}},
+		{"path": "pages/news/info","style": {"navigationBarTitleText": "新闻详情"}},
+		{"path": "pages/news/noticeInfo","style": {"navigationBarTitleText": "公告详情"}},
+		
+		{"path": "pages/account/collection","style": {"navigationBarTitleText": "收款设置"}},
+		{"path": "pages/account/setCard","style": {"navigationBarTitleText": "上传收款码"}},
+		{"path": "pages/account/details","style": {"navigationBarTitleText": "明细","enablePullDownRefresh": true}},
+		{"path": "pages/account/recommend","style": {"navigationBarTitleText": "推荐奖励明细","enablePullDownRefresh": true}},
+		{"path": "pages/account/team","style": {"navigationBarTitleText": "团队奖明细","enablePullDownRefresh": true}},
+		{"path": "pages/account/achievement","style": {"navigationBarTitleText": "团队业绩明细","enablePullDownRefresh": true}},
+		{"path": "pages/account/withdrawal","style": {"navigationBarTitleText": "提现"}},
+		{"path": "pages/account/withdrawalInfo","style": {"navigationBarTitleText": "提现明细"}},
+		{"path": "pages/account/give","style": {"navigationBarTitleText": "转赠"}},
+		{"path": "pages/account/change","style": {"navigationBarTitleText": "冲押金"}},
+		{"path": "pages/account/recharge","style": {"navigationBarTitleText": "充值"}},
+		{"path": "pages/account/account","style": {"navigationBarTitleText": "账户"}},
+		{"path": "pages/account/balance","style": {"navigationBarTitleText": "佣金"}},
+		{"path": "pages/account/silver","style": {"navigationBarTitleText": "银元宝"}},
+		
+		{"path": "pages/team/friends","style": {"navigationBarTitleText": "我的好友","enablePullDownRefresh": true}},
+		{"path": "pages/team/invitation","style": {"navigationBarTitleText": "邀请函"}},
+		
+		{"path": "pages/order/list","style": {"navigationBarTitleText": "我的订单","enablePullDownRefresh": true}},
+		{"path": "pages/order/buyList","style": {"navigationBarTitleText": "实物订单","enablePullDownRefresh": true}},
+		{"path": "pages/order/info","style": {"navigationBarTitleText": "订单详情"}},
+		{"path": "pages/order/pay","style": {"navigationBarTitleText": "确认支付"}},
+		
+		{"path": "pages/member/center","style": {"navigationBarTitleText": "我的","navigationStyle":"custom"}},
+		{"path": "pages/member/details","style": {"navigationBarTitleText": "个人资料"}},
+		{"path": "pages/member/retrieve","style": {"navigationBarTitleText": "找回密码"}}, 
+		{"path": "pages/member/registered","style": {"navigationBarTitleText": "注册"}}, 
+		{"path": "pages/member/changePwd","style": {"navigationBarTitleText": "修改支付密码"}},
+		{"path": "pages/member/setPhone","style": {"navigationBarTitleText": "修改手机号"}},
+		{"path": "pages/member/login","style": {"navigationBarTitleText": "登录",
+                "app-plus":{
+                    "titleNView":{
+                        "buttons":[
+                            {
+                                "text":"验证码登录",
+                                "type":"none",
+                                "color":"#737373",
+                                "background":"#000000",
+                                "fontSize":"14px",
+                                "float":"right"
+                            }
+
+                        ]
+                    }
+                }
+		}},
+		{"path": "pages/member/information","style": {"navigationBarTitleText": "完善信息"}},
+		{"path": "pages/member/protocol","style": {"navigationBarTitleText": "注册协议说明"}},
+		{"path": "pages/member/smsLogin","style": {"navigationBarTitleText": "验证码登录",
+		"app-plus":{
+		    "titleNView":{
+		        "buttons":[
+		            {
+		                "text":"密码登录",
+		                "type":"none",
+		                "color":"#737373",
+		                "background":"#000000",
+		                "fontSize":"14px",
+		                "float":"right"
+		            }
+		
+		        ]
+		    }
+		}
+		}},
+		
+		
+		{"path": "pages/card/list","style": {"navigationBarTitleText": "我的入场券"}}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationStyle": "default", //default custom
+		"navigationBarTitleText": "uni-app", 
+		"navigationBarBackgroundColor": "#EFEFEF",
+		"backgroundColor": "#EFEFEF"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#00a869",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/tab_main_normal.png",
+				"selectedIconPath": "static/images/tab_main_checked.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/shop/list",
+				"iconPath": "static/images/tab_shop_normal.png",
+				"selectedIconPath": "static/images/tab_shop_checked.png",
+				"text": "元宝商城"
+			}, {
+				"pagePath": "pages/news/list",
+				"iconPath": "static/images/tab_news_normal.png",
+				"selectedIconPath": "static/images/tab_news_checked.png",
+				"text": "新闻资讯"
+			}, {
+				"pagePath": "pages/member/center",
+				"iconPath": "static/images/tab_found_me_normal.png",
+				"selectedIconPath": "static/images/tab_found_me_select.png",
+				"text": "我的"
+			}
+		]
+	}
+}

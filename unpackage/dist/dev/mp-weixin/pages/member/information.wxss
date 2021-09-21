@@ -1,0 +1,92 @@
+
+page {
+	background-color: #ffffff !important;
+}
+.t-box {
+	background-color: #ffffff;
+	width: 92%;
+	margin-left: 4%;
+	padding: 11.25rpx 0 7.5rpx 0;
+	margin-top: 37.5rpx;
+}
+.t-item {
+	border-bottom: 1px solid #efefef;
+	margin: 37.5rpx 0 56rpx 0;
+	clear: both;
+}
+.t-t {
+	width: 150rpx;
+	text-align: right;
+	float: left;
+	font-size: 30rpx;
+}
+.t-input {
+	margin: 19rpx 0 3.75rpx 0;
+	height: 49rpx;
+	line-height: 49rpx;
+	font-size: 26rpx;
+}
+.b-box {
+	width: 92%;
+	margin-left: 4%;
+}
+.blt-botton {
+	color: #f8d79f;
+	background-color: #201f24;
+	margin-bottom: 19rpx;
+	width: 100%;
+	text-align: center;
+	height: 86rpx;
+	line-height: 86rpx;
+	border-radius: 11rpx;
+	font-size: 30rpx;
+}
+.blt-r {
+	color: #5e5e5e;
+	font-size: 22.5rpx;
+	float: left;
+}
+.blt-z {
+	color: #5e5e5e;
+	font-size: 22.5rpx;
+	float: right;
+}
+.seehouse_get_nub {
+	display: inline-block;
+	min-width: 150rpx;
+	height: 52.5rpx;
+	line-height: 52.5rpx;
+	font-size: 22.5rpx;
+	border-radius: 7.5rpx;
+	text-align: center;
+	background-color: #ffffff;
+	border: 1px solid #9a9a9a;
+	color: #9a9a9a;
+	text-decoration: none;
+	float: right;
+	margin-top: -60rpx;
+	z-index: 100;
+}
+.sends {
+	display: inline-block;
+	min-width: 150rpx;
+	height: 52.5rpx;
+	line-height: 52.5rpx;
+	font-size: 22.5rpx;
+	border-radius: 7.5rpx;
+	text-align: center;
+	background-color: #ffffff;
+	border: 1px solid #9a9a9a;
+	color: #9a9a9a;
+	text-decoration: none;
+	padding: 0 5.625rpx;
+	float: right;
+	margin-top: -60rpx;
+	z-index: 100;
+}
+.t-agree {
+	width: 94%;
+	margin: 0 auto;
+	margin-bottom: 50rpx;
+}
+

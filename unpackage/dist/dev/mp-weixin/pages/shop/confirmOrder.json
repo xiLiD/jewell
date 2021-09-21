@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "提交订单",
+  "usingComponents": {
+    "ss-payment-password": "/components/sanshui-payment-password/index"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "冲押金",
+  "usingComponents": {
+    "ss-payment-password": "/components/sanshui-payment-password/index"
+  }
+}

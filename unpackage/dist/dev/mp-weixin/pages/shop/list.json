@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "元宝商城",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "uni-search-bar": "/components/uni-search-bar/uni-search-bar"
+  }
+}

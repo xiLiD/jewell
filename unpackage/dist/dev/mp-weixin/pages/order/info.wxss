@@ -1,0 +1,314 @@
+
+.container,
+page {
+	background-color: #f4f5f6;
+}
+
+
+/*头部*/
+.top {
+	width: 100%;
+	background-color: #FFFFFF;
+	height: 150rpx;
+	padding: 25rpx 30rpx;
+}
+.top view {
+	text-align: center;
+	float: left;
+}
+.top .top-icon {
+	width: 130rpx;
+}
+.top .top-icon image {
+	width: 60rpx;
+	height: 60rpx;
+}
+.top .top-icon view {
+	font-size: 20rpx;
+	color: #94929c;
+	text-align: center;
+	width: 100%;
+	margin-top: -10rpx;
+}
+.top .top-icon .icon-on {
+	color: #000000;
+}
+.top-line {
+	width: 57rpx;
+	height: 3px;
+	background-color: #f6f6f6;
+	margin-top: 30rpx;
+	padding: 0 -50rpx;
+}
+
+
+/*项目*/
+.main {
+	width: 100%;
+	background-color: #FFFFFF;
+	margin-top: 10rpx;
+}
+.main-item {
+	height: 88rpx;
+	line-height: 88rpx;
+	border-bottom: 1px solid #f6f6f6;
+	width: 710rpx;
+	margin: 0 auto;
+	font-size: 22rpx;
+}
+.main .main-l {
+	float: left;
+	width: 150rpx;
+	height: 88rpx;
+	line-height: 88rpx;
+	color: #b1b1b1;
+}
+.main .main-r {
+	height: 88rpx;
+	line-height: 88rpx;
+}
+.main .main-r .uni-icon {
+	font-size: 32rpx;
+	float: right;
+	height: 88rpx;
+	line-height: 88rpx;
+	margin-right: 10rpx;
+}
+
+
+/*支付*/
+.main-pay {
+	background-color: #FFFFFF;
+	margin-top: 10rpx;
+	padding: 20rpx;
+}
+.main-pay .pay-title {
+	border-left: 7rpx solid #c13c3e;
+	height: 35rpx;
+	line-height: 35rpx;
+	padding-left: 20rpx;
+	font-weight: 600;
+	font-size: 32rpx;
+}
+.pay-type {
+	height: 80rpx;
+	line-height: 80rpx;
+	margin-top: 20rpx;
+}
+.type-name {
+	float: left;
+	width: 300rpx;
+	font-size: 32rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	color: #b1b1b1;
+}
+.type-r {
+	float: right;
+	width: 300rpx;
+	text-align: right;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.type-r text {
+	font-size: 36rpx;
+}
+.pay-con {
+	clear: both;
+	text-align: center;
+	margin-top: 20rpx;
+}
+.pay-intro {
+	color: #b1b1b1;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.pay-no {
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.pay-con image {
+	width: 600rpx;
+	margin-top: 20rpx;
+}
+.picker {
+	position: absolute;
+	margin-top: 0;
+	left: 0;
+	width: 100%;
+	height: 80rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+
+/*底部按钮*/
+.main-bottom {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+.btn-a {
+	width: 100%;
+	color: #FFFFFF;
+	background-color: #cc373b;
+	height: 110rpx;
+	line-height: 110rpx;
+	font-size: 35rpx;
+	text-align: center;
+}
+.btn-b {
+	width: 100%;
+}
+.btn-c {
+	width: 100%;
+	height: 110rpx;
+	line-height: 110rpx;
+	font-size: 35rpx;
+	text-align: center;
+	background-color: #EFEFEF;
+	color: #aaaaaa;
+}
+.btn-b .btn-b-t {
+	width: 100%;
+	background-color: #f8c953;
+	color: #000000;
+	text-align: center;
+	height: 65rpx;
+	line-height: 65rpx;
+}
+.btn-b .btn-b-l {
+	width: 38%;
+	height: 110rpx;
+	line-height: 110rpx;
+	font-size: 35rpx;
+	float: left;
+	text-align: center;
+	background-color: #FFFFFF;
+	font-size: 27rpx;
+	color: #aaaaaa;
+}
+.btn-b .btn-b-r {
+	width: 62%;
+	height: 110rpx;
+	line-height: 110rpx;
+	font-size: 35rpx;
+	text-align: center;
+	float: right;
+	background-color: #cc373b;
+	color: #FFFFFF;
+	font-size: 27rpx;
+}
+.btn-b-l text {
+	font-size: 33rpx;
+	margin-right: 10rpx;
+}
+.btn-d {
+	width: 100%;
+	height: 110rpx;
+	line-height: 110rpx;
+	font-size: 35rpx;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+.btn-d .btn-d-l {
+	width: 50%;
+	float: left;
+	height: 110rpx;
+	line-height: 110rpx;
+	background-color: #f8c953;
+	color: #000000;
+}
+.btn-d .btn-d-r {
+	width: 50%;
+	float: right;
+	height: 110rpx;
+	line-height: 110rpx;
+	color: #FFFFFF;
+	background-color: #cc373b;
+}
+.dbh {
+	height: 200rpx !important;
+}
+
+
+/*转拍*/
+.main-transfer {
+	width: 100%;
+	height: 770rpx;
+	background-color: #FFFFFF;
+	border-top-left-radius: 50rpx;
+	border-top-right-radius: 50rpx;
+	padding-top: 40rpx;
+}
+.tr-title {
+	padding-top: 20rpx;
+	color: #000000;
+	font-weight: 600;
+	padding: 0 40rpx;
+}
+.tr-title image {
+	width: 30rpx;
+	height: 30rpx;
+	margin-right: 10rpx;
+}
+.tr-main {
+	border-bottom: 10rpx solid #f8f8f8;
+	padding-bottom: 20rpx;
+}
+.tr-item {
+	color: #b0b0b0;
+	height: 50rpx;
+	line-height: 50rpx;
+	padding: 0 40rpx;
+}
+.tr-item text {
+	font-weight: 600;
+}
+.tr-pay {
+	padding: 20rpx 40rpx;
+}
+.pay-top {
+	color: #000000;
+	font-weight: 600;
+	font-size: 35rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.pay-item {
+	height: 65rpx;
+	line-height: 65rpx;
+}
+.uni-list {
+	border: 0;
+	padding-top: 20rpx;
+}
+.pay-l {
+	color: #3e3e3e;
+	float: left;
+}
+.pay-l image {
+	width: 30rpx;
+	height: 30rpx;
+	margin-right: 20rpx;
+	text-anchor: middle;
+}
+.pay-r {
+	float: right;
+}
+.pay-radio {
+	-webkit-transform: scale(0.7);
+	        transform: scale(0.7);
+}
+.tr-bottom {
+	position: absolute;
+	bottom: 0;
+	height: 100rpx;
+	line-height: 100rpx;
+	text-align: center;
+	background-color: #cc373b;
+	color: #FFFFFF;
+	width: 100%;
+	font-size: 33rpx;
+}
+
