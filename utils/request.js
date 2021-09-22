@@ -100,9 +100,11 @@ export default class Request {
                 },
                 //请求完成
                 complete() {
-                    //隐藏加载
+                    // let _this = this;
+                    // //隐藏加载
                     if (!hideLoading) {
-                        uni.hideLoading();
+                        uni.hideLoading()
+                        // _this.$tools.loadingHide();
                     }
                     resolve();
                     return;

@@ -295,7 +295,7 @@
 						order_id: _this.order_id
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.mainData = data.data;
 							if (_this.mainData.sellerUser == null) {
@@ -327,10 +327,7 @@
 								this.getLiveTimeCount(str_date_end);
 							}
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					});
 			},
@@ -351,29 +348,20 @@
 									order_state: 3
 								})
 								.then(data => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									if (data.status == 1) {
-										uni.showToast({
-											icon: 'none',
-											title: '确认成功'
-										});
+										_this.$tools.toast('确认成功');
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										uni.showToast({
-											icon: 'none',
-											title: data.msg
-										});
+										_this.$tools.toast(data.msg);
 									}
 								})
 								.catch(err => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									//消息异常
-									uni.showToast({
-										icon: 'none',
-										title: '数据加载异常'
-									});
+									_this.$tools.toast('数据加载异常');
 								});
 						}
 					}
@@ -395,29 +383,20 @@
 									order_id: _this.order_id
 								})
 								.then(data => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									if (data.status == 1) {
-										uni.showToast({
-											icon: 'none',
-											title: '确认成功'
-										});
+										_this.$tools.toast('确认成功');
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										uni.showToast({
-											icon: 'none',
-											title: data.msg
-										});
+										_this.$tools.toast(data.msg);
 									}
 								})
 								.catch(err => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									//消息异常
-									uni.showToast({
-										icon: 'none',
-										title: '数据加载异常'
-									});
+									_this.$tools.toast('数据加载异常');
 								});
 						}
 					}
@@ -439,29 +418,20 @@
 									order_id: _this.order_id
 								})
 								.then(data => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									if (data.status == 1) {
-										uni.showToast({
-											icon: 'none',
-											title: '取消成功'
-										});
+										_this.$tools.toast('取消成功');
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										uni.showToast({
-											icon: 'none',
-											title: data.msg
-										});
+										_this.$tools.toast(data.msg);
 									}
 								})
 								.catch(err => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									//消息异常
-									uni.showToast({
-										icon: 'none',
-										title: '数据加载异常'
-									});
+									_this.$tools.toast('数据加载异常');
 								});
 						}
 					}
@@ -490,26 +460,20 @@
 						order_id: _this.order_id
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.transferData.order_price = data.data.unitPurchasePrice;
 							_this.transferData.transfer_price = data.data.unitPrice;
 							_this.transferData.pay_price = data.data.serviceCharge;
 							this.$refs['showtransfer'].open();
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			substitution() {
@@ -528,29 +492,20 @@
 									order_id: _this.order_id
 								})
 								.then(data => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									if (data.status == 1) {
-										uni.showToast({
-											icon: 'none',
-											title: '置换成功'
-										});
+										_this.$tools.toast('置换成功');
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										uni.showToast({
-											icon: 'none',
-											title: data.msg
-										});
+										_this.$tools.toast(data.msg);
 									}
 								})
 								.catch(err => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									//消息异常
-									uni.showToast({
-										icon: 'none',
-										title: '数据加载异常'
-									});
+									_this.$tools.toast('数据加载异常');
 								});
 						}
 					}
@@ -567,9 +522,7 @@
 			transferPay(e) {
 				//转拍下单
 				var _this = this;
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				_this.$tools.loading('数据条件中')
 				var pwdPay = '';
 				if (e) pwdPay = e.value;
 				_this.$request.order
@@ -579,15 +532,12 @@
 						pwdPay: pwdPay
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							if (this.transferData.pay_type == 3) {
 								_this.pays(data.msg);
 							} else {
-								uni.showToast({
-									icon: 'none',
-									title: '转拍成功'
-								});
+								_this.$tools.toast('转拍成功');
 								setTimeout(() => {
 									_this.$refs.paymentPassword.modalFun('hide');
 									_this.$refs['showtransfer'].close();
@@ -596,23 +546,18 @@
 							}
 						} else {
 							_this.$refs.paymentPassword.modalFun('hide');
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						_this.$refs.paymentPassword.modalFun('hide');
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			pays(orderInfo) {
+				let _this = this;
 				jwx({
 					nonceStr: orderInfo.nonceStr,
 					timeStamp: orderInfo.timeStamp,
@@ -620,19 +565,13 @@
 					signType: orderInfo.signType,
 					paySign: orderInfo.paySign
 				}, res => {
-					uni.showToast({
-						icon: 'none',
-						title: '转拍成功'
-					});
+					_this.$tools.toast('转拍成功')
 					setTimeout(() => {
 						_this.initData();
 					}, 1000)
 				}, fail => {
 					console.log(fail)
-					uni.showToast({
-						icon: 'none',
-						title: '支付失败'
-					});
+					_this.$tools.toast('支付失败')
 				})
 			},
 			payChange(e) {

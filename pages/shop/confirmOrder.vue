@@ -112,18 +112,12 @@
 							_this.mainItem = _this.mainItem.concat(data.data);
 							_this.dealNum();
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			getAddress() {
@@ -144,10 +138,8 @@
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
+						
 					});
 			},
 			dealNum() {
@@ -164,10 +156,8 @@
 			openPwd() {
 				var _this = this;
 				if (_this.addressItem.id <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请选择收货地址'
-					});
+					_this.$tools.toast('请选择收货地址')
+					
 					return false;
 				}
 				//验证密码
@@ -177,10 +167,7 @@
 				//处理订单
 				var _this = this;
 				if (_this.addressItem.id <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请选择收货地址'
-					});
+					_this.$tools.toast('请选择收货地址')
 					return false;
 				}
 				uni.showLoading({
@@ -194,12 +181,9 @@
 						pwdPay: e.value
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
-							uni.showToast({
-								icon: 'none',
-								title: '购买成功'
-							});
+							_this.$tools.toast('购买成功')
 							setTimeout(() => {
 								uni.navigateTo({
 									url: '/pages/order/info?orderId=' + data.data.orderId
@@ -207,20 +191,14 @@
 							}, 1000)
 						} else {
 							_this.$refs.paymentPassword.modalFun('hide');
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						_this.$refs.paymentPassword.modalFun('hide');
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			selectAddress() {

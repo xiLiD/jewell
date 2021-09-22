@@ -212,7 +212,7 @@
 						goods_id: _this.id
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.mainData = data.data;
 							_this.price = data.data.money;
@@ -221,19 +221,13 @@
 								title: _this.mainData.BrandModelName
 							});
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			saveOrder() {

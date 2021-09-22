@@ -151,26 +151,17 @@ export default {
 		async share(name) {
 			this.shareData = this._props.range;
 			if (!this.shareData.title) {
-				uni.showToast({
-					icon: 'none',
-					title: '分享内容不能为空'
-				});
+				this.$tools.toast('分享内容不能为空')
 				return;
 			}
 
 			if (!this.shareData.url) {
-				uni.showToast({
-					icon: 'none',
-					title: '分享链接不能为空'
-				});
+				this.$tools.toast('分享链接不能为空')
 				return;
 			}
 
 			if (!this.shareData.imgUrl) {
-				uni.showToast({
-					icon: 'none',
-					title: '分享图片不能为空'
-				});
+				this.$tools.toast('分享图片不能为空')
 				return;
 			}
 
@@ -192,16 +183,10 @@ export default {
 				scene: name && name === 'WXSenceTimeline' ? 'WXSenceTimeline' : 'WXSceneSession', //WXSceneSession”分享到聊天界面，“WXSenceTimeline”分享到朋友圈，“WXSceneFavorite”分享到微信收藏
 				type: 0,
 				success: e => {
-					uni.showToast({
-						icon: 'none',
-						title: '已分享'
-					});
+					this.$tools.toast('已分享')
 				},
 				fail: e => {
-					uni.showToast({
-						icon: 'none',
-						title: e.errMsg
-					});
+					this.$tools.toast(e.errMsg)
 				},
 				complete: function() {
 					console.log('分享操作结束!');

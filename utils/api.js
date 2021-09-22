@@ -10,12 +10,21 @@ const getToken = (data) => {
 }
 //全局定义请求头
 export default {
-	common : {
+	common: {
 		// //支付
 		paySundries: function(data) {
-						data = getToken(data)
+			data = getToken(data)
 			return request({
 				url: "/gzh/Pay/paySundries",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 发送验证码
+		SendCode: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Applogin/sms",
 				method: "POST", //请求方式
 				data: data, //请求数据
 			})
@@ -26,7 +35,7 @@ export default {
 		// 短信登录
 		msgLogin: function(data) {
 			return request({
-				url: "/gzh/Applogin/lgion",
+				url: "/gzh/Applogin/msgLgion",
 				method: "POST", //请求方式
 				data: data, //请求数据
 			})

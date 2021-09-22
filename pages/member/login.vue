@@ -3,7 +3,7 @@
 
 		<view class="t-box">
 			<view class="t-item"><input type="text" class="t-input" v-model="userName" placeholder="用户名" /></view>
-			<view class="t-item"><input type="password" class="t-input" v-model="userPwd" placeholder="登录密码" /></view>
+			<view class="t-item"><input type="password" class="t-input" v-model="userPwd" placeholder="登录密码"  /></view>
 		</view>
 
 
@@ -184,24 +184,18 @@
 							invitation: _this.invitation
 						})
 						.then(data => {
-							uni.hideLoading();
-							if (data.status == 1) {
+							_this.$tools.loadingHide();
+							if (data.status == 200) {
 								_this.dealLogin(data.data);
 							} else {
-								uni.showToast({
-									icon: 'none',
-									title: data.msg
-								});
+								_this.$tools.toast(data.msg)
 							}
 						})
 						.catch(err => {
 							console.log(err);
-							uni.hideLoading();
+							_this.$tools.loadingHide();
 							//消息异常
-							uni.showToast({
-								icon: 'none',
-								title: '数据加载异常'
-							});
+							_this.$tools.toast('数据加载异常')
 						});
 				}
 			},

@@ -231,9 +231,7 @@
 				if (this._mode !== 1 && this._mode !== 4) {
 					this.msgText = msg;
 				} else {
-					uni.showToast({
-						title: msg
-					})
+					this.$tools.toast(msg)
 				}
 			},
 			forgetPwd() {
@@ -266,43 +264,44 @@
 				})
 			},
 			submit(clickFlag) { //clickFlag主动点击
-				if (this.trigger !== 'auto' && !clickFlag) return;
-				if (this.paymentPwd.length !== this._digits) {
-					this.showError('请输入' + this._digits + '位支付密码');
+				let _this = this;
+				if (_this.trigger !== 'auto' && !clickFlag) return;
+				if (_this.paymentPwd.length !== _this._digits) {
+					_this.showError('请输入' + _this._digits + '位支付密码');
 				} else {
-					this.showError('');
-					if (this._mode === 5 || this._mode === 4 || this.current >= (this._mode - 1)) {
-						if (this._mode === 5 && this.current === 0) { //下一步，再次输入
-							return this.changeSwiper(1);
+					_this.showError('');
+					if (_this._mode === 5 || _this._mode === 4 || _this.current >= (this._mode - 1)) {
+						if (_this._mode === 5 && _this.current === 0) { //下一步，再次输入
+							return _this.changeSwiper(1);
 						}
-						if (this.current > 0) { //需要校验2次支付密码的是否相等
-							if (this.paymentPwd !== this.paymentPwds[this.current - 1]) {
-								this.showError('两次支付密码输入不一致');
+						if (_this.current > 0) { //需要校验2次支付密码的是否相等
+							if (_this.paymentPwd !== _this.paymentPwds[_this.current - 1]) {
+								_this.showError('两次支付密码输入不一致');
 								setTimeout(() => {
-									this.paymentPwd = '';
-									this.paymentPwds[this.current] = '';
-									this.activeInput = 0;
+									_this.paymentPwd = '';
+									_this.paymentPwds[_this.current] = '';
+									_this.activeInput = 0;
 								}, 300)
 								return;
 							}
-							this.showError('');
-							if (this._mode === 2) { //设置支付密码
+							_this.showError('');
+							if (_this._mode === 2) { //设置支付密码
 								uni.showLoading({
 									title: '正在设置密码'
 								});
 								// 如果不把逻辑卸载这里面，直接把setTimeout删除即可
 								setTimeout(() => { //模拟请求，把这个换成ajax请求哈，或者emit出去 外面去请求，但是建议都集成在这边 省的写一堆重置代码
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									let response = { //模拟返回
 										code: 1,
 										value: this.paymentPwd
 									}
 									if (response.code === 1) {
-										this.$emit('submit', { //这里是传出去给调用者的，参数任意下，只要能区分就行
+										_this.$emit('submit', { //这里是传出去给调用者的，参数任意下，只要能区分就行
 											type: 'reset',
 											value: this.paymentPwd
 										});
-										this.modalFun('hide');
+										_this.modalFun('hide');
 									}
 								}, 1000)
 							} else { //修改支付密码
@@ -311,29 +310,29 @@
 								});
 								// 如果不把逻辑卸载这里面，直接把setTimeout删除即可
 								setTimeout(() => { //模拟请求，把这个换成ajax请求哈，或者emit出去 外面去请求，但是建议都集成在这边 省的写一堆重置代码
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									let response = { //模拟返回
 										code: 1,
 										msg: '重置新支付密码成功'
 									}
 									if (response.code === 1) {
-										this.$emit('submit', {
+										_this.$emit('submit', {
 											type: 'modify',
 											value: this.paymentPwd
 										});
-										this.modalFun('hide');
+										_this.modalFun('hide');
 									}
 								}, 1000)
 							}
 							return;
 						}
-						this.checkSafePwd('check');
+						_this.checkSafePwd('check');
 					} else {
-						if (this._mode === 3 && this.current === 0) { //校验支付密码正确性
-							this.checkSafePwd('verify');
+						if (_this._mode === 3 && _this.current === 0) { //校验支付密码正确性
+							_this.checkSafePwd('verify');
 							return;
 						}
-						this.changeSwiper(1);
+						_this.changeSwiper(1);
 					}
 				}
 			},

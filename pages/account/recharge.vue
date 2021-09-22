@@ -35,46 +35,37 @@
 				var _this = this;
 				if (_this.isSubmit) return false;
 				if (_this.price == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的金额'
-					});
+					_this.$tools.toast('请输入正确的金额')
 					return false;
 				}
 				_this.isSubmit = true;
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				_this.$tools.loading('数据条件中')
+				
 				_this.$request.common
 					.paySundries({
 						type: 3,
 						money: _this.price
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						_this.isSubmit = false;
 						if (data.status == 1) {
 							_this.pay(data.msg);
 						} else {
 							_this.$refs.paymentPassword.modalFun('hide');
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						_this.$refs.paymentPassword.modalFun('hide');
 						_this.isSubmit = false;
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			pay(orderInfo) {
+				let _this = this;
 				jwx({
 					nonceStr: orderInfo.nonceStr,
 					timeStamp: orderInfo.timeStamp,
@@ -82,19 +73,13 @@
 					signType: orderInfo.signType,
 					paySign: orderInfo.paySign
 				}, res => {
-					uni.showToast({
-						icon: 'none',
-						title: '充值成功'
-					});
+					_this.$tools.toast('充值成功')
 					setTimeout(() => {
 						uni.navigateBack();
 					}, 1000)
 				}, fail => {
 					console.log(fail)
-					uni.showToast({
-						icon: 'none',
-						title: '支付失败'
-					});
+					_this.$tools.toast('支付失败')
 				})
 			}
 		}

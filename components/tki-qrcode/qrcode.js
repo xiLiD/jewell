@@ -1020,8 +1020,9 @@ let QRCode = {};
      * @return {}
      */
     QRCode = function (opt) {
+        let _this = this;
         //设置默认参数
-        this.options = {
+        _this.options = {
             text: '',
             size: 256,
             correctLevel: 3,
@@ -1043,7 +1044,7 @@ let QRCode = {};
         }
         if (opt) {
             for (var i in opt) {
-                this.options[i] = opt[i];
+                _this.options[i] = opt[i];
             }
         }
         //使用QRCodeAlg创建二维码结构
@@ -1160,7 +1161,7 @@ let QRCode = {};
                             },
                             complete: function () {
                                 if (options.showLoading){
-                                    uni.hideLoading();
+                                    _this.$tools.loadingHide();
                                 }
                             },
                         }, options.context);
@@ -1168,7 +1169,7 @@ let QRCode = {};
                 });
             }, options.usingComponents ? 0 : 150);
         }
-        createCanvas(this.options);
+        createCanvas(_this.options);
         // 空判定
         let empty = function (v) {
             let tp = typeof v,

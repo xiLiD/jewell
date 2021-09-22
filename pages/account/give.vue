@@ -56,42 +56,27 @@
 								_this.balance = data.data.acer_truncatum;
 							}
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg);
 						}
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 
 			},
 			openPwd() {
 				var _this = this;
 				if (_this.phone == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的转赠手机号'
-					});
+					_this.$tools.toast('请输入正确的转赠手机号')
 					return false;
 				}
 				if (_this.price == '' || parseFloat(_this.price) <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的提现金额'
-					});
+					_this.$tools.toast('请输入正确的提现金额')
 					return false;
 				}
 				if (parseFloat(_this.price) > _this.balance) {
-					uni.showToast({
-						icon: 'none',
-						title: '账户余额不足'
-					});
+					_this.$tools.toast('账户余额不足')
 					return false;
 				}
 				//验证密码
@@ -102,30 +87,19 @@
 				var _this = this;
 				if (_this.isSubmit) return false;
 				if (_this.phone == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的转赠手机号'
-					});
+					_this.$tools.toast('请输入正确的转赠手机号')
 					return false;
 				}
 				if (_this.price == '' || parseFloat(_this.price) <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的转赠金额'
-					});
+					_this.$tools.toast('请输入正确的转赠金额')
 					return false;
 				}
 				if (parseFloat(_this.price) > _this.balance) {
-					uni.showToast({
-						icon: 'none',
-						title: '账户余额不足'
-					});
+					_this.$tools.toast('账户余额不足')
 					return false;
 				}
 				_this.isSubmit = true;
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				_this.$tools.loading('数据提交中')
 				_this.$request.account
 					.tyransfer({
 						type: _this.type,
@@ -134,33 +108,24 @@
 						pwdPay: e.value
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						_this.isSubmit = false;
 						if (data.status == 1) {
-							uni.showToast({
-								icon: 'none',
-								title: '申请成功'
-							});
+							_this.$tools.toast('申请成功')
 							setTimeout(() => {
 								uni.navigateBack();
 							}, 1000)
 						} else {
 							_this.$refs.paymentPassword.modalFun('hide');
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg);
 						}
 					})
 					.catch(err => {
 						_this.$refs.paymentPassword.modalFun('hide');
 						_this.isSubmit = false;
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			}
 		}

@@ -61,16 +61,12 @@
 				//复制
 				var _this = this;
 				setClipboardData(_this.val).then(() => {
-					uni.showToast({
-						title: '复制成功',
-					});
+					_this.$tools.toast('复制成功')
 				})
 			},
 			msg(msg) {
-				uni.showToast({
-					icon: 'none',
-					title: msg
-				});
+				let _this = this;
+				_this.$tools.toast(msg)
 			}
 		}
 	};

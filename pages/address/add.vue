@@ -116,37 +116,23 @@
 			},
 			add() {
 				if (!this.mainData.receiving_name) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入业主名称'
-					});
+					_this.$tools.toast('请输入业主名称')
 					return false;
 				}
 				if (!this.mainData.receiving_phone) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入手机号码'
-					});
+					_this.$tools.toast('请输入手机号码')
 					return false;
 				}
 				if (!this.mainData.city) {
-					uni.showToast({
-						icon: 'none',
-						title: '请选择城市'
-					});
+					_this.$tools.toast('请选择城市')
 					return false;
 				}
 				if (!this.mainData.detailed_address) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入详细地址'
-					});
+					_this.$tools.toast('请输入详细地址')
 					return false;
 				}
 				var _this = this;
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				_this.$tools.loading('数据条件中')
 				var formData = _this.mainData;
 
 				formData = Object.assign({
@@ -158,25 +144,19 @@
 				_this.$request.address
 					.addAddress(formData)
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							uni.navigateTo({
 								url: '/pages/address/list?order=' + this.order + '&type=' + this.type
 							});
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			}
 		}

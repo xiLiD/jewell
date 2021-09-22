@@ -96,7 +96,7 @@
 			getPage() {
 				//加载数据
 				var _this = this;
-				this.$tools.loading('数据查询中')
+				_this.$tools.loading('数据查询中')
 				_this.$request.product
 					.getGoodsList({
 						page: _this.PageNo,
@@ -104,7 +104,7 @@
 						keyWords: _this.keyWords
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.mainItem = _this.mainItem.concat(data.data);
 							if (data.data.length < _this.PageSize) {
@@ -116,21 +116,13 @@
 							}
 						} else {
 							_this.showLoadMore = false;
-							// uni.showToast({
-							// 	icon: 'none',
-							// 	title: data.msg
-							// });
-							this.$tools.loading(data.msg)
+							_this.$tools.loading(data.msg)
 						}
 					})
 					.catch(err => {
 						_this.showLoadMore = false;
-						// uni.hideLoading();
+						// this.$tools.loadingHide();
 						//消息异常
-						// uni.showToast({
-						// 	icon: 'none',
-						// 	title: '数据加载异常'
-						// });
 						_this.$tools.loadingHide();
 						_this.$tools.loading('数据加载异常')
 					});

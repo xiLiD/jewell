@@ -61,10 +61,10 @@
 		},
 		methods: {
 			countdown() {
-				let that = this;
+				let _this = this;
 				// let mainItem = JSON.parse((JSON.stringify(that.mainItem)));
 				let timer = setInterval(function() {
-					that.mainItem.forEach((item,index)=>{
+					_this.mainItem.forEach((item,index)=>{
 						let t = item.count_down;
 						if (t > 0) {
 							item.count_down -= 1;
@@ -83,28 +83,22 @@
 							}else{
 								format = `待开始：${day}天${hour}时${min}分${sec}秒`;
 							}
-							// format = `待开始：${day}天${hour}时${min}分${sec}秒`;
 							item.countDownStr = format
-							that.$set(that.mainItem, index, item)
-							// item.countDownStr = format;
+							_this.$set(_this.mainItem, index, item)
 						} else {
 							// 进行判断 如果数据内所有的倒计时已经结束，那么结束定时器， 如果没有那么继续执行定时器
-							let flag = that.mainItem.every((val, ind) => val.count_down <= 0);
+							let flag = _this.mainItem.every((val, ind) => val.count_down <= 0);
 							if (flag) clearInterval(timer);
 							if (item.count_down == -1) {
 								item.countDownStr = '已开始'
-								that.$set(that.mainItem, index, item)
-								// that.$set(that.mainItem, index, '已开始')
-								// item.countDownStr = `已开始`; // 结束文案
+								_this.$set(_this.mainItem, index, item)
 							} else if (item.count_down == -2) {
 								item.countDownStr = '已结束'
-								that.$set(that.mainItem, index, item)
-								// that.$set(that.mainItem, index, '已结束')
-								// item.countDownStr = `已结束`; // 结束文案
+								_this.$set(_this.mainItem, index, item)
 							}
 						}
 					})
-					console.log(that.mainItem)
+					console.log(_this.mainItem)
 				}, 1000);
 
 			},
@@ -127,7 +121,7 @@
 						_this.$request.card
 							.gradeList({})
 							.then(data => {
-								uni.hideLoading();
+								_this.$tools.loadingHide();
 								if (data.status == 1) {
 									var end_time = data.data.end_time; //结束时间
 									if (end_time == 0) {
@@ -195,12 +189,9 @@
 					})
 					.catch(err => {
 						console.log(err);
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			getDate(hours) {
@@ -227,12 +218,9 @@
 					})
 					.catch(err => {
 						console.log(err);
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			getUserUp() {

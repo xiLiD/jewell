@@ -165,9 +165,7 @@
 				//复制
 				var _this = this;
 				setClipboardData(_this.mainData.nvitationCode).then(() => {
-					uni.showToast({
-						title: '复制成功',
-					});
+					_this.$tools.toast('复制成功')
 				})
 			},
 			getUserData() {
@@ -194,28 +192,19 @@
 								})
 							}
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			up() {
 				//升级
 				var _this = this;
 				if (_this.mainData.up == 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '未满足升级条件'
-					});
+					_this.$tools.toast('未满足升级条件')
 					return false;
 				}
 				uni.showLoading({
@@ -229,20 +218,14 @@
 							_this.upData = data.data;
 							this.$refs['showUp'].open();
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			closeUp() {
@@ -252,10 +235,7 @@
 			openPwd() {
 				var _this = this;
 				if (_this.addressItem.id <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请选择收货地址'
-					});
+					_this.$tools.toast('请选择收货地址')
 					return false;
 				}
 				//验证密码
@@ -264,36 +244,29 @@
 			upBuy(e) {
 				//确认购买
 				var _this = this;
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				_this.$tools.loading('数据条件中')
 				_this.$request.common
 					.paySundries({
 						type: 2
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.closeUp();
 							_this.pay(data.msg);
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						console.log(err)
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			pay(orderInfo) {
+				let _this = this;
 				jwx({
 					nonceStr: orderInfo.nonceStr,
 					timeStamp: orderInfo.timeStamp,
@@ -301,19 +274,13 @@
 					signType: orderInfo.signType,
 					paySign: orderInfo.paySign
 				}, res => {
-					uni.showToast({
-						icon: 'none',
-						title: '充值成功'
-					});
+					_this.$tools.toast('充值成功')
 					setTimeout(() => {
 						_this.getUserData();
 					}, 1000)
 				}, fail => {
 					console.log(fail)
-					uni.showToast({
-						icon: 'none',
-						title: '支付失败'
-					});
+					_this.$tools.toast('支付失败')
 				})
 			}
 		}

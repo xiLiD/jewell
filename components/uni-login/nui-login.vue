@@ -194,68 +194,52 @@
 			},
 			sendCode() {
 				//发送验证码
-				var th = this;
-				if (th.userTel == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请填写正确的手机号码'
-					});
+				var _this = this;
+				if (_this.userTel == '') {
+					_this.$tools.toast('请填写正确的手机号码')
 					return false;
 				}
 
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				_this.$tools.loading('数据条件中')
 				//发送验证码
-				th.$request.common
+				_this.$request.common
 					.SendCode({
-						tel: th.userTel,
+						tel: _this.userTel,
 						typeId: 2
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
-							th.showText = false;
+							_this.showText = false;
 							var interval = setInterval(() => {
-								let times = --th.second;
-								th.second = times < 10 ? '0' + times : times; //小于10秒补 0
+								let times = --_this.second;
+								_this.second = times < 10 ? '0' + times : times; //小于10秒补 0
 							}, 1000);
 							setTimeout(() => {
 								clearInterval(interval);
-								th.second = 90;
-								th.showText = true;
+								_this.second = 90;
+								_this.showText = true;
 							}, 90000);
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
+						
 					});
 			},
 			signUp() {
 				//报名
 				var th = this;
 				if (th.userTel == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请填写正确的手机号码'
-					});
+					th.$tools.toast('请填写正确的手机号码')
 					return false;
 				}
 				if (th.code == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入手机验证码'
-					});
+					th.$tools.toast('请输入手机验证码')
 					return false;
 				}
 
@@ -307,28 +291,23 @@
 								typeId: typeId
 							})
 							.then(data => {
-								uni.hideLoading();
+								_this.$tools.loadingHide();
 								if (data.status == 1) {
 									console.log(data)
 								} else {
-									uni.showToast({
-										icon: 'none',
-										title: data.msg
-									});
+									_this.$tools.toast(data.msg)
 								}
 							})
 							.catch(err => {
-								uni.hideLoading();
+								_this.$tools.loadingHide();
 								//消息异常
-								uni.showToast({
-									icon: 'none',
-									title: '数据加载异常'
-								});
+								_this.$tools.toast('数据加载异常')
 							});
 					}
 				});
 			},
 			init() {
+				let _this = this;
 				//初始化建议在app启动时调用，即App.vue的onLaunch方法中
 				uni.showLoading({
 					mask: true
@@ -338,9 +317,9 @@
 						appid: this.appid
 					},
 					result => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (result.code === 1022 || result.code === 1000) {
-							this.qulickLogin();
+							_this.qulickLogin();
 						}
 					}
 				);
@@ -864,54 +843,46 @@
 				}
 			},
 			qulickLogin() {
-				if (this._props.isFullScreen) {
-					this.setAuthCJSThemeConfig();
+				let _this = this;
+				if (_this._props.isFullScreen) {
+					_this.setAuthCJSThemeConfig();
 				} else {
-					this.setAuthDialogThemeConfig();
+					_this.setAuthDialogThemeConfig();
 				}
 				uni.showLoading({
 					mask: true
 				});
 				setTimeout(function() {
-					uni.hideLoading();
+					_this.$tools.loadingHide();
 				}, 5000);
-				if (this.platform == 'android') {
+				if (_this.platform == 'android') {
 					/*************************Android*************************/
 					//闪验SDK  拉起授权页方法
 					shanYanSDKModule.openLoginAuth(
 						true,
 						result => {
-							uni.hideLoading();
+							_this.$tools.loadingHide();
 							//成功进入授权页
 							if (result.code === 1022 || result.code === 1000) {
-								this.qulickLogin();
+								_this.qulickLogin();
 							} else {
-								// uni.showToast({
-								// 	icon: 'none',
-								// 	title: '获取手机号码失败',
-								// 	duration: 3000
-								// });
-								this.otherLogin();
+								_this.otherLogin();
 							}
 						},
 						result => {
 							//点击一键登录
 							var tokenJson = JSON.parse(result.result.replace(/\"/g, '"'));
-							this.token = tokenJson.token;
-							this.dealLogin();
+							_this.token = tokenJson.token;
+							_this.dealLogin();
 						}
 					);
-				} else if (this.platform == 'ios') {
+				} else if (_this.platform == 'ios') {
 					/*************************iOS*************************/
 					//闪验SDK  拉起授权页方法
 
-					if (this.ios_uiConfigure == null) {
+					if (_this.ios_uiConfigure == null) {
 						//debug_test
-						uni.showToast({
-							icon: 'none',
-							title: '请先配置UI',
-							duration: 3000
-						});
+						_this.$tools.toast('请先配置UI')
 						return;
 					}
 
@@ -920,15 +891,10 @@
 						this.ios_uiConfigure,
 						openLoginAuthListenerResult => {
 							//拉起授权页面回调
-							uni.hideLoading();
-							// uni.showToast({
-							// 	icon: 'none',
-							// 	title: openLoginAuthListenerResult.errorDomain,
-							// 	duration: 3000
-							// });
+							_this.$tools.loadingHide();
 						},
 						oneKeyLoginListenerResult => {
-							uni.hideLoading();
+							_this.$tools.loadingHide();
 							//点一键登录回调
 							if (oneKeyLoginListenerResult.errorCode != null) {
 								//失败，跳回手动登录页面
@@ -951,8 +917,8 @@
 								// 	title: JSON.stringify(oneKeyLoginListenerResult),
 								// 	duration: 3000
 								// });
-								this.token = oneKeyLoginListenerResult.data.token;
-								this.dealLogin();
+								_this.token = oneKeyLoginListenerResult.data.token;
+								_this.dealLogin();
 							}
 						}
 					);
@@ -1028,10 +994,7 @@
 						data: data.datas.UserTel
 					});
 
-					uni.showToast({
-						icon: 'none',
-						title: '操作成功'
-					});
+					this.$tools.toast('操作成功')
 
 					if (this._props.isFullScreen) {
 						uni.switchTab({

@@ -76,57 +76,45 @@
 			},
 			sendCode() {
 				//发送验证码
-				var th = this;
-				if (th.phone == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请填写正确的手机号码'
-					});
+				var _this = this;
+				if (_this.phone == '') {
+					_this.$tools.toast('请填写正确的手机号码')
 					return false;
 				}
 
 				//发送验证码
-				th.$request.common
+				_this.$request.common
 					.sendCode({
-						phone: th.phone,
+						phone: _this.phone,
 						type: 1
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
-							th.showText = false;
+							_this.showText = false;
 							var interval = setInterval(() => {
-								let times = --th.second;
-								th.second = times < 10 ? '0' + times : times; //小于10秒补 0
+								let times = --_this.second;
+								_this.second = times < 10 ? '0' + times : times; //小于10秒补 0
 							}, 1000);
 							setTimeout(() => {
 								clearInterval(interval);
-								th.second = 90;
-								th.showText = true;
+								_this.second = 90;
+								_this.showText = true;
 							}, 90000);
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			formSubmit(e) {
 				var _this = this;
 				if (!_this.agreeCheck) {
-					uni.showToast({
-						title: "请选阅读并同意用户协议说明",
-						icon: 'none'
-					});
+					_this.$tools.toast('请选阅读并同意用户协议说明')
 					return false;
 				}
 				//定义表单规则
@@ -171,15 +159,13 @@
 
 				var checkRes = graceChecker.check(formData, rule);
 				if (checkRes) {
-					uni.showLoading({
-						title: '数据提交中'
-					});
+					_this.$tools.loading('数据提交中')
 					_this.$request.user
 						.setdatum(formData)
 						.then(data => {
-							uni.hideLoading();
+							_this.$tools.loadingHide();
 							if (data.status == 1) {
-								this.$store.commit('setInformation');
+								_this.$store.commit('setInformation');
 
 								var user = uni.getStorageSync('uerInfo');
 								var user_pay_state = user.user_pay_state; //支付信息
@@ -194,25 +180,16 @@
 								}
 
 							} else {
-								uni.showToast({
-									icon: 'none',
-									title: data.msg
-								});
+								_this.$tools.toast(data.msg)
 							}
 						})
 						.catch(err => {
-							uni.hideLoading();
+							_this.$tools.loadingHide();
 							//消息异常
-							uni.showToast({
-								icon: 'none',
-								title: '数据加载异常'
-							});
+							_this.$tools.toast('数据加载异常')
 						});
 				} else {
-					uni.showToast({
-						title: graceChecker.error,
-						icon: 'none'
-					});
+					_this.$tools.toast(graceChecker.error)
 				}
 			}
 		}

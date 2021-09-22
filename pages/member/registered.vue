@@ -14,6 +14,8 @@
 							placeholder="用户密码" /></view>
 					<view class="t-item"><input type="password" class="t-input" name="passWorda" v-model="passWorda"
 							placeholder="确认密码" /></view>
+					<view class="t-item"><input type="text" class="t-input" name="payWord" v-model="payWord"
+							placeholder="支付密码" /></view>		
 					<view class="t-item"><input class="t-input" name="nvitationCode" v-model="nvitationCode"
 							placeholder="邀请码" /></view>
 				</view>
@@ -33,6 +35,7 @@
 				code: '',
 				passWord: '',
 				passWorda: '',
+				payWord : '',
 				nvitationCode:'',//邀请码
 				second: 90,
 				showText: true
@@ -44,48 +47,39 @@
 		methods: {
 			sendCode() {
 				//发送验证码
-				var th = this;
-				if (th.tel == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请填写正确的手机号码'
-					});
+				var _this = this;
+				if (_this.tel == '') {
+					_this.$tools.toast('请填写正确的手机号码')
 					return false;
 				}
 
 				//发送验证码
-				th.$request.common
+				_this.$request.common
 					.SendCode({
-						tel: th.tel,
-						typeId: 3
+						phone: _this.tel,
+						type: 2
 					})
 					.then(data => {
-						uni.hideLoading();
-						if (data.status == 1) {
-							th.showText = false;
+						_this.$tools.loadingHide();
+						if (data.status == 200) {
+							_this.showText = false;
 							var interval = setInterval(() => {
-								let times = --th.second;
-								th.second = times < 10 ? '0' + times : times; //小于10秒补 0
+								let times = --_this.second;
+								_this.second = times < 10 ? '0' + times : times; //小于10秒补 0
 							}, 1000);
 							setTimeout(() => {
 								clearInterval(interval);
-								th.second = 90;
-								th.showText = true;
+								_this.second = 90;
+								_this.showText = true;
 							}, 90000);
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			formSubmit(e) {
@@ -113,44 +107,40 @@
 						checkType: 'same',
 						checkRule: _this.passWord,
 						errorMsg: '两次密码不相同'
-					}
+					},
+					{
+						name: 'payWord',
+						checkType: 'string',
+						checkRule: '6,6',
+						errorMsg: '支付密码为6个字符'
+					},
+					
 				];
 				//进行表单检查
 				var formData = e.detail.value;
 
 				var checkRes = graceChecker.check(formData, rule);
 				if (checkRes) {
-					uni.showLoading({
-						title: '数据提交中'
-					});
+					_this.$tools.loading('数据提交中')
 					_this.$request.user
 						.Registered(formData)
 						.then(data => {
-							uni.hideLoading();
-							if (data.status == 1) {
+							_this.$tools.loadingHide();
+							if (data.status == 200) {
 								uni.navigateTo({
 									url: '/pages/member/login'
 								});
 							} else {
-								uni.showToast({
-									icon: 'none',
-									title: data.msg
-								});
+								_this.$tools.toast(data.msg)
 							}
 						})
 						.catch(err => {
-							uni.hideLoading();
+							_this.$tools.loadingHide();
 							//消息异常
-							uni.showToast({
-								icon: 'none',
-								title: '数据加载异常'
-							});
+							_this.$tools.toast('数据加载异常')
 						});
 				} else {
-					uni.showToast({
-						title: graceChecker.error,
-						icon: 'none'
-					});
+					_this.$tools.toast(graceChecker.error)
 				}
 			}
 		}

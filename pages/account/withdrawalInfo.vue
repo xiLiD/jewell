@@ -126,11 +126,11 @@
 						type: _this.type
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.mainItem = _this.mainItem.concat(data.data);
 							if (data.data.length < _this.PageSize) {
-								this.loadMoreText = '没有更多数据了';
+								_this.loadMoreText = '没有更多数据了';
 								_this.isMore = false;
 							} else {
 								_this.showLoadMore = false;
@@ -138,20 +138,14 @@
 							}
 						} else {
 							_this.showLoadMore = false;
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg);
 						}
 					})
 					.catch(err => {
 						_this.showLoadMore = false;
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常');
 					});
 			}
 		}

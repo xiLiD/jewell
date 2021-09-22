@@ -34,7 +34,7 @@
 				_this.$request.card
 					.gradeList({})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.mainItem = data.data;
 							if (_this.mainItem.end_time == 0) {
@@ -49,12 +49,9 @@
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			getDate(item) { // 时间戳转日期
@@ -85,30 +82,25 @@
 									grade_id: _this.mainItem.id
 								})
 								.then(data => {
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									if (data.status == 1) {
 										_this.pay(data.msg);
 									} else {
-										uni.showToast({
-											icon: 'none',
-											title: data.msg
-										});
+										_this.$tools.toast(data.msg);
 									}
 								})
 								.catch(err => {
 									console.log(err)
-									uni.hideLoading();
+									_this.$tools.loadingHide();
 									//消息异常
-									uni.showToast({
-										icon: 'none',
-										title: '数据加载异常'
-									});
+									_this.$tools.toast('数据加载异常');
 								});
 						} else if (res.cancel) {}
 					}
 				});
 			},
 			pay(orderInfo) {
+				let _this = this;
 				jwx({
 					nonceStr: orderInfo.nonceStr,
 					timeStamp: orderInfo.timeStamp,
@@ -116,19 +108,13 @@
 					signType: orderInfo.signType,
 					paySign: orderInfo.paySign
 				}, res => {
-					uni.showToast({
-						icon: 'none',
-						title: '支付成功'
-					});
+					_this.$tools.toast('支付成功')
 					setTimeout(() => {
 						_this.getList();
 					}, 1000)
 				}, fail => {
 					console.log(fail)
-					uni.showToast({
-						icon: 'none',
-						title: '支付失败'
-					});
+					_this.$tools.toast('支付失败')
 				})
 			}
 		}

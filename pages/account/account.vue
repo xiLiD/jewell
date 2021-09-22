@@ -82,27 +82,20 @@
 							_this.recommend = data.data.recommend;
 							_this.reward = data.data.reward;
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			},
 			copyUrl() {
 				//复制
+				let _this = this;
 				var url = config.SITE + '#/pages/member/registered?nvitationCode=' + this.nvitationCode;
 				setClipboardData(url).then(() => {
-					uni.showToast({
-						title: '复制成功',
-					});
+					_this.$tools.toast('复制成功')
 				})
 			}
 		}

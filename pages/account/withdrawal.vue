@@ -81,18 +81,12 @@
 								_this.balance = data.data.acer_truncatum;
 							}
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						this.$tools.toast('数据加载异常')
 					});
 
 			},
@@ -107,35 +101,23 @@
 							_this.bank_number = data.msg.bank_number;
 							_this.bank_qutlets = data.msg.bank_qutlets;
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 
 			},
 			openPwd() {
 				var _this = this;
 				if (_this.price == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的提现金额'
-					});
+					_this.$tools.toast('请输入正确的提现金额')
 					return false;
 				}
 				if (parseFloat(_this.price) > _this.balance) {
-					uni.showToast({
-						icon: 'none',
-						title: '账户余额不足'
-					});
+					_this.$tools.toast('账户余额不足')
 					return false;
 				}
 				//验证密码
@@ -146,23 +128,18 @@
 				var _this = this;
 				if (_this.isSubmit) return false;
 				if (_this.price == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的金额'
-					});
+					_this.$tools.toast('请输入正确的金额')
 					return false;
 				}
 				if (parseFloat(_this.price) > _this.balance) {
-					uni.showToast({
-						icon: 'none',
-						title: '账户余额不足'
-					});
+					_this.$tools.toast('账户余额不足')
 					return false;
 				}
 				_this.isSubmit = true;
-				uni.showLoading({
-					title: '数据提交中'
-				});
+				// uni.showLoading({
+				// 	title: '数据提交中'
+				// });
+				_this.$tools.loading('数据提交中')
 				_this.$request.account
 					.withdrawal({
 						type: _this.type,
@@ -173,33 +150,26 @@
 						bank_qutlets: _this.bank_qutlets
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						_this.isSubmit = false;
 						if (data.status == 1) {
-							uni.showToast({
-								icon: 'none',
-								title: '申请成功'
-							});
+
+							_this.$tools.toast('申请成功')
 							setTimeout(() => {
 								_this.dump('/pages/account/withdrawalInfo?type='+_this.type);
 							}, 1000)
 						} else {
 							_this.$refs.paymentPassword.modalFun('hide');
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+	
+							_this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {
 						_this.$refs.paymentPassword.modalFun('hide');
 						_this.isSubmit = false;
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常')
 					});
 			}
 		}

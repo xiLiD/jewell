@@ -40,11 +40,14 @@ const store = new Vuex.Store({
 			state.user_head = provider.user_head;
 			state.user_name = provider.user_name;
 			state.user_type = provider.user_type;
-
+				
 			uni.setStorage({ //将用户信息保存在本地  
 				key: 'uerInfo',
 				data: provider
 			})
+			var user = uni.getStorageSync('uerInfo')
+			console.log('user',user)
+			console.log('state',state)	
 				
 		},
 		setInformation() { //设置账户状态

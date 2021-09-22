@@ -191,15 +191,13 @@
 			getshouPay() {
 				//获取用户信息
 				var _this = this;
-				uni.showLoading({
-					title: '数据查询中'
-				});
+				_this.$tools.loading('数据查询中')
 				_this.$request.account
 					.shouPay({
 						type: _this.payMain.Id
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
 							_this.payMain.ImgUrl = data.data.zf_imgse;
 							_this.payMain.accountNumber = data.data.zf_name;
@@ -213,12 +211,9 @@
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常');
 					});
 			},
 			upload() {
@@ -226,24 +221,16 @@
 				var _this = this;
 				if (!_this.payMain.accountNumber) {
 					//消息异常
-					uni.showToast({
-						icon: 'none',
-						title: '请输入数据收款账户'
-					});
+					_this.$tools.toast('请输入数据收款账户');
 					return false;
 				}
 				if (!_this.cardUrl) {
 					//消息异常
-					uni.showToast({
-						icon: 'none',
-						title: '请选择收款码图片'
-					});
+					_this.$tools.toast('请选择收款码图片');
 					return false;
 				}
 				_this.isSubmit = true;
-				uni.showLoading({
-					title: '上传中'
-				});
+				_this.$tools.loadoing('上传中');
 				_this.uploadFile('file', _this.cardUrl);
 			},
 
@@ -259,24 +246,18 @@
 						token: user.token
 					},
 					success: function(msg) {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						_this.isSubmit = false;
 						var data = JSON.parse(msg.data);
 						if (data.status == 1) {
 							_this.addPay(data.data);
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg);
 						}
 					},
 					fail: res => {
 						_this.isSubmit = false;
-						uni.showToast({
-							icon: 'none',
-							title: '上传失败'
-						});
+						_this.$tools.toast('上传失败');
 					}
 				});
 			},
@@ -289,14 +270,10 @@
 						zf_imgse: url
 					})
 					.then(data => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						if (data.status == 1) {
-
-							uni.showToast({
-								icon: 'none',
-								title: '上传成功'
-							});
-							this.$store.commit('setUserPay'); //记录状态
+							_this.$tools.toast('上传成功');
+							_this.$store.commit('setUserPay'); //记录状态
 
 							if (_this.isPerfect) { //完善信息，跳转到个人中心
 								uni.switchTab({
@@ -307,19 +284,13 @@
 							}
 
 						} else {
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+							_this.$tools.toast(data.msg);
 						}
 					})
 					.catch(err => {
-						uni.hideLoading();
+						_this.$tools.loadingHide();
 						//消息异常
-						uni.showToast({
-							icon: 'none',
-							title: '数据加载异常'
-						});
+						_this.$tools.toast('数据加载异常');
 					});
 			}
 		}

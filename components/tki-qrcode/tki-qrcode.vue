@@ -109,11 +109,7 @@ export default {
 					},
 				});
 			} else {
-				uni.showToast({
-					title: '二维码内容不能为空',
-					icon: 'none',
-					duration: 2000
-				});
+				this.$tools.toast('二维码内容不能为空')
 			}
 		},
 		_clearCode() {
@@ -126,11 +122,7 @@ export default {
 				uni.saveImageToPhotosAlbum({
 					filePath: that.result,
 					success: function () {
-						uni.showToast({
-							title: '二维码保存成功',
-							icon: 'success',
-							duration: 2000
-						});
+						this.$tools.toast('二维码保存成功','success')
 					}
 				});
 			}
