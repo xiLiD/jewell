@@ -12,6 +12,9 @@
 				<view>{{item.money}}</view>
 				<view>{{typeItem.find(p=>p.id==item.type).name}}</view>
 			</view>
+			<view v-if="mainItem.length == 0">
+				<noData></noData>
+			</view>
 		</view>
 		<view class="uni-loadmore" v-if="showLoadMore">{{ loadMoreText }}</view>
 	</view>

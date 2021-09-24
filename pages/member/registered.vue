@@ -1,26 +1,32 @@
 <template>
 	<view class="container">
 		<template>
-			<form @submit="formSubmit">
+			<form>
 				<view class="t-box">
-					<view class="t-item"><input type="text" class="t-input" name="tel" v-model="tel"
-							placeholder="请输入手机号码" /></view>
+					<view class="t-item"><input type="text" class="t-input" name="tel" v-model="tel" placeholder="请输入手机号码" /></view>
 					<view class="t-item">
 						<input type="text" class="t-input" name="code" v-model="code" placeholder="请输入验证码" />
 						<button class="seehouse_get_nub" @click="sendCode" v-if="showText == true">获取验证码</button>
 						<view v-else class="sends">({{ second }}秒)重新获取</view>
 					</view>
-					<view class="t-item"><input type="password" class="t-input" name="passWord" v-model="passWord"
-							placeholder="用户密码" /></view>
-					<view class="t-item"><input type="password" class="t-input" name="passWorda" v-model="passWorda"
-							placeholder="确认密码" /></view>
-					<view class="t-item"><input type="text" class="t-input" name="payWord" v-model="payWord"
-							placeholder="支付密码" /></view>		
-					<view class="t-item"><input class="t-input" name="nvitationCode" v-model="nvitationCode"
-							placeholder="邀请码" /></view>
+					<view class="t-item">
+						<!-- 						<input type="password" class="t-input" name="passWord" v-model="passWord"
+							placeholder="用户密码" /> -->
+						<pwInput :inputInfo="{name:'passWord',placeholder:'用户密码'}" ref='userPwd'></pwInput>
+					</view>
+
+					<view class="t-item">
+						<pwInput :inputInfo="{name:'passWorda',placeholder:'确认密码'}" ref='passWorda'></pwInput>
+					</view>
+					<view class="t-item">
+						<!-- 					<input type="text" class="t-input" name="payWord" v-model="payWord"
+							placeholder="支付密码" /> -->
+						<pwInput :inputInfo="{name:'payWord',placeholder:'支付密码'}" ref='payWord'></pwInput>
+					</view>
+					<view class="t-item"><input class="t-input" name="nvitationCode" v-model="nvitationCode" placeholder="邀请码" /></view>
 				</view>
 
-				<view class="b-box"><button formType="submit" class="blt-botton">提交注册</button></view>
+				<view class="b-box"><button class="blt-botton" @click="btnRegister">提交注册</button></view>
 			</form>
 		</template>
 	</view>
@@ -28,15 +34,19 @@
 
 <script>
 	var graceChecker = require('@/common/graceChecker.js');
+	import pwInput from '@/components/input/PwInput'
 	export default {
+		components: {
+			pwInput
+		},
 		data() {
 			return {
 				tel: '',
 				code: '',
 				passWord: '',
 				passWorda: '',
-				payWord : '',
-				nvitationCode:'',//邀请码
+				payWord: '',
+				nvitationCode: '', //邀请码
 				second: 90,
 				showText: true
 			};
@@ -55,7 +65,7 @@
 
 				//发送验证码
 				_this.$request.common
-					.SendCode({
+					.sendCode({
 						phone: _this.tel,
 						type: 2
 					})
@@ -82,11 +92,11 @@
 						_this.$tools.toast('数据加载异常')
 					});
 			},
-			formSubmit(e) {
+			btnRegister() {
 				var _this = this;
 				//定义表单规则
 				var rule = [{
-						name: 'tel',
+						name: 'userName',
 						checkType: 'phoneno',
 						errorMsg: '电话号码不正确'
 					},
@@ -97,39 +107,54 @@
 						errorMsg: '验证码6个字符'
 					},
 					{
-						name: 'passWord',
+						name: 'pawd',
 						checkType: 'string',
 						checkRule: '6,20',
 						errorMsg: '密码为6-20个字符'
 					},
 					{
-						name: 'passWorda',
-						checkType: 'same',
-						checkRule: _this.passWord,
-						errorMsg: '两次密码不相同'
-					},
-					{
-						name: 'payWord',
+						name: 'pay_paw',
 						checkType: 'string',
 						checkRule: '6,6',
 						errorMsg: '支付密码为6个字符'
 					},
-					
+					{
+						name: 'invitation',
+						checkType: 'string',
+						checkRule: '6,6',
+						errorMsg: '邀请码为6个字符'
+					},
 				];
-				//进行表单检查
-				var formData = e.detail.value;
-
+				console.log(_this.$refs['userPwd'].getPassWord(), _this.$refs['passWorda'].getPassWord())
+				if(_this.$refs['userPwd'].getPassWord() != _this.$refs['passWorda'].getPassWord()){
+					this.$tools.toast('两次输入的密码不一致!')
+					return;
+				}
+				let formData = {
+					userName: _this.tel,
+					code: _this.code,
+					pawd: _this.$refs['userPwd'].getPassWord(),
+					pay_paw: _this.$refs['payWord'].getPassWord(),
+					invitation: _this.nvitationCode
+				}
 				var checkRes = graceChecker.check(formData, rule);
 				if (checkRes) {
 					_this.$tools.loading('数据提交中')
 					_this.$request.user
-						.Registered(formData)
+						.register(formData)
 						.then(data => {
 							_this.$tools.loadingHide();
 							if (data.status == 200) {
-								uni.navigateTo({
-									url: '/pages/member/login'
-								});
+								_this.$tools.toast('注册成功!')
+								_this.$tools.loading('前往登录中...')
+								setTimeout(()=>{
+									_this.$tools.loadingHide();
+									uni.navigateTo({
+										url: '/pages/member/login'
+									});
+									
+								},500)	
+								
 							} else {
 								_this.$tools.toast(data.msg)
 							}

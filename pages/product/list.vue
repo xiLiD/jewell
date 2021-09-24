@@ -3,6 +3,7 @@
 		<view class="t_se">
 			<uni-search-bar radius="100" placeholder="请输入关键词" cancelButton="none" @confirm="search" />
 		</view>
+		<view class="time_str">{{ countDownObject.countDownStr }}</view>
 		<view class="t_main">
 			<view class="t_item" v-for="(item, index) in mainItem" :key="index" @click="dumpInfo(item.id)">
 				<view class="t-status t-status-a" v-if="item.start_auction==0">待开始 {{}}</view>
@@ -33,20 +34,47 @@
 				PageNo: 1,
 				PageSize: 10,
 				mainItem: [],
-				keyWords: '' //搜索关键词
+				keyWords: '' ,//搜索关键词
+				countDownObject : {
+					countDownStr : '',
+					count_down : 0
+				},
+				timer : null
 			};
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
-			
+			this.getStartTime();
+		},
+		onHide(){
+			console.log('页面隐藏')
+			if(this.timer){
+				clearInterval(this.timer);
+			}
 		},
 		onLoad(option) {
 			if (option.type) this.type = option.type;
 			this.initData();
-			this.getStartTime();
+			// this.getStartTime();
 		},
 		onUnload() {
-			(this.PageNo = 1), (this.mainItem = []), (this.loadMoreText = '加载更多'), (this.showLoadMore = false);
+			console.log('页面卸载');
+			if(this.timer){
+				clearInterval(this.timer);
+			}
+
+			this.PageNo = 1;
+			this.mainItem = [];
+			this.loadMoreText = '加载更多';
+			this.showLoadMore = false;
+		},
+		onBackPress(e){
+		  // console.log("监听返回按钮事件",e);
+		  // uni.navigateTo({
+		  //   url:"/pages/details/details?type=2"
+		  // })
+		  // // 此处一定姚要return为true，否则页面不会返回到指定路径
+		  // return true;
 		},
 		onReachBottom() {
 			//下拉加载
@@ -60,13 +88,52 @@
 			this.initData();
 		},
 		methods: {
+			countdown() {
+				let that = this;
+				that.timer = setInterval(function() {
+					if (that.countDownObject.count_down > 0) {
+						that.countDownObject.count_down -= 1;
+						let t = that.countDownObject.count_down;
+						let day = Math.floor(t / 86400);
+						let hour = Math.floor((t / 3600) % 24);
+						let min = Math.floor((t / 60) % 60);
+						let sec = Math.floor((t) % 60);
+						day = day < 10 ? "0" + day : day;
+						hour = hour < 10 ? "0" + hour : hour;
+						min = min < 10 ? "0" + min : min;
+						sec = sec < 10 ? "0" + sec : sec;
+						let format = "";
+						if(day == '00'){
+							format = `待开始：${hour}时${min}分${sec}秒`;
+						}else{
+							format = `待开始：${day}天${hour}时${min}分${sec}秒`;
+						}
+						that.$set(that.countDownObject,'countDownStr',format)
+					} else {
+						// 进行判断 如果数据内所有的倒计时已经结束，那么结束定时器， 如果没有那么继续执行定时器
+						clearInterval(that.timer);
+						if (that.countDownObject.count_down == -1) {
+							that.$set(that.countDownObject,'countDownStr','已开始')
+						} else if (that.countDownObject.count_down == -2) {
+							that.$set(that.countDownObject,'countDownStr','已结束')
+						}
+					}
+					// that.$set(that.countDownObject,'countDownStr',that.countDownObject.countDownStr)
+					console.log(that.countDownObject)
+				}, 1000);
+			},
 			getStartTime(){
 				let _this = this;
 				_this.$request.product
 					.getTime({
 						class_id: _this.type,
 					}).then((res)=>{
-						console.log(res);
+						console.log(res.data)
+						res.data.countDownStr = '';
+						_this.countDownObject = res.data;
+						// _this.countDownObject.countDownStr = '';
+						// this.startTime = res.data.count_down;
+						_this.countdown();
 					})
 			},
 			search(res) {
@@ -96,7 +163,9 @@
 			getPage() {
 				//加载数据
 				var _this = this;
-				_this.$tools.loading('数据查询中')
+				uni.showLoading({
+					title: '数据查询中'
+				});
 				_this.$request.product
 					.getGoodsList({
 						page: _this.PageNo,
@@ -104,7 +173,7 @@
 						keyWords: _this.keyWords
 					})
 					.then(data => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						if (data.status == 1) {
 							_this.mainItem = _this.mainItem.concat(data.data);
 							if (data.data.length < _this.PageSize) {
@@ -116,15 +185,20 @@
 							}
 						} else {
 							_this.showLoadMore = false;
-							_this.$tools.loading(data.msg)
+							uni.showToast({
+								icon: 'none',
+								title: data.msg
+							});
 						}
 					})
 					.catch(err => {
 						_this.showLoadMore = false;
-						// this.$tools.loadingHide();
+						uni.hideLoading();
 						//消息异常
-						_this.$tools.loadingHide();
-						_this.$tools.loading('数据加载异常')
+						uni.showToast({
+							icon: 'none',
+							title: '数据加载异常'
+						});
 					});
 			}
 		}
@@ -220,5 +294,11 @@
 		background-color: #EFEFEF;
 		color: #000000;
 		font-weight: 600;
+	}
+	.time_str {
+		text-align: center;
+		font-size: 32upx;
+		font-weight: bold;
+		color:#e0664f !important
 	}
 </style>

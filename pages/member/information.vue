@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<template>
-			<form @submit="formSubmit">
+			<form>
 				<view class="t-box">
 					<view class="t-item"><input type="text" class="t-input" name="phone" v-model="phone"
 							placeholder="请输入手机号码" /></view>
@@ -15,10 +15,16 @@
 					<view class="t-item"><input type="idcard" class="t-input" name="id_card" v-model="id_card"
 							placeholder="身份证号码" />
 					</view>
-					<view class="t-item"><input type="password" class="t-input" name="pay_paw" v-model="pay_paw"
-							placeholder="支付密码" /></view>
-					<view class="t-item"><input type="password" class="t-input" name="pay_pawa" v-model="pay_pawa"
-							placeholder="确认支付密码" /></view>
+					<view class="t-item">
+						<pwInput :inputInfo="{name:'pay_paw',placeholder:'支付密码'}" ref='pay_paw'></pwInput>
+<!-- 						<input type="password" class="t-input" name="pay_paw" v-model="pay_paw"
+							placeholder="支付密码" /> -->
+							</view>
+					<view class="t-item">
+						<pwInput :inputInfo="{name:'pay_pawa',placeholder:'确认支付密码'}" ref='pay_pawa'></pwInput>
+<!-- 						<input type="password" class="t-input" name="pay_pawa" v-model="pay_pawa"
+							placeholder="确认支付密码" /> -->
+							</view>
 				</view>
 				<view class="t-agree">
 					<switch type="checkbox" :checked="agreeCheck" color="#201f24" style="transform:scale(0.7)"
@@ -26,7 +32,7 @@
 					已阅读并同意<text class="red" @click="dump('/pages/member/protocol')">《注册协议说明》</text>
 				</view>
 
-				<view class="b-box"><button formType="submit" class="blt-botton">确认提交</button></view>
+				<view class="b-box"><button formType="submit" class="blt-botton" @click="btnClick">确认提交</button></view>
 			</form>
 		</template>
 	</view>
@@ -34,7 +40,11 @@
 
 <script>
 	var graceChecker = require('@/common/graceChecker.js');
+	import pwInput from '@/components/input/PwInput'
 	export default {
+		components: {
+			pwInput
+		},
 		data() {
 			return {
 				phone: '',
@@ -90,7 +100,7 @@
 					})
 					.then(data => {
 						_this.$tools.loadingHide();
-						if (data.status == 1) {
+						if (data.status == 200) {
 							_this.showText = false;
 							var interval = setInterval(() => {
 								let times = --_this.second;
@@ -110,6 +120,93 @@
 						//消息异常
 						_this.$tools.toast('数据加载异常')
 					});
+			},
+			btnClick(){
+				var _this = this;
+				if (!_this.agreeCheck) {
+					_this.$tools.toast('请选阅读并同意用户协议说明')
+					return false;
+				}
+				//定义表单规则
+				var rule = [{
+						name: 'phone',
+						checkType: 'phoneno',
+						errorMsg: '电话号码不正确'
+					},
+					{
+						name: 'code',
+						checkType: 'string',
+						checkRule: '6,6',
+						errorMsg: '验证码6个字符'
+					},
+					{
+						name: 'id_card_name',
+						checkType: 'string',
+						checkRule: '1,100',
+						errorMsg: '请输入正确的姓名'
+					},
+					{
+						name: 'id_card',
+						checkType: 'string',
+						checkRule: '18,18',
+						errorMsg: '请输入正确的身份证号码'
+					},
+					{
+						name: 'pay_paw',
+						checkType: 'string',
+						checkRule: '6,20',
+						errorMsg: '密码为6-20个字符'
+					},
+					{
+						name: 'pay_pawa',
+						checkType: 'same',
+						checkRule: _this.pay_paw,
+						errorMsg: '两次密码不相同'
+					}
+				];
+				//进行表单检查
+				var formData = {
+					phone : this.phone,
+					code : this.code,
+					id_card_name : this.id_card_name,
+					pay_paw : this.$refs['pay_paw'].getPassWord(),
+					pay_pawa : this.$refs['pay_pawa'].getPassWord(),
+				}
+				
+				var checkRes = graceChecker.check(formData, rule);
+				if (checkRes) {
+					_this.$tools.loading('数据提交中')
+					_this.$request.user
+						.setdatum(formData)
+						.then(data => {
+							_this.$tools.loadingHide();
+							if (data.status == 1) {
+								_this.$store.commit('setInformation');
+				
+								var user = uni.getStorageSync('uerInfo');
+								var user_pay_state = user.user_pay_state; //支付信息
+								if (user_pay_state != 1) {
+									uni.navigateTo({
+										url: '/pages/account/setCard?source=1'
+									});
+								} else {
+									uni.switchTab({
+										url: '/pages/member/center'
+									});
+								}
+				
+							} else {
+								_this.$tools.toast(data.msg)
+							}
+						})
+						.catch(err => {
+							_this.$tools.loadingHide();
+							//消息异常
+							_this.$tools.toast('数据加载异常')
+						});
+				} else {
+					_this.$tools.toast(graceChecker.error)
+				}
 			},
 			formSubmit(e) {
 				var _this = this;

@@ -1161,7 +1161,8 @@ let QRCode = {};
                             },
                             complete: function () {
                                 if (options.showLoading){
-                                    _this.$tools.loadingHide();
+									uni.hideLoading()
+                                    // _this.$tools.loadingHide();
                                 }
                             },
                         }, options.context);

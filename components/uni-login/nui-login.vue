@@ -209,7 +209,7 @@
 					})
 					.then(data => {
 						_this.$tools.loadingHide();
-						if (data.status == 1) {
+						if (data.status == 200) {
 							_this.showText = false;
 							var interval = setInterval(() => {
 								let times = --_this.second;

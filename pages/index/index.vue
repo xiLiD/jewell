@@ -20,7 +20,7 @@
 					<view class="i_r_t">{{ item.class_name }}</view>
 					<view class="i-r-date" v-if="item.sleep==1">
 						<view class="i-r-date" v-if="item.status==1">进行中（{{item.start_hours}}-{{item.end_hours}})</view>
-						<view class="i-r-date" v-else><text>{{ item.countDownStr }}</text><text v-if="item.start_time>0">（{{item.start_hours}}-{{item.end_hours}})</text></view>
+						<view class="i-r-date" v-else>{{item.countDownStr}}<text v-if="item.start_time>0">（{{item.start_hours}}-{{item.end_hours}})</text></view>
 						<text class="i-r-intro">{{item.quota}}</text>
 					</view>
 					<view class="i-r-date" v-else>休市中</view>
@@ -48,23 +48,39 @@
 				},
 				ImgList: [],
 				mainItem: [],
+				timer: null,
 				isCard: -1 //0、未权限；1、有权限
 			};
 		},
 		onShow() {
 			this.isCard = -1;
-		},
-		onLoad() {
 			this.getList();
 			this.getBanner();
 			this.getUserUp();
 		},
+		onLoad() {
+			// this.getList();
+			// this.getBanner();
+			// this.getUserUp();
+		},
+		onHide() {
+			console.log('页面隐藏')
+			if (this.timer) {
+				clearInterval(this.timer);
+			}
+		},
+		onUnload() {
+			console.log('页面卸载')
+			if (this.timer) {
+				clearInterval(this.timer);
+			}
+		},
 		methods: {
 			countdown() {
-				let _this = this;
+				let that = this;
 				// let mainItem = JSON.parse((JSON.stringify(that.mainItem)));
-				let timer = setInterval(function() {
-					_this.mainItem.forEach((item,index)=>{
+				that.timer = setInterval(function() {
+					that.mainItem.forEach((item, index) => {
 						let t = item.count_down;
 						if (t > 0) {
 							item.count_down -= 1;
@@ -77,28 +93,34 @@
 							min = min < 10 ? "0" + min : min;
 							sec = sec < 10 ? "0" + sec : sec;
 							let format = "";
-							if(day == '00'){
+							if (day == '00') {
 								format = `待开始：${hour}时${min}分${sec}秒`;
-								
-							}else{
+
+							} else {
 								format = `待开始：${day}天${hour}时${min}分${sec}秒`;
 							}
+							// format = `待开始：${day}天${hour}时${min}分${sec}秒`;
 							item.countDownStr = format
-							_this.$set(_this.mainItem, index, item)
+							that.$set(that.mainItem, index, item)
+							// item.countDownStr = format;
 						} else {
 							// 进行判断 如果数据内所有的倒计时已经结束，那么结束定时器， 如果没有那么继续执行定时器
-							let flag = _this.mainItem.every((val, ind) => val.count_down <= 0);
-							if (flag) clearInterval(timer);
+							let flag = that.mainItem.every((val, ind) => val.count_down <= 0);
+							if (flag) clearInterval(that.timer);
 							if (item.count_down == -1) {
 								item.countDownStr = '已开始'
-								_this.$set(_this.mainItem, index, item)
+								that.$set(that.mainItem, index, item)
+								// that.$set(that.mainItem, index, '已开始')
+								// item.countDownStr = `已开始`; // 结束文案
 							} else if (item.count_down == -2) {
 								item.countDownStr = '已结束'
-								_this.$set(_this.mainItem, index, item)
+								that.$set(that.mainItem, index, item)
+								// that.$set(that.mainItem, index, '已结束')
+								// item.countDownStr = `已结束`; // 结束文案
 							}
 						}
 					})
-					console.log(_this.mainItem)
+					console.log(that.mainItem)
 				}, 1000);
 
 			},
@@ -121,7 +143,7 @@
 						_this.$request.card
 							.gradeList({})
 							.then(data => {
-								_this.$tools.loadingHide();
+								uni.hideLoading();
 								if (data.status == 1) {
 									var end_time = data.data.end_time; //结束时间
 									if (end_time == 0) {
@@ -171,7 +193,6 @@
 							_this.mainItem = data.data;
 							var h = new Date().getHours();
 							_this.mainItem.forEach(item => {
-								item.countDownStr = '';
 								item.status = 0;
 								var a = parseFloat(item.start_time / 3600);
 								var b = parseFloat(item.end_time / 3600);
@@ -181,17 +202,17 @@
 									item.status = 1;
 								}
 							});
-							
-							console.log(this.mainItem)
-							// 开始倒计时
-							_this.countdown();
+							_this.countdown()
 						}
 					})
 					.catch(err => {
 						console.log(err);
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						//消息异常
-						_this.$tools.toast('数据加载异常')
+						uni.showToast({
+							icon: 'none',
+							title: '数据加载异常'
+						});
 					});
 			},
 			getDate(hours) {
@@ -211,27 +232,26 @@
 				_this.$request.index
 					.carousel({})
 					.then(data => {
-						console.log(data)
 						if (data.status == 1) {
 							_this.ImgList = data.data;
 						}
 					})
 					.catch(err => {
 						console.log(err);
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						//消息异常
-						_this.$tools.toast('数据加载异常')
+						uni.showToast({
+							icon: 'none',
+							title: '数据加载异常'
+						});
 					});
 			},
 			getUserUp() {
 				//获取是否可以升级
 				var _this = this;
 				_this.$request.user
-					.getUserData({
-
-					})
+					.getUserData({})
 					.then(data => {
-						console.log(data)
 						if (data.status == 1) {
 							if (data.data.up == 1) {
 								uni.setTabBarBadge({

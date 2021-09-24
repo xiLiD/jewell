@@ -35,14 +35,14 @@ export default class Request {
 			// if(userInfo){
 			// 	header.token = userInfo.token
 			// }
-			var user = uni.getStorageSync('uerInfo');
+			// var user = uni.getStorageSync('uerInfo');
 			// console.log(user)
-			// if(user){
+			// if(user.token){
 			// 	header.token = user.token
 			// }
-			if(store.token){
-				header.token = store.token
-			}
+			// if(store.token){
+			// 	header.token = store.token
+			// }
         }
 
         //加载圈
@@ -88,6 +88,15 @@ export default class Request {
                     // }
                     // 将结果抛出
 					console.log(res)
+					if(res.data.status == -1){
+						uni.showToast({
+						        title: "登录失效!" + res.data.msg,
+						        icon: 'none'
+						    });
+							uni.redirectTo({
+								url : '/pages/member/login?back=0'
+							})
+					}
                     resolve(res.data)
                 },
                 //请求失败

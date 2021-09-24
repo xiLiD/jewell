@@ -67,6 +67,9 @@
 			msg(msg) {
 				let _this = this;
 				_this.$tools.toast(msg)
+			},
+			qrR(result){
+				console.log(result)
 			}
 		}
 	};

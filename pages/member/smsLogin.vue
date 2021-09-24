@@ -60,7 +60,7 @@
 			
 				//发送验证码
 				_this.$request.common
-					.SendCode({
+					.sendCode({
 						phone: _this.userName,
 						type: 1
 					})

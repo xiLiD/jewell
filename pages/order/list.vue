@@ -26,6 +26,9 @@
 				</view>
 				<view class="clear"></view>
 			</view>
+			<view v-if="mainItem.length == 0">
+				<noData></noData>
+			</view>
 		</view>
 		<view class="uni-loadmore" v-if="showLoadMore">{{ loadMoreText }}</view>
 	</view>

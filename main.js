@@ -55,6 +55,10 @@ Vue.prototype.$request = api;
 
 App.mpType = 'app'
 
+// 全局注册 无数据组件
+import noData from 'components/no-data/index'
+Vue.component('noData',noData)
+
 const app = new Vue({
     ...App
 })

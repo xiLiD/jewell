@@ -12,12 +12,13 @@
 						<view v-else class="sends">({{second}}秒)重新获取</view>
 					</view>
 					<view class="t-item">
-						<input type="password" class="t-input" name="passWord" v-model="passWord" placeholder="新密码" />
+						<!-- <input type="password" class="t-input" name="passWord" v-model="passWord" placeholder="新密码" /> -->
+						<pwInput :inputInfo="{name:'passWord',placeholder:'新密码'}" ref='payWord'></pwInput>
 					</view>
 				</view>
 
 				<view class="b-box">
-					<button formType="submit" class="blt-botton">提交修改</button>
+					<button formType="submit" class="blt-botton" @click="btnClick">提交修改</button>
 				</view>
 			</form>
 		</template>
@@ -26,7 +27,11 @@
 
 <script>
 	var graceChecker = require("@/common/graceChecker.js");
+		import pwInput from '@/components/input/PwInput'
 	export default {
+		components: {
+			pwInput
+		},
 		data() {
 			return {
 				userName: '',
@@ -50,7 +55,7 @@
 
 				//发送验证码
 				_this.$request.common
-					.SendCode({
+					.sendCode({
 						phone: _this.userName,
 						type: 1
 					})
@@ -79,6 +84,58 @@
 						_this.$tools.toast('数据加载异常')
 					});
 
+			},
+			btnClick(){
+				var _this = this;
+				//定义表单规则
+				var rule = [{
+						name: "userName",
+						checkType: "phoneno",
+						errorMsg: "电话号码不正确"
+					},
+					{
+						name: "code",
+						checkType: "string",
+						checkRule: "6,6",
+						errorMsg: "验证码6个字符"
+					},
+					{
+						name: "passWord",
+						checkType: "string",
+						checkRule: "6,20",
+						errorMsg: "密码为6-20个字符"
+					}
+				];
+				//进行表单检查
+				var formData = {
+					userName : this.userName,
+					code : this.code,
+					passWord : this.$refs['passWord'].getPassWord()
+				}
+				
+				var checkRes = graceChecker.check(formData, rule)
+				if (checkRes) {
+					_this.$tools.loading('数据提交中')
+					_this.$request.user
+						.changePwd(formData)
+						.then(data => {
+							_this.$tools.loadingHide();
+							if (data.status == 200 || data.status == 201) {
+								uni.navigateTo({
+									url: '/pages/member/login'
+								});
+							} else {
+								_this.$tools.toast(data.msg)
+							}
+						})
+						.catch(err => {
+							_this.$tools.loadingHide();
+							//消息异常
+							_this.$tools.toast('数据加载异常')
+						});
+				} else {
+					_this.$tools.toast(graceChecker.error)
+				}
 			},
 			formSubmit(e) {
 				var _this = this;

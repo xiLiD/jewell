@@ -165,7 +165,7 @@
 						"changeOrigin": true,   
 						"secure": false,
 						"pathRewrite": {
-							"^/web": "/"  
+							"^/gzh": "/"  
 						}  
 					}  
 				}

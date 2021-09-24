@@ -1,8 +1,10 @@
 import Request from '@/utils/request.js'
 let request = new Request().http
-let user = uni.getStorageSync('uerInfo')
+
 const getToken = (data) => {
+	let user = uni.getStorageSync('uerInfo')
 	if (user) {
+		console.log(user.token)
 		data.token = user.token
 	}
 	return data
@@ -21,7 +23,7 @@ export default {
 			})
 		},
 		// 发送验证码
-		SendCode: function(data) {
+		sendCode: function(data) {
 			data = getToken(data)
 			return request({
 				url: "/gzh/Applogin/sms",
@@ -206,9 +208,6 @@ export default {
 				method: "POST", //请求方式
 				data: data, //请求数据
 			})
-		},
-		getGoods(data) {
-			return minRequest.post('/gzh/Goods/getGoods', data)
 		},
 		//抢购
 		rush: function(data) {

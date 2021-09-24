@@ -1,9 +1,12 @@
 <template>
 	<view class="container">
-
 		<view class="t-box">
-			<view class="t-item"><input type="text" class="t-input" v-model="userName" placeholder="用户名" /></view>
-			<view class="t-item"><input type="password" class="t-input" v-model="userPwd" placeholder="登录密码"  /></view>
+			<view class="t-item">
+				<input type="text" class="t-input" v-model="userName" placeholder="用户名" autocomplete="off" /></view>
+			<view class="t-item">
+				<!-- <input :type="type" name="userPwd" ref="userPwd" class="t-input" v-model="userPwd" @focus="type = 'password'" autocomplete="off" placeholder="登录密码"  /> -->
+				<pwInput  :inputInfo="{name:'userPwd',placeholder:'登录密码'}" ref='pwInput'></pwInput>
+			</view>
 		</view>
 
 
@@ -16,10 +19,10 @@
 
 
 
-		<!-- <view class="bt-x" @click="dump('/pages/member/protocol')">
+		<view class="bt-x" @click="dump('/pages/member/protocol')">
 			登录即同意
 			<text>《禅艺珠宝用户协议》</text>
-		</view> -->
+		</view>
 
 		<!-- <uni-login ref="uniLogin" :isFullScreen="isFullScreen" :isWeiAutomatic="isAutomatic"></uni-login>? -->
 	</view>
@@ -27,6 +30,7 @@
 
 <script>
 	// import uniLogin from '@/components/uni-login/nui-login.vue';
+		import pwInput from '@/components/input/PwInput'
 	import {
 		mapState,
 		mapMutations
@@ -35,6 +39,7 @@
 	export default {
 		components: {
 			// uniLogin
+			pwInput
 		},
 		data() {
 			return {
@@ -51,7 +56,8 @@
 					OpenId: '',
 					UserImg: '',
 					UserNickName: ''
-				}
+				},
+				type : 'text'
 			};
 		},
 		onShow() {
@@ -96,6 +102,11 @@
 		},
 		methods: {
 			...mapMutations(['login']),
+			getFocus(){
+				this.$refs.userPwd.type = "password"  
+				this.userPwd = '';
+				this.userName = this.userName;
+			},
 			back() {
 				uni.switchTab({
 					url: '/pages/index/index'
@@ -112,7 +123,8 @@
 					that.$tools.toast('请输入账号')
 					return false;
 				}
-				if (that.userPwd == '') {
+				let userPwd = that.$refs['pwInput'].getPassWord();
+				if (userPwd == '') {
 					that.$tools.toast('请输入密码')
 					return false;
 				}
@@ -120,7 +132,7 @@
 				that.$request.user
 					.login({
 						userName: that.userName,
-						passWord: that.userPwd
+						passWord: userPwd
 					})
 					.then(data => {
 						that.$tools.loadingHide();	

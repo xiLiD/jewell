@@ -144,7 +144,9 @@
 			};
 		},
 		onShow: function(e) {
+			
 			this.$store.commit('judgeLogin'); //判断登录状态
+			this.getUserData();
 		},
 		onLoad(option) {
 			var user = uni.getStorageSync('uerInfo');
@@ -153,7 +155,7 @@
 			this.mainData.nvitationCode = user.invitation;
 			this.mainData.user_type = user.user_type;
 			this.mainData.up = user.up;
-			this.getUserData();
+			
 		},
 		methods: {
 			dump(url) {
