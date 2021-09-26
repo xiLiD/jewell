@@ -27,7 +27,7 @@
 				<view class="clear"></view>
 			</view>
 			<view v-if="mainItem.length == 0">
-				<noData></noData>
+				<noData ref="noData"></noData>
 			</view>
 		</view>
 		<view class="uni-loadmore" v-if="showLoadMore">{{ loadMoreText }}</view>
@@ -155,7 +155,8 @@
 							}
 						} else {
 							_this.showLoadMore = false;
-							_this.$tools.toast(data.msg)
+							_this.$refs.noData.showText(data.msg)
+							// _this.$tools.toast(data.msg)
 						}
 					})
 					.catch(err => {

@@ -230,7 +230,7 @@
 					return false;
 				}
 				_this.isSubmit = true;
-				_this.$tools.loadoing('上传中');
+				_this.$tools.loading('上传中');
 				_this.uploadFile('file', _this.cardUrl);
 			},
 
@@ -238,6 +238,7 @@
 				var _this = this;
 				//文件上传
 				var user = uni.getStorageSync('uerInfo');
+				console.log(file)
 				const uploadTask = uni.uploadFile({
 					url: config.API_SITE + '/gzh/Pay/addYine',
 					filePath: file,
