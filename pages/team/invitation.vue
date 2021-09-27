@@ -69,7 +69,6 @@
 				_this.$tools.toast(msg)
 			},
 			qrR(result){
-				console.log(result)
 			}
 		}
 	};

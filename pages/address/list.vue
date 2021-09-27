@@ -46,6 +46,7 @@
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
+			this.getAddress()
 		},
 		onLoad(option) {
 			if (option.order) this.order = option.order;

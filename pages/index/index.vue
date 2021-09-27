@@ -64,13 +64,11 @@
 			// this.getUserUp();
 		},
 		onHide() {
-			console.log('页面隐藏')
 			if (this.timer) {
 				clearInterval(this.timer);
 			}
 		},
 		onUnload() {
-			console.log('页面卸载')
 			if (this.timer) {
 				clearInterval(this.timer);
 			}
@@ -120,7 +118,6 @@
 							}
 						}
 					})
-					console.log(that.mainItem)
 				}, 1000);
 
 			},

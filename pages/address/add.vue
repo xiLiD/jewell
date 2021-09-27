@@ -146,9 +146,12 @@
 					.then(data => {
 						_this.$tools.loadingHide();
 						if (data.status == 1) {
-							uni.navigateTo({
-								url: '/pages/address/list?order=' + this.order + '&type=' + this.type
-							});
+							// uni.redirectTo({
+							// 	url: '/pages/address/list?order=' + this.order + '&type=' + this.type
+							// });
+							uni.navigateBack({
+								delta:1
+							})
 						} else {
 							_this.$tools.toast(data.msg)
 						}

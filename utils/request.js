@@ -61,7 +61,6 @@ export default class Request {
                 method: method,
                 header: header,
                 success: (res) => {
-					console.log(res)
                     // 判断 请求api 格式是否正确
                     // if (res.statusCode && res.statusCode != 200) {
                     //     uni.showToast({
@@ -87,7 +86,6 @@ export default class Request {
                     //     return;
                     // }
                     // 将结果抛出
-					console.log(res)
 					if(res.data.status == -1){
 						uni.showToast({
 						        title: "登录失效!" + res.data.msg,

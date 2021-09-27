@@ -5,7 +5,7 @@
 			<view class="bt-box">
 				<view class="bt-tx" @click="dump('/pages/account/withdrawal?type=1')">提现</view>
 				<view class="bt-tx" @click="dump('/pages/account/give?type=1')">转赠</view>
-				<view class="bt-tx" @click="dump('/pages/account/change')">冲押金</view>
+				<!-- <view class="bt-tx" @click="dump('/pages/account/change')">冲押金</view> -->
 			</view>
 			<view class="bt-mx" @click="dump('/pages/account/details?type=1')">明细</view>
 		</view>
@@ -135,6 +135,8 @@
 		width: 550upx;
 		margin: 0 auto;
 		margin-top: 50upx;
+		display: flex;
+		justify-content: space-around;
 	}
 
 	.top .bt-tx {

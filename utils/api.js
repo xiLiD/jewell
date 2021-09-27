@@ -4,7 +4,6 @@ let request = new Request().http
 const getToken = (data) => {
 	let user = uni.getStorageSync('uerInfo')
 	if (user) {
-		console.log(user.token)
 		data.token = user.token
 	}
 	return data
