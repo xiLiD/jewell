@@ -13,7 +13,7 @@
 				<view>{{typeItem.find(p=>p.id==item.type).name}}</view>
 			</view>
 			<view v-if="mainItem.length == 0">
-				<noData></noData>
+				<noData ref="noData"></noData>
 			</view>
 		</view>
 		<view class="uni-loadmore" v-if="showLoadMore">{{ loadMoreText }}</view>
@@ -145,9 +145,7 @@
 			},
 			getPage() {
 				var _this = this;
-				uni.showLoading({
-					title: '数据查询中'
-				});
+				_this.$tools.loading('数据查询中')
 				_this.$request.account
 					.billList({
 						page: _this.PageNo,
@@ -166,7 +164,8 @@
 							}
 						} else {
 							_this.showLoadMore = false;
-							_this.$tools.toast(data.msg);
+							_this.$refs.noData.showText(data.msg)
+							// _this.$tools.toast(data.msg);
 						}
 					})
 					.catch(err => {

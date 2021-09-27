@@ -1,7 +1,7 @@
 <template>
   <view class="noDate">
     <img :src="nodata" alt />
-    <view>暂无数据</view>
+    <view>{{value}}</view>
   </view>
 </template>
 <script>
@@ -18,8 +18,15 @@ export default {
   },
   data() {
     return {
-      nodata: nodata
+      nodata: nodata,
+	  value : '无数据'
     };
+  },
+  methods:{
+	  showText(val){
+		  console.log(val)
+		  this.value = val;
+	  }
   }
 };
 </script>
