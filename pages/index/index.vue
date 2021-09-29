@@ -12,7 +12,7 @@
 			<view class="main-titel">
 				竞拍<text class="red">快报</text><text class="l-3">|</text><text class="l-4">七月风暖，豪礼相送！</text>
 			</view>
-			<view class="i_item" v-for="(item, index) in mainItem" :key="index" @click="loadShop(item)">
+			<!-- 			<view class="i_item" v-for="(item, index) in mainItem" :key="index" @click="loadShop(item)">
 				<view class="i_l">
 					<image :src="item.imgs" mode="aspectFill" lazy-load></image>
 				</view>
@@ -28,6 +28,41 @@
 				<view class="i-p">
 					<view :class="['uni-navigate-icon','uni-icon', item.status==1 ? 'i-p-b' : 'i-p-a']">&#xe83e;</view>
 					<view class="i-p-b" v-if="item.status==1">购买</view>
+				</view>
+			</view> -->
+			<view class="member-info">
+				<view class="member-avater">
+					<image :src="user.user_head" mode="aspectFill" lazy-load></image>
+				</view>
+				<view class="nick">{{user.phone}}</view>
+				<view class="m-name-b" @click="up">
+					<view class="m-rank-name">{{rankItem.find(p=>p.id==user.user_type).name}}</view>
+					<image :src="rankItem.find(p=>p.id==user.user_type).logo" mode="aspectFill"></image>
+				</view>
+			</view>
+
+			<view class="index-menu">
+				<view class="index-menu-item" v-for="(item, index) in mainItem" :key="index" @click="loadShop(item)">
+					<view class="item-name">{{ item.class_name }}</view>
+					<view class="item-status">
+						<view class="i-r-date-box" v-if="item.sleep==1">
+							<view class="i-r-date-time" v-if="item.start_time>0">
+								{{item.start_hours}}-{{item.end_hours}}
+							</view>
+							<text class="i-r-intro">{{item.quota}}</text>
+						</view>
+					</view>
+					<view class="item-time">
+						<view v-if="item.sleep==1">
+							<text v-if="item.status==1">进行中</text>
+							<text v-else>
+								{{ item.countDownStr }}
+							</text>
+						</view>
+						<view v-else>
+							<text>休市中</text>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -49,10 +84,34 @@
 				ImgList: [],
 				mainItem: [],
 				timer: null,
-				isCard: -1 //0、未权限；1、有权限
+				isCard: -1, //0、未权限；1、有权限
+				user: null,
+				rankItem: [{
+					id: 0,
+					name: '普通用户',
+					logo: '/static/images/v0.png'
+				}, {
+					id: 1,
+					name: '青铜分店',
+					logo: '/static/images/v1.png'
+				}, {
+					id: 2,
+					name: '白银分店',
+					logo: '/static/images/v2.png'
+				}, {
+					id: 3,
+					name: '黄金分店',
+					logo: '/static/images/v3.png'
+				}, {
+					id: 4,
+					name: '分公司',
+					logo: '/static/images/v4.png'
+				}],
 			};
 		},
 		onShow() {
+			this.user = uni.getStorageSync('uerInfo');
+			console.log(this.user)
 			this.isCard = -1;
 			this.getList();
 			this.getBanner();
@@ -354,12 +413,17 @@
 	}
 
 	.i-r-intro {
-		background-color: #fbe3c0;
+		/* background-color: #fbe3c0; */
+				background-color: rgb(251, 184, 5);
 		width: initial;
 		text-align: center;
-		border-radius: 22upx;
-		padding: 9upx 30upx;
+		border-radius: 20upx 0 20upx 0;
+		padding: 4upx 14upx;
 		font-size: 20upx;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+
 	}
 
 	.i-p {
@@ -377,5 +441,137 @@
 	.i-p .i-p-b {
 		margin: 0 auto;
 		color: #f99c9c;
+	}
+
+	.member-info {
+		width: 90%;
+		margin: 15upx auto 15upx;
+		display: flex;
+		align-items: center;
+		border: 1px solid #d10713;
+		border-radius: 20upx;
+		padding: 20upx 20upx;
+	}
+
+	.member-avater {
+		width: 100upx;
+		height: 100upx;
+		border-radius: 50%;
+		overflow: hidden;
+		box-shadow: 0 0 4upx #d10713; 
+	}
+
+	.nick {
+		margin-left: 15upx;
+	}
+
+	uni-image {
+		width: 100%;
+		height: 100%;
+	}
+
+	.m-name-b {
+		float: left;
+		background-color: #2d2c31;
+		color: #f6d79e;
+		width: 170upx;
+		border-radius: 11upx;
+		margin-top: 7upx;
+		margin-left: 15px;
+	}
+
+	.m-rank-name {
+		font-size: 22upx;
+		float: left;
+		width: 130upx;
+		height: 45upx;
+		line-height: 45upx;
+		text-align: center;
+	}
+
+	.m-name-b image {
+		width: 30upx;
+		height: 30upx;
+		float: right;
+		margin-right: 10upx;
+		margin-top: 6upx;
+	}
+
+	.m-rank-up {
+		width: 40upx;
+		height: 40upx;
+		float: left;
+		margin-top: -15upx;
+		margin-left: -25upx;
+	}
+
+	.m-rank-up image {
+		width: 40upx;
+		height: 40upx;
+	}
+
+	.index-menu {
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.index-menu-item {
+		width: 100%;
+		height: 250upx;
+		margin-top: 30upx;
+		position: relative;
+		background-image: url('../../static/images/index-back.jpg');
+		background-position: center center;
+		background-size: cover;
+		border-radius: 20upx;
+		/* overflow: hidden; */
+	}
+
+	.item-name {
+		font-size: 40upx;
+		color: #fff;
+		font-weight: bold;
+		border-bottom: 1px solid #fff;
+		display: inline-block;
+		/* margin-left: 20upx; */
+		position: absolute;
+		left: 20upx;
+		top: 10upx;
+		/* margin-top:10upx; */
+	}
+
+	.item-status {
+		font-size: 34upx;
+		color: #fff;
+	}
+
+	.item-time {
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-radius: 0 20upx 0 20upx;
+		background-color: rgb(251, 184, 5);
+		padding: 4upx 15upx;
+		font-size: 24upx;
+		color: #fff;
+		/* font-size: 20upx; */
+	}
+	.item-time text {
+		font-size: 24upx;
+	}
+
+	.i-r-date-time {
+		/* background-color: rgba(0, 0, 0, 0.8); */
+		font-size: 50upx;
+		color: #fff;
+		border-radius: 20upx;
+		text-align: center;
+		padding: 10upx 15upx;
+		/* width: 250upx; */
+		margin: 0 auto;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 </style>

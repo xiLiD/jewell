@@ -5,9 +5,10 @@ const getToken = (data) => {
 	let user = uni.getStorageSync('uerInfo')
 	if (user) {
 		data.token = user.token
+		// data.token = '1cdcd38cb368eeda083310ca7d7978f47a08f09d'
 	}
 	return data
-	console.log(DATA)
+	// console.log(DATA)
 }
 //全局定义请求头
 export default {
