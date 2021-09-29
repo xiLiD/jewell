@@ -1,13 +1,25 @@
 <template>
 	<view class="container">
 		<view class="t-main">
-			<view class="main-title">
+			<view class="main-title" v-if="type == 1">
+				<view>时间</view>
+				<view>金额</view>
+				<view>用户</view>
+				<view>类型</view>
+			</view>
+			<view class="main-title" v-else>
 				<view>时间</view>
 				<view>数额</view>
 				<view>类别</view>
 			</view>
+			<view class="main-item" v-for="(item, index) in mainItem" :key="index" v-if="type == 1">
+				<view>{{getDate(item.time*1000)}}</view>
+				<view>{{item.money}}</view>
+				<view>{{item.user_name}}</view>
+				<view>{{typeItem.find(p=>p.id==item.type).name}}</view>
+			</view>
 
-			<view class="main-item" v-for="(item, index) in mainItem" :key="index">
+			<view class="main-item" v-for="(item, index) in mainItem" :key="index" v-else>
 				<view>{{getDate(item.time*1000)}}</view>
 				<view>{{item.money}}</view>
 				<view>{{typeItem.find(p=>p.id==item.type).name}}</view>
@@ -74,11 +86,11 @@
 					},
 					{
 						id: 11,
-						name: '元宝支付'
+						name: '银元宝支付'
 					},
 					{
 						id: 12,
-						name: '兑换'
+						name: '拆单'
 					}
 				]
 			};
