@@ -13,12 +13,12 @@
 					</view>
 					<view class="t-item">
 						<!-- <input type="password" class="t-input" name="passWord" v-model="passWord" placeholder="新密码" /> -->
-						<pwInput :inputInfo="{name:'passWord',placeholder:'新密码'}" ref='payWord'></pwInput>
+						<pwInput :inputInfo="{name:'passWord',placeholder:'新密码'}" ref='passWord'></pwInput>
 					</view>
 				</view>
 
 				<view class="b-box">
-					<button formType="submit" class="blt-botton" @click="btnClick">提交修改</button>
+					<button class="blt-botton" @click="btnClick">提交修改</button>
 				</view>
 			</form>
 		</template>
