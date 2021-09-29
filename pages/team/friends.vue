@@ -3,18 +3,25 @@
 		<view class="t_se">
 			<uni-search-bar radius="100" placeholder="手机号搜索" cancelButton="none" @confirm="search" />
 		</view>
+		<view class="team-nums">今日团队成交量: 121321341</view>
 		<view class="t-main">
 			<view class="main-title">
 				<view>ID</view>
 				<view>昵称</view>
 				<view>会员数</view>
 				<view>会员等级</view>
+				<view></view>
 			</view>
 			<view class="main-item" v-for="(item, index) in mainItem" :key="index">
 				<view>{{item.id}}</view>
 				<view>{{item.user_name}}</view>
 				<view>{{item.nub}}</view>
 				<view>{{typeItem.find(p=>p.id==item.user_type).name}}</view>
+				<view class="uni-list-cell-db">
+				    <picker @change="bindPickerChange" :value="index" :range="array">
+				        <view class="uni-input color-btn">打赏</view>
+				    </picker>
+				</view>
 			</view>
 			<view v-if="mainItem.length == 0">
 				<noData ref="noData"></noData>
@@ -28,6 +35,8 @@
 	export default {
 		data() {
 			return {
+				array: ['佣金', '金元宝'],
+				index: 0,
 				type: 0, //类别
 				loadMoreText: '加载中...',
 				showLoadMore: false,
@@ -141,7 +150,13 @@
 	page {
 		background-color: #f4f5f6;
 	}
-
+	.color-btn{
+		color: #f37483;
+	}
+	.team-nums{
+		padding: 20upx 30upx;
+		color: #f37483;
+	}
 	.t_se {
 		width: 750upx;
 		margin: 0 auto;
