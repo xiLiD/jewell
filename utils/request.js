@@ -1,4 +1,4 @@
-import operate from './operate.js'
+import config from '../config/config.js'
 // vuex 的使用  详情参考官网 https://uniapp.dcloud.io/vue-vuex
 import store from '../store/index.js'  
 
@@ -13,7 +13,7 @@ export default class Request {
             hideLoading = param.hideLoading || false;
 
         //拼接完整请求地址
-        var requestUrl = operate.api + url;
+        var requestUrl = config.API_SITE + url;
 
         //请求方式:GET或POST(POST需配置
         // header: {'content-type' : "application/x-www-form-urlencoded"},)
