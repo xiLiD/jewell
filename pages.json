@@ -33,6 +33,7 @@
 		{"path": "pages/account/account","style": {"navigationBarTitleText": "账户"}},
 		{"path": "pages/account/balance","style": {"navigationBarTitleText": "佣金"}},
 		{"path": "pages/account/silver","style": {"navigationBarTitleText": "银元宝"}},
+		{"path": "pages/member/service","style": {"navigationStyle": "custom"},"app-plus":{"titleNView":false}},
 		
 		{"path": "pages/team/friends","style": {"navigationBarTitleText": "我的好友","enablePullDownRefresh": true}},
 		{"path": "pages/team/invitation","style": {"navigationBarTitleText": "邀请函"}},
