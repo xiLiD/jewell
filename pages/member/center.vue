@@ -68,6 +68,10 @@
 				<image src="/static/images/c-8.png" mode="aspectFill"></image>
 				<view>我的入场券</view>
 			</view>
+			<view class="center-item" @click="dump('/pages/member/service')">
+				<image src="/static/images/c-8.png" mode="aspectFill"></image>
+				<view>在线客服</view>
+			</view>
 		</view>
 		<view class="dbh"></view>
 
@@ -436,7 +440,7 @@
 	.m-center {
 		width: 750upx;
 		background-color: #FFFFFF;
-		height: 350upx;
+		height: 500upx;
 		margin-top: 100upx;
 	}
 

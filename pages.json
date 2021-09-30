@@ -27,11 +27,13 @@
 		{"path": "pages/account/withdrawal","style": {"navigationBarTitleText": "提现"}},
 		{"path": "pages/account/withdrawalInfo","style": {"navigationBarTitleText": "提现明细"}},
 		{"path": "pages/account/give","style": {"navigationBarTitleText": "转赠"}},
+		{"path": "pages/account/reward","style": {"navigationBarTitleText": "打赏"}},
 		{"path": "pages/account/change","style": {"navigationBarTitleText": "冲押金"}},
 		{"path": "pages/account/recharge","style": {"navigationBarTitleText": "充值"}},
 		{"path": "pages/account/account","style": {"navigationBarTitleText": "账户"}},
 		{"path": "pages/account/balance","style": {"navigationBarTitleText": "佣金"}},
 		{"path": "pages/account/silver","style": {"navigationBarTitleText": "银元宝"}},
+		{"path": "pages/member/service","style": {"navigationStyle": "custom"},"app-plus":{"titleNView":false}},
 		
 		{"path": "pages/team/friends","style": {"navigationBarTitleText": "我的好友","enablePullDownRefresh": true}},
 		{"path": "pages/team/invitation","style": {"navigationBarTitleText": "邀请函"}},

@@ -129,9 +129,9 @@
 
 								_this.$tools.toast('修改成功')
 								setTimeout(()=>{
-									uni.navigateTo({
-										url: '/pages/member/details'
-									});
+									uni.navigateBack({
+										delta: 1
+									})
 								},500)
 
 							} else {
