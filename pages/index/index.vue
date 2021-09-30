@@ -43,10 +43,10 @@
 
 			<view class="index-menu">
 				<view class="index-menu-item" v-for="(item, index) in mainItem" :key="index" @click="loadShop(item)">
-					<view class="item-name">{{ item.class_name }}</view>
+					<view class="item-name fzsj">{{ item.class_name }}</view>
 					<view class="item-status">
 						<view class="i-r-date-box" v-if="item.sleep==1">
-							<view class="i-r-date-time" v-if="item.start_time>0">
+							<view class="i-r-date-time fzsj" v-if="item.start_time>0">
 								{{item.start_hours}}-{{item.end_hours}}
 							</view>
 							<text class="i-r-intro">{{item.quota}}</text>
@@ -528,14 +528,17 @@
 	}
 
 	.item-name {
-		font-size: 40upx;
+		font-size: 48upx;
+		letter-spacing: 2upx;
 		color: #fff;
 		font-weight: bold;
-		border-bottom: 1px solid #fff;
+		line-height: 1;
+		padding: 10upx 15upx;
+		border-bottom: 4upx solid #fff;
 		display: inline-block;
 		/* margin-left: 20upx; */
 		position: absolute;
-		left: 20upx;
+		left: 10upx;
 		top: 10upx;
 		/* margin-top:10upx; */
 	}
