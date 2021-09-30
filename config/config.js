@@ -1,11 +1,9 @@
 module.exports = {
 	// API_SITE: "http://cypaipai.com/index.php", //请求地址
 	API_SITE: "http://ningjingkj.com/index.php", //请求地址
-	
 	SITE: "http://cypaipai.com/home/", //地址,
 	H5Wei:{
 		AppId:'wxec649220f8b334dc'
-		
 	},
 	Sign: { //签名相关
 		APPId: "",
