@@ -118,6 +118,24 @@ export default {
 				data: data, //请求数据
 			})
 		},
+		// 我的好友  打赏
+		reward: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/reward",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 订单拆分
+		substitution: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Order/substitution",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
 		// 升级信息
 		getUp: function(data) {
 			data = getToken(data)

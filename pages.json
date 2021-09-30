@@ -27,6 +27,7 @@
 		{"path": "pages/account/withdrawal","style": {"navigationBarTitleText": "提现"}},
 		{"path": "pages/account/withdrawalInfo","style": {"navigationBarTitleText": "提现明细"}},
 		{"path": "pages/account/give","style": {"navigationBarTitleText": "转赠"}},
+		{"path": "pages/account/reward","style": {"navigationBarTitleText": "打赏"}},
 		{"path": "pages/account/change","style": {"navigationBarTitleText": "冲押金"}},
 		{"path": "pages/account/recharge","style": {"navigationBarTitleText": "充值"}},
 		{"path": "pages/account/account","style": {"navigationBarTitleText": "账户"}},
