@@ -1,0 +1,1 @@
+<view class="data-v-3cc52268"><input id="{{inputInfo.name}}" type="text" name="{{inputInfo.name}}" placeholder="{{inputInfo.placeholder}}" autocomplete="off" data-event-opts="{{[['input',[['__set_model',['','pwdCover','$event',[]]],['setPassword',['$event']]]]]}}" value="{{pwdCover}}" bindinput="__e" class="data-v-3cc52268"/></view>

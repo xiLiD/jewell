@@ -6,7 +6,7 @@
 		<view class="time_str">{{ countDownObject.countDownStr }}</view>
 		<view class="t_main">
 			<view class="t_item" v-for="(item, index) in mainItem" :key="index" @click="dumpInfo(item.id)">
-				<view class="t-status t-status-a" v-if="item.start_auction==0">待开始 {{}}</view>
+				<view class="t-status t-status-a" v-if="item.start_auction==0">待开始</view>
 				<view class="t-status t-status-b" v-else-if="item.purchase_state==1">已售罄</view>
 				<view class="t-status t-status-b" v-else-if="item.purchase_state==2">进行中</view>
 				<view class="t_img">

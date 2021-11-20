@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "注册",
-  "usingComponents": {}
+  "usingComponents": {
+    "pw-input": "/components/input/PwInput"
+  }
 }

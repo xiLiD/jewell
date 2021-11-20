@@ -1,0 +1,17 @@
+.noDate {
+  text-align: center;
+  margin-top: 40rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.noDate ._img {
+  width: 300rpx;
+}
+.noDate view {
+  color: #999999;
+  font-size: 30rpx;
+}
+

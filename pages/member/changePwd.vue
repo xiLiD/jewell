@@ -12,14 +12,10 @@
 						<view v-else class="sends">({{ second }}秒)重新获取</view>
 					</view>
 					<view class="t-item">
-						<!-- 						<input type="password" class="t-input" name="pay_paw" v-model="pay_paw"
-							placeholder="支付密码"/></view> -->
 						<pwInput :inputInfo="{name:'pay_paw',placeholder:'支付密码'}" ref='pay_paw'></pwInput>
-						<view class="t-item">
-							<!-- 						<input type="password" class="t-input"  name="pay_pawa" v-model="pay_pawa"
-							placeholder="确认支付密码"/> -->
-							<pwInput :inputInfo="{name:'pay_pawa',placeholder:'确认支付密码'}" ref='pay_pawa'></pwInput>
-						</view>
+					</view>
+					<view class="t-item">
+						<pwInput :inputInfo="{name:'pay_pawa',placeholder:'确认支付密码'}" ref='pay_pawa'></pwInput>
 					</view>
 
 					<view class="b-box"><button class="blt-botton" @click="btnClick">提交修改</button></view>

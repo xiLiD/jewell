@@ -32,9 +32,10 @@
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
+			this.initData();
 		},
 		onLoad(option) {
-			this.initData();
+			
 		},
 		onUnload() {
 			(this.PageNo = 1), (this.mainItem = []), (this.loadMoreText = '加载更多'), (this.showLoadMore = false);

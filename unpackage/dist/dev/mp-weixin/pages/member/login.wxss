@@ -61,4 +61,8 @@ page {
 .bt-x text {
 	color: #007aff;
 }
+.b-phone {
+	position: fixed;
+	bottom: 60rpx;
+}
 

@@ -118,6 +118,18 @@
 			this.initData();
 		},
 		methods: {
+			getbillType(){
+				this.$request.account
+					.billType({
+					}).then((res)=>{
+						let types = [];
+						console.log(res.data)
+						for(var i in res.data){
+							types.push({name : res.data[i] ,id : i})
+						}
+						this.typeItem = types;
+					})
+			},
 			search(res) {
 				this.keyWords = res.value;
 				this.initData();
@@ -157,6 +169,7 @@
 			},
 			getPage() {
 				var _this = this;
+				this.getbillType();
 				_this.$tools.loading('数据查询中')
 				_this.$request.account
 					.billList({

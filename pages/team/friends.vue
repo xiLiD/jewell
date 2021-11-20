@@ -3,7 +3,7 @@
 		<view class="t_se">
 			<uni-search-bar radius="100" placeholder="手机号搜索" cancelButton="none" @confirm="search" />
 		</view>
-		<view class="team-nums">今日团队成交量: 121321341</view>
+		<view class="team-nums">今日团队成交量: {{amount_record}}</view>
 		<view class="t-main">
 			<view class="main-title">
 				<view>ID</view>
@@ -19,7 +19,7 @@
 				<view>{{typeItem.find(p=>p.id==item.user_type).name}}</view>
 				<view class="uni-list-cell-db">
 				    <picker @change="bindPickerChange" :value="index" :range="array">
-				        <view class="uni-input color-btn">打赏</view>
+				        <view class="color-btn">打赏</view>
 				    </picker>
 				</view>
 			</view>
@@ -43,6 +43,7 @@
 				isMore: true,
 				PageNo: 1,
 				PageSize: 10,
+				amount_record: '',
 				mainItem: [],
 				typeItem: [{
 					id: 0,
@@ -120,7 +121,8 @@
 					.then(data => {
 						_this.$tools.loadingHide();
 						if (data.status == 1) {
-							_this.mainItem = _this.mainItem.concat(data.data);
+							this.amount_record = data.data.amount_record
+							_this.mainItem = _this.mainItem.concat(data.data.friend);
 							if (data.data.length < _this.PageSize) {
 								this.loadMoreText = '没有更多数据了';
 								_this.isMore = false;

@@ -159,16 +159,17 @@
         "devServer" : {
             "https" : false,
             "port" : 8084,
-				"proxy": {  
-					"/gzh": {  
-						"target": "http://ningjingkj.com/index.php/gzh",
-						"changeOrigin": true,   
-						"secure": false,
-						"pathRewrite": {
-							"^/gzh": "/"  
-						}  
-					}  
-				}
-        }
+            "proxy" : {
+                "/gzh" : {
+                    "target" : "http://ningjingkj.com/index.php/gzh",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/gzh" : "/"
+                    }
+                }
+            }
+        },
+        "domain" : "http://119.23.77.226/home/"
     }
 }

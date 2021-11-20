@@ -35,14 +35,17 @@
 				PageNo: 1,
 				PageSize: 10,
 				mainItem: [],
+				userInfo : null,
 				keyWords: '' //搜索关键词
 			};
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
+			this.userInfo = uni.getStorageSync('uerInfo')
+			this.getUserUp();
 		},
 		onLoad(option) {
-			this.getUserUp();
+			
 		},
 		onUnload() {
 			(this.PageNo = 1), (this.mainItem = []), (this.loadMoreText = '加载更多'), (this.showLoadMore = false);
@@ -98,6 +101,7 @@
 				});
 				_this.$request.shop
 					.getGoodsList({
+						user_id : this.userInfo.id,
 						page: _this.PageNo,
 						keyWords: _this.keyWords
 					})
@@ -140,7 +144,8 @@
 								})
 							} else {
 								uni.setTabBarBadge({
-									index: 3
+									index: 3,
+									text : ''
 								})
 							}
 						}

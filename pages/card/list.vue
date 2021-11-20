@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view class="m-item">
-			<view class="p-l">{{mainItem.money}}元/月</view>
+			<view class="p-l">{{mainItem.money}}元宝/月</view>
 			<view class="p-c">
 				<view class="p-c-t">{{mainItem.name}}</view>
 				<view class="p-c-b">{{mainItem.strDate}}</view>
@@ -66,7 +66,7 @@
 			},
 			buy() {
 				//购买入场券
-
+			
 				var _this = this;
 				uni.showModal({
 					title: '提示',
@@ -77,23 +77,33 @@
 								title: '数据提交中'
 							});
 							_this.$request.common
-								.paySundries({
+								.getcode({
 									type: 1,
 									grade_id: _this.mainItem.id
 								})
 								.then(data => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									if (data.status == 1) {
-										_this.pay(data.msg);
+										// _this.pay(data.msg);
+										uni.showToast({
+											icon: 'none',
+											title: data.msg
+										});
 									} else {
-										_this.$tools.toast(data.msg);
+										uni.showToast({
+											icon: 'none',
+											title: data.msg
+										});
 									}
 								})
 								.catch(err => {
 									console.log(err)
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									//消息异常
-									_this.$tools.toast('数据加载异常');
+									uni.showToast({
+										icon: 'none',
+										title: '数据加载异常'
+									});
 								});
 						} else if (res.cancel) {}
 					}

@@ -32,21 +32,21 @@
 			</view> -->
 			<view class="member-info">
 				<view class="member-avater">
-					<image :src="user.user_head" mode="aspectFill" lazy-load></image>
+					<image :src="userInfo.user_head" mode="aspectFill" lazy-load></image>
 				</view>
-				<view class="nick">{{user.phone}}</view>
+				<view class="nick">{{userInfo.phone}}</view>
 				<view class="m-name-b" @click="up">
-					<view class="m-rank-name">{{rankItem.find(p=>p.id==user.user_type).name}}</view>
-					<image :src="rankItem.find(p=>p.id==user.user_type).logo" mode="aspectFill"></image>
+					<view class="m-rank-name">{{rankItem.find(p=>p.id==userInfo.user_type).name}}</view>
+					<image :src="rankItem.find(p=>p.id==userInfo.user_type).logo" mode="aspectFill"></image>
 				</view>
 			</view>
 
 			<view class="index-menu">
 				<view class="index-menu-item" v-for="(item, index) in mainItem" :key="index" @click="loadShop(item)">
-					<view class="item-name">{{ item.class_name }}</view>
+					<view class="item-name firstFont">{{ item.class_name }}</view>
 					<view class="item-status">
 						<view class="i-r-date-box" v-if="item.sleep==1">
-							<view class="i-r-date-time" v-if="item.start_time>0">
+							<view class="i-r-date-time firstFont" v-if="item.start_time>0">
 								{{item.start_hours}}-{{item.end_hours}}
 							</view>
 							<text class="i-r-intro">{{item.quota}}</text>
@@ -110,8 +110,10 @@
 			};
 		},
 		onShow() {
-			this.user = uni.getStorageSync('uerInfo');
-			console.log(this.user)
+			this.$store.commit('judgeLogin'); //判断登录状态
+			this.userInfo = uni.getStorageSync('uerInfo')
+			// this.user = uni.getStorageSync('uerInfo');
+			// console.log(this.user)
 			this.isCard = -1;
 			this.getList();
 			this.getBanner();
@@ -243,7 +245,9 @@
 				//获取数据
 				var _this = this;
 				_this.$request.index
-					.classify({})
+					.classify({
+						uid : this.userInfo.id
+					})
 					.then(data => {
 						if (data.status == 1) {
 							_this.mainItem = data.data;
@@ -316,7 +320,8 @@
 								})
 							} else {
 								uni.setTabBarBadge({
-									index: 3
+									index: 3,
+									text : ''
 								})
 							}
 						}
@@ -528,15 +533,16 @@
 	}
 
 	.item-name {
-		font-size: 40upx;
+		font-size: 60upx;
 		color: #fff;
 		font-weight: bold;
-		border-bottom: 1px solid #fff;
+		border-bottom: 2px solid #fff;
 		display: inline-block;
 		/* margin-left: 20upx; */
 		position: absolute;
 		left: 20upx;
 		top: 10upx;
+		line-height: 1.1;
 		/* margin-top:10upx; */
 	}
 
@@ -562,7 +568,8 @@
 
 	.i-r-date-time {
 		/* background-color: rgba(0, 0, 0, 0.8); */
-		font-size: 50upx;
+		font-size: 56upx;
+		font-weight: bold;
 		color: #fff;
 		border-radius: 20upx;
 		text-align: center;

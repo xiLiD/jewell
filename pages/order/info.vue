@@ -39,8 +39,7 @@
 			</view>
 			<view class="main-item">
 				<view class="main-l">手机号</view>
-				<view class="main-r" v-if="mainData.sellerUser.sellerUserId==user_id"
-					@click="call(mainData.buyersUser.phone)">{{mainData.buyersUser.phone}}
+				<view class="main-r" v-if="mainData.sellerUser.sellerUserId==user_id" @click="call(mainData.buyersUser.phone)">{{mainData.buyersUser.phone}}
 					<view class="uni-icon">&#xe230;</view>
 				</view>
 				<view class="main-r" v-else>{{mainData.buyersUser.phone}}</view>
@@ -88,8 +87,7 @@
 			</view>
 			<view class="main-item">
 				<view class="main-l">联系卖家</view>
-				<view class="main-r" v-if="mainData.buyersUser.buyersUserId==user_id"
-					@click="call(mainData.sellerUser.phone)">
+				<view class="main-r" v-if="mainData.buyersUser.buyersUserId==user_id" @click="call(mainData.sellerUser.phone)">
 					{{mainData.sellerUser.phone}}
 					<view class="uni-icon">&#xe230;</view>
 				</view>
@@ -97,16 +95,16 @@
 			</view>
 		</view>
 
-		<view class="main-pay" v-if="mainData.orderData.order_state==1&&mainData.buyersUser.buyersUserId==user_id">
+		<!-- 		<view class="main-pay" v-if="mainData.orderData.order_state==1&&mainData.buyersUser.buyersUserId==user_id">
 			<view class="pay-title">收款码</view>
 			<view class="pay-type">
 				<view class="type-name">支付方式</view>
 
 				<picker class="picker" @change="payTypeChange" :value="payTypeIndex" :range="mainData.sellerPayData"
 					range-key="name">
-					<!-- #ifdef MP-WEIXIN -->
+
 					<input :value="mainData.sellerPayData[payTypeIndex].name" disabled style="color: transparent;" />
-					<!-- #endif -->
+		
 				</picker>
 				<view class="type-r">{{payMain.name}}<text class="uni-icon">&#xe470;</text></view>
 			</view>
@@ -115,36 +113,58 @@
 				<view class="pay-no">收款账户：{{payMain.zf_name}}</view>
 				<image :src="payMain.zf_imgse" mode="widthFix"></image>
 			</view>
-		</view>
+		</view> -->
 
-		<view class="main-pay" v-if="mainData.orderData.order_state>=2&&mainData.orderData.zfb_imgs!=''">
+
+		<view class="main-pay" v-if="mainData.orderData.order_state==1&&mainData.buyersUser.buyersUserId==user_id">
+			<view class="pay-title">收款信息</view>
+
+			<view class="pay-con">
+				<view class="pay-intro">如遇付款信息有问题，请与卖家联系再支付</view>
+
+				<view class="main bank-info">
+					<view class="main-item">
+						<view class="main-l">收款账户</view>
+						<view class="main-r">{{blank.user_name}}</view>
+					</view>
+					<view class="main-item">
+						<view class="main-l">开户银行</view>
+						<view class="main-r">{{blank.blank_name}}</view>
+					</view>
+					<view class="main-item">
+						<view class="main-l">开户支行</view>
+						<view class="main-r">{{blank.blank_address}}</view>
+					</view>
+					<view class="main-item">
+						<view class="main-l">银行卡号</view>
+						<view class="main-r">{{blank.blank_num}}</view>
+						<view class="item-copy" @click="copyCode">复制</view>
+					</view>
+				</view>
+			</view>
+		</view>
+<!-- 		<view class="main-pay" v-if="mainData.orderData.order_state>=2&&mainData.orderData.zfb_imgs!=''">
 			<view class="pay-title">支付凭证</view>
 			<view class="pay-con">
 				<image :src="mainData.orderData.zfb_imgs" mode="widthFix"></image>
 			</view>
-		</view>
+		</view> -->
 
 		<view class="main-bottom">
-			<view class="btn-a" @click="confirmOrder"
-				v-if="mainData.orderData.physical_order==2&&mainData.orderData.physical_order_state==2&&mainData.buyersUser.buyersUserId==user_id">
+			<view class="btn-a" @click="confirmOrder" v-if="mainData.orderData.physical_order==2&&mainData.orderData.physical_order_state==2&&mainData.buyersUser.buyersUserId==user_id">
 				确认收货</view>
 			<view class="btn-c" v-else-if="mainData.orderData.order_state==5">已取消</view>
-			<view class="btn-a" v-else-if="mainData.orderData.order_state==2&&mainData.sellerUser.sellerUserId==user_id"
-				@click="confirmOrderPay">确认收款</view>
-			<view class="btn-a"
-				v-else-if="mainData.orderData.order_state==2&&mainData.buyersUser.buyersUserId==user_id">等待放货</view>
-			<view class="btn-d"
-				v-else-if="mainData.orderData.order_state==3&&mainData.buyersUser.buyersUserId==user_id&&mainData.sellerUser.sellerUserId>0">
+			<view class="btn-a" v-else-if="mainData.orderData.order_state==2&&mainData.sellerUser.sellerUserId==user_id" @click="confirmOrderPay">确认收款</view>
+			<view class="btn-a" v-else-if="mainData.orderData.order_state==2&&mainData.buyersUser.buyersUserId==user_id">等待放货</view>
+			<view class="btn-d" v-else-if="mainData.orderData.order_state==3&&mainData.buyersUser.buyersUserId==user_id&&mainData.sellerUser.sellerUserId>0">
 				<view class="btn-d-l" @click="substitution">置换成银元宝</view>
 				<view class="btn-d-r" @click="transfer">立即转拍</view>
 			</view>
-			<view class="btn-d"
-				v-else-if="mainData.orderData.order_state==3&&mainData.buyersUser.buyersUserId==user_id">
+			<view class="btn-d" v-else-if="mainData.orderData.order_state==3&&mainData.buyersUser.buyersUserId==user_id">
 				<view class="btn-a" @click="transfer">立即转拍</view>
 			</view>
-			<view class="btn-a" v-else-if="mainData.orderData.order_state==3&&mainData.buyersUser.buyersUserId==user_id"
-				<view class="btn-b"
-				v-else-if="mainData.orderData.order_state==1&&mainData.buyersUser.buyersUserId==user_id">
+			<view
+			 class="btn-b" v-else-if="mainData.orderData.order_state==1&&mainData.buyersUser.buyersUserId==user_id">
 				<view class="btn-b-t">请在{{payitem_start}}至{{payitem_end}}之间付款</view>
 				<view class="btn-b-l" @click="cancel"><text class="uni-icon">&#xe404;</text>取消订单</view>
 				<view class="btn-b-r" @click="pay">({{liveCountdown}})已付款,提醒卖家收款</view>
@@ -172,8 +192,7 @@
 								<image src="../../static/images/ye.png" mode="aspectFill"></image>佣金支付
 							</view>
 							<view class="pay-r">
-								<radio value="2" class="pay-radio" color="#cd373a"
-									:checked="transferData.pay_type==2" />
+								<radio value="2" class="pay-radio" color="#cd373a" :checked="transferData.pay_type==2" />
 							</view>
 						</view>
 						<view class="pay-item">
@@ -181,8 +200,7 @@
 								<image src="../../static/images/yb.png" mode="aspectFill"></image>金元宝支付
 							</view>
 							<view class="pay-r">
-								<radio value="1" class="pay-radio" color="#cd373a"
-									:checked="transferData.pay_type==1" />
+								<radio value="1" class="pay-radio" color="#cd373a" :checked="transferData.pay_type==1" />
 							</view>
 						</view>
 						<view class="pay-item">
@@ -190,8 +208,7 @@
 								<image src="../../static/images/grid-2.png" mode="aspectFill"></image>微信支付
 							</view>
 							<view class="pay-r">
-								<radio value="3" class="pay-radio" color="#cd373a"
-									:checked="transferData.pay_type==3" />
+								<radio value="3" class="pay-radio" color="#cd373a" :checked="transferData.pay_type==3" />
 							</view>
 						</view>
 					</radio-group>
@@ -204,6 +221,10 @@
 </template>
 
 <script>
+	import {
+		setClipboardData,
+		getClipboardData
+	} from '@/uni_modules/u-clipboard/js_sdk'
 	import ssPaymentPassword from '../../components/sanshui-payment-password'
 	import jwx from '../../common/weiPay/jws.js'
 	export default {
@@ -224,6 +245,14 @@
 					id: 3,
 					name: "银行卡"
 				}],
+				blank: {
+					blank_address: "",
+					blank_name: "",
+					blank_num: "",
+					id: '',
+					user_id: '',
+					user_name: ""
+				},
 				payMain: {
 					id: 0,
 					name: "",
@@ -266,6 +295,15 @@
 			this.initData();
 		},
 		methods: {
+			copyCode() {
+				//复制
+				var _this = this;
+				setClipboardData(_this.blank.blank_num).then(() => {
+					uni.showToast({
+						title: '复制成功',
+					});
+				})
+			},
 			payTypeChange(e) {
 				this.payTypeIndex = e.target.value;
 				this.payMain = this.mainData.sellerPayData[this.payTypeIndex];
@@ -290,12 +328,13 @@
 				uni.showLoading({
 					title: '数据查询中'
 				});
+
 				_this.$request.order
 					.particulars({
 						order_id: _this.order_id
 					})
 					.then(data => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						if (data.status == 1) {
 							_this.mainData = data.data;
 							if (_this.mainData.sellerUser == null) {
@@ -303,13 +342,17 @@
 									sellerUserId: 0
 								};
 							}
-							//收款码
-							if (_this.mainData.sellerPayData.length > 0) {
-								_this.mainData.sellerPayData.forEach(item => {
-									item.name = _this.payItem.find(p => p.id == item.type).name;
-								})
-								_this.payMain = _this.mainData.sellerPayData[0];
+							// 收款信息
+							if (_this.mainData.blank) {
+								_this.blank = _this.mainData.blank
 							}
+							//收款码
+							// if (_this.mainData.sellerPayData.length > 0) {
+							// 	_this.mainData.sellerPayData.forEach(item => {
+							// 		item.name = _this.payItem.find(p => p.id == item.type).name;
+							// 	})
+							// 	_this.payMain = _this.mainData.sellerPayData[0];
+							// }
 							//订单时间
 							if (_this.mainData.orderData.order_state == 1) {
 								var date_start = getDate(_this.getDate(_this.mainData.orderData.time * 1000));
@@ -327,7 +370,10 @@
 								this.getLiveTimeCount(str_date_end);
 							}
 						} else {
-							_this.$tools.toast(data.msg)
+							uni.showToast({
+								icon: 'none',
+								title: data.msg
+							});
 						}
 					});
 			},
@@ -348,20 +394,29 @@
 									order_state: 3
 								})
 								.then(data => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									if (data.status == 1) {
-										_this.$tools.toast('确认成功');
+										uni.showToast({
+											icon: 'none',
+											title: '确认成功'
+										});
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										_this.$tools.toast(data.msg);
+										uni.showToast({
+											icon: 'none',
+											title: data.msg
+										});
 									}
 								})
 								.catch(err => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									//消息异常
-									_this.$tools.toast('数据加载异常');
+									uni.showToast({
+										icon: 'none',
+										title: '数据加载异常'
+									});
 								});
 						}
 					}
@@ -383,20 +438,29 @@
 									order_id: _this.order_id
 								})
 								.then(data => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									if (data.status == 1) {
-										_this.$tools.toast('确认成功');
+										uni.showToast({
+											icon: 'none',
+											title: '确认成功'
+										});
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										_this.$tools.toast(data.msg);
+										uni.showToast({
+											icon: 'none',
+											title: data.msg
+										});
 									}
 								})
 								.catch(err => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									//消息异常
-									_this.$tools.toast('数据加载异常');
+									uni.showToast({
+										icon: 'none',
+										title: '数据加载异常'
+									});
 								});
 						}
 					}
@@ -418,36 +482,53 @@
 									order_id: _this.order_id
 								})
 								.then(data => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									if (data.status == 1) {
-										_this.$tools.toast('取消成功');
+										uni.showToast({
+											icon: 'none',
+											title: '取消成功'
+										});
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										_this.$tools.toast(data.msg);
+										uni.showToast({
+											icon: 'none',
+											title: data.msg
+										});
 									}
 								})
 								.catch(err => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									//消息异常
-									_this.$tools.toast('数据加载异常');
+									uni.showToast({
+										icon: 'none',
+										title: '数据加载异常'
+									});
 								});
 						}
 					}
 				})
 			},
 			pay() {
-				//支付
+				//确认订单
 				var _this = this;
 				uni.showModal({
 					title: '已付款，提醒卖家收款',
 					content: '请再次确认您是否付款，未成功就点击，将记录违规，请谨慎点击',
 					success: function(res) {
 						if (res.confirm) {
-							uni.navigateTo({
-								url: '/pages/order/pay?orderId=' + _this.order_id
-							});
+							_this.$request.order
+								.setPayDocument({
+									order_state:2,
+									order_id: _this.order_id
+								})
+								.then(data => {
+									console.log(data)
+									uni.navigateTo({
+										url: '/pages/order/info?orderId=' + _this.order_id
+									});
+								})
 						}
 					}
 				})
@@ -460,20 +541,26 @@
 						order_id: _this.order_id
 					})
 					.then(data => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						if (data.status == 1) {
 							_this.transferData.order_price = data.data.unitPurchasePrice;
 							_this.transferData.transfer_price = data.data.unitPrice;
 							_this.transferData.pay_price = data.data.serviceCharge;
 							this.$refs['showtransfer'].open();
 						} else {
-							_this.$tools.toast(data.msg)
+							uni.showToast({
+								icon: 'none',
+								title: data.msg
+							});
 						}
 					})
 					.catch(err => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						//消息异常
-						_this.$tools.toast('数据加载异常')
+						uni.showToast({
+							icon: 'none',
+							title: '数据加载异常'
+						});
 					});
 			},
 			substitution() {
@@ -492,20 +579,29 @@
 									order_id: _this.order_id
 								})
 								.then(data => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									if (data.status == 1) {
-										_this.$tools.toast('置换成功');
+										uni.showToast({
+											icon: 'none',
+											title: '置换成功'
+										});
 										setTimeout(() => {
 											_this.initData();
 										}, 1000)
 									} else {
-										_this.$tools.toast(data.msg);
+										uni.showToast({
+											icon: 'none',
+											title: data.msg
+										});
 									}
 								})
 								.catch(err => {
-									_this.$tools.loadingHide();
+									uni.hideLoading();
 									//消息异常
-									_this.$tools.toast('数据加载异常');
+									uni.showToast({
+										icon: 'none',
+										title: '数据加载异常'
+									});
 								});
 						}
 					}
@@ -522,7 +618,9 @@
 			transferPay(e) {
 				//转拍下单
 				var _this = this;
-				_this.$tools.loading('数据条件中')
+				uni.showLoading({
+					title: '数据提交中'
+				});
 				var pwdPay = '';
 				if (e) pwdPay = e.value;
 				_this.$request.order
@@ -532,12 +630,15 @@
 						pwdPay: pwdPay
 					})
 					.then(data => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						if (data.status == 1) {
 							if (this.transferData.pay_type == 3) {
 								_this.pays(data.msg);
 							} else {
-								_this.$tools.toast('转拍成功');
+								uni.showToast({
+									icon: 'none',
+									title: '转拍成功'
+								});
 								setTimeout(() => {
 									_this.$refs.paymentPassword.modalFun('hide');
 									_this.$refs['showtransfer'].close();
@@ -546,18 +647,23 @@
 							}
 						} else {
 							_this.$refs.paymentPassword.modalFun('hide');
-							_this.$tools.toast(data.msg)
+							uni.showToast({
+								icon: 'none',
+								title: data.msg
+							});
 						}
 					})
 					.catch(err => {
 						_this.$refs.paymentPassword.modalFun('hide');
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						//消息异常
-						_this.$tools.toast('数据加载异常')
+						uni.showToast({
+							icon: 'none',
+							title: '数据加载异常'
+						});
 					});
 			},
 			pays(orderInfo) {
-				let _this = this;
 				jwx({
 					nonceStr: orderInfo.nonceStr,
 					timeStamp: orderInfo.timeStamp,
@@ -565,13 +671,19 @@
 					signType: orderInfo.signType,
 					paySign: orderInfo.paySign
 				}, res => {
-					_this.$tools.toast('转拍成功')
+					uni.showToast({
+						icon: 'none',
+						title: '转拍成功'
+					});
 					setTimeout(() => {
 						_this.initData();
 					}, 1000)
 				}, fail => {
 					console.log(fail)
-					_this.$tools.toast('支付失败')
+					uni.showToast({
+						icon: 'none',
+						title: '支付失败'
+					});
 				})
 			},
 			payChange(e) {
@@ -721,6 +833,9 @@
 		color: #b1b1b1;
 	}
 
+
+
+
 	.main .main-r {
 		height: 88upx;
 		line-height: 88upx;
@@ -787,6 +902,7 @@
 		color: #b1b1b1;
 		height: 80upx;
 		line-height: 80upx;
+
 	}
 
 	.pay-no {
@@ -1000,5 +1116,27 @@
 		color: #FFFFFF;
 		width: 100%;
 		font-size: 33upx;
+	}
+
+	.bank-info .main-l,
+	.bank-info .main-r,
+	.bank-info .pay-intro {
+		text-align: left;
+	}
+
+	.bank-info .main-item {
+		position: relative;
+	}
+
+	.bank-info .main-item .item-copy {
+		position: absolute;
+		right: 30upx;
+		top: 50%;
+		transform: translateY(-50%);
+		padding: 0upx 20upx;
+		border: 1upx solid red;
+		color: red;
+		border-radius: 10upx;
+		font-size: 24upx;
 	}
 </style>

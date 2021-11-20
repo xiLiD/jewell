@@ -42,6 +42,7 @@
     "pages/member/login",
     "pages/member/information",
     "pages/member/protocol",
+    "pages/member/smsLogin",
     "pages/card/list"
   ],
   "subPackages": [],
@@ -89,5 +90,8 @@
       "desc": "获取用户当前位置，以便最近门店为客户提供服务"
     }
   },
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "no-data": "/components/no-data/index"
+  }
 }

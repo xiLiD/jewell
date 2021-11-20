@@ -20,7 +20,7 @@
 			<view class="list-title">商品信息</view>
 			<view class="i_item" v-for="(item, index) in mainItem" :key="index">
 				<view class="i_l" @click="loadInfo(item.id)">
-					<image :src="item.goods_imgs" mode="aspectFill"></image>
+					<image :src="item.goods_imgs[0]" mode="aspectFill"></image>
 				</view>
 				<view class="i_r" @click="loadInfo(item.id)">
 					<view class="i-r-n">x{{ item.num }}</view>

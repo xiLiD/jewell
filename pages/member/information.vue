@@ -187,7 +187,7 @@
 								var user_pay_state = user.user_pay_state; //支付信息
 								if (user_pay_state != 1) {
 									uni.navigateTo({
-										url: '/pages/account/setCard?source=1'
+										url: '/pages/account/findBank'
 									});
 								} else {
 									uni.switchTab({
@@ -268,7 +268,7 @@
 								var user_pay_state = user.user_pay_state; //支付信息
 								if (user_pay_state != 1) {
 									uni.navigateTo({
-										url: '/pages/account/setCard?source=1'
+										url: '/pages/account/findBank'
 									});
 								} else {
 									uni.switchTab({

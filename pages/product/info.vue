@@ -56,12 +56,17 @@
 		</view>
 
 		<view class="dbh"></view>
-		<view class="btn-a" v-if="mainData.start_auction==0">待开始</view>
-		<view class="btn-b" v-else-if="mainData.purchase_state==1">已售罄</view>
-		<view class="bt-cn" v-else>
-			<view class="t-b-p">￥{{ mainData.money }}</view>
-			<view class="t-b-a" @click="saveOrder">立即购买</view>
-		</view>a
+		<view v-show="countDownObject.count_down !== ''">
+			<view class="btn-b" v-if="mainData.purchase_state==1">已售罄</view>
+			<view class="btn-b" v-else-if="countDownObject.count_down == -2">已结束</view>
+			<view class="btn-a" v-else-if="countDownObject.count_down > 0">
+				{{ countDownObject.countDownStr }}
+			</view>
+			<view class="bt-cn" v-if="mainData.purchase_state!=1 && countDownObject.countDownStr == '已开始'">
+				<view class="t-b-p">￥{{ mainData.money }}</view>
+				<view class="t-b-a" @click="saveOrder">立即购买</view>
+			</view>
+		</view>
 
 		<!-- <uni-popup ref="sku" type="bottom">
 			<view class="sku-main">
@@ -98,6 +103,12 @@
 <script>
 	import config from '@/config/config';
 	export default {
+		// computed:{
+		// 	showBtn(){
+		// 		return this.mainData && this.mainData.purchase_state != 1 && (this.mainData.start_auction != 0 && this.countDownObject.countDownStr == '已开始')
+		// 		// return this.mainData && this.mainData.purchase_state != 1 && (this.start_auction != 0 || this.greenInfo.green_load == 1)
+		// 	}
+		// },
 		data() {
 			return {
 				userKey: '',
@@ -126,11 +137,26 @@
 					height: '400upx'
 				},
 				qrCodeUrl: '',
-				isH5: false
+				isH5: false,
+				greenInfo : null, // 绿色通道
+				countDownObject : {
+					countDownStr : '',
+					count_down : 0
+				},
+				timer : null,
 			};
+		},
+		onHide(){
+			console.log('页面隐藏')
+			clearInterval(this.timer)
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
+			// this.getStartTime();
+			// if(this.id){
+			// 	this.getSearch();
+			// 	this.getGoods();
+			// }
 		},
 		onLoad(option) {
 			var user = uni.getStorageSync('uerInfo');
@@ -138,6 +164,8 @@
 				this.userKey = user.userKey;
 			}
 			if (option.id) this.id = parseInt(option.id);
+			
+			this.getSearch();
 			this.getGoods();
 
 			// #ifdef MP-WEIXIN
@@ -151,7 +179,7 @@
 			this.isH5 = true;
 			//#endif
 
-			this.setShare();
+			
 		},
 		onShareAppMessage(res) {
 			this.setShare();
@@ -174,14 +202,73 @@
 			}
 		},
 		methods: {
+			countdown() {
+				let that = this;
+				// let mainItem = JSON.parse((JSON.stringify(that.mainItem)));
+				that.timer = setInterval(function() {
+					if (that.countDownObject.count_down > 1) {
+						that.countDownObject.count_down -= 1;
+						let t = that.countDownObject.count_down;
+						let day = Math.floor(t / 86400);
+						let hour = Math.floor((t / 3600) % 24);
+						let min = Math.floor((t / 60) % 60);
+						let sec = Math.floor((t) % 60);
+						day = day < 10 ? "0" + day : day;
+						hour = hour < 10 ? "0" + hour : hour;
+						min = min < 10 ? "0" + min : min;
+						sec = sec < 10 ? "0" + sec : sec;
+						let format = "";
+						if(day == '00'){
+							format = `待开始：${hour}时${min}分${sec}秒`;
+						}else{
+							format = `待开始：${day}天${hour}时${min}分${sec}秒`;
+						}
+						// that.countDownObject.countDownStr = format
+						that.$set(that.countDownObject,'countDownStr',format)
+					} else {
+						// 进行判断 如果数据内所有的倒计时已经结束，那么结束定时器， 如果没有那么继续执行定时器
+						console.log(that.countDownObject.count_down)
+						clearInterval(that.timer);
+						if (that.countDownObject.count_down == -1 || that.countDownObject.count_down == 1) {
+							// that.countDownObject.countDownStr = '已开始'
+							that.$set(that.countDownObject,'countDownStr','已开始')
+						} else if (that.countDownObject.count_down == -2) {
+							// that.countDownObject.countDownStr = '已结束'
+							that.$set(that.countDownObject,'countDownStr','已结束')
+						}
+					}
+				}, 1000);
+			},
+			getStartTime(id){
+				let _this = this;
+				_this.$request.product
+					.getTime({
+						class_id: id,
+					}).then((res)=>{
+						console.log(res.data)
+						res.data.countDownStr = '';
+						_this.countDownObject = res.data;
+						// _this.countDownObject.countDownStr = '';
+						// this.startTime = res.data.count_down;
+						_this.countdown();
+					})
+			},
+			getSearch() {
+				this.$request.passway
+					.greenload({})
+					.then(data => {
+						this.greenInfo = data.data;
+					})
+			},
 			setShare() {
 				var img = config.SITE + 'static/logo.png';
-				img = this.mainData.goods_imgs;
-				this.shareData.title = '爱秀装' + this.mainData.BrandModelName + '详情';
+				img = this.mainData.goods_imgs[0];
+				this.shareData.title = '爱秀装' + this.mainData.goods_name + '详情';
 				this.shareData.intro = this.mainData.BrandModelName + '同一风格，上百件家具任意组合，比市场便宜50%';
 				this.shareData.imgUrl = img;
 				this.shareData.baseUrl = 'pages/furniture/info?id=' + this.id;
 				this.shareData.url = config.SITE + '#/' + this.shareData.baseUrl;
+				console.log(this.shareData)
 			},
 			selectSku(e) {
 				//选择规格
@@ -212,22 +299,31 @@
 						goods_id: _this.id
 					})
 					.then(data => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						if (data.status == 1) {
 							_this.mainData = data.data;
 							_this.price = data.data.money;
 
 							uni.setNavigationBarTitle({
-								title: _this.mainData.BrandModelName
+								title: _this.mainData.goods_name
 							});
+							
+							this.getStartTime(data.data.class_id)
+							this.setShare();
 						} else {
-							_this.$tools.toast(data.msg)
+							uni.showToast({
+								icon: 'none',
+								title: data.msg
+							});
 						}
 					})
 					.catch(err => {
-						_this.$tools.loadingHide();
+						uni.hideLoading();
 						//消息异常
-						_this.$tools.toast('数据加载异常')
+						uni.showToast({
+							icon: 'none',
+							title: '数据加载异常'
+						});
 					});
 			},
 			saveOrder() {

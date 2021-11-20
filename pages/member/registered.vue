@@ -3,12 +3,19 @@
 		<template>
 			<form>
 				<view class="t-box">
+					<view class="t-item">
+						<input type="text" class="t-input" name="id_card_name" v-model="id_card_name" placeholder="身份证姓名" />
+					</view>
+					<view class="t-item">
+						<input type="text" class="t-input" name="id_card" v-model="id_card" placeholder="身份证号码" />
+					</view>
 					<view class="t-item"><input type="text" class="t-input" name="tel" v-model="tel" placeholder="请输入手机号码" /></view>
 					<view class="t-item">
 						<input type="text" class="t-input" name="code" v-model="code" placeholder="请输入验证码" />
 						<button class="seehouse_get_nub" @click="sendCode" v-if="showText == true">获取验证码</button>
 						<view v-else class="sends">({{ second }}秒)重新获取</view>
 					</view>
+					
 					<view class="t-item">
 						<!-- 						<input type="password" class="t-input" name="passWord" v-model="passWord"
 							placeholder="用户密码" /> -->
@@ -24,6 +31,7 @@
 						<pwInput :inputInfo="{name:'payWord',placeholder:'支付密码'}" ref='payWord'></pwInput>
 					</view>
 					<view class="t-item"><input class="t-input" name="nvitationCode" v-model="nvitationCode" placeholder="邀请码" /></view>
+					
 				</view>
 
 				<view class="b-box"><button class="blt-botton" @click="btnRegister">提交注册</button></view>
@@ -48,7 +56,9 @@
 				payWord: '',
 				nvitationCode: '', //邀请码
 				second: 90,
-				showText: true
+				showText: true,
+				id_card_name: '',
+				id_card: ''
 			};
 		},
 		onLoad(option) {
@@ -125,9 +135,17 @@
 						errorMsg: '邀请码为6个字符'
 					},
 				];
-				console.log(_this.$refs['userPwd'].getPassWord(), _this.$refs['passWorda'].getPassWord())
-				if(_this.$refs['userPwd'].getPassWord() != _this.$refs['passWorda'].getPassWord()){
+
+				if (_this.$refs['userPwd'].getPassWord() != _this.$refs['passWorda'].getPassWord()) {
 					this.$tools.toast('两次输入的密码不一致!')
+					return;
+				}
+				if (!_this.isCardName(_this.id_card_name)) {
+					this.$tools.toast('身份证姓名格式不正确!')
+					return;
+				}
+				if (!_this.isCardNo(_this.id_card)) {
+					this.$tools.toast('身份证格式不正确!')
 					return;
 				}
 				let formData = {
@@ -135,6 +153,8 @@
 					code: _this.code,
 					pawd: _this.$refs['userPwd'].getPassWord(),
 					pay_paw: _this.$refs['payWord'].getPassWord(),
+					id_card : _this.id_card,
+					id_card_name : _this.id_card_name,
 					invitation: _this.nvitationCode
 				}
 				var checkRes = graceChecker.check(formData, rule);
@@ -147,14 +167,14 @@
 							if (data.status == 200) {
 								_this.$tools.toast('注册成功!')
 								_this.$tools.loading('前往登录中...')
-								setTimeout(()=>{
+								setTimeout(() => {
 									_this.$tools.loadingHide();
 									uni.navigateTo({
 										url: '/pages/member/login'
 									});
-									
-								},500)	
-								
+
+								}, 500)
+
 							} else {
 								_this.$tools.toast(data.msg)
 							}
@@ -167,8 +187,84 @@
 				} else {
 					_this.$tools.toast(graceChecker.error)
 				}
+			},
+			isCardName(name){
+				var regName =/^[\u4e00-\u9fa5]{2,4}$/; 
+				if(!regName.test(name)){  
+				   return false; 
+				}
+				return true
+			},
+			isCardNo(num) {
+				num = num.toUpperCase();
+				//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。   
+				if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) {
+					return false;
+				}
+				//校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。 
+				//下面分别分析出生日期和校验位 
+				var len, re;
+				len = num.length;
+				if (len == 15) {
+					re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
+					var arrSplit = num.match(re);
+			
+					//检查生日日期是否正确 
+					var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3] + '/' + arrSplit[4]);
+					var bCorrectDay;
+					bCorrectDay = (dtmBirth.getYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) &&
+						(
+							dtmBirth.getDate() == Number(arrSplit[4]));
+					if (!bCorrectDay) {
+						return false;
+					} else {
+						//将15位身份证转成18位 
+						//校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。 
+						var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+						var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+						var nTemp = 0,
+							i;
+						num = num.substr(0, 6) + '19' + num.substr(6, num.length - 6);
+						for (i = 0; i < 17; i++) {
+							nTemp += num.substr(i, 1) * arrInt[i];
+						}
+						num += arrCh[nTemp % 11];
+						return true;
+					}
+				}
+				if (len == 18) {
+					re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
+					var arrSplit = num.match(re);
+			
+					//检查生日日期是否正确 
+					var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]);
+					var bCorrectDay;
+					bCorrectDay = (dtmBirth.getFullYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) &&
+						(dtmBirth.getDate() == Number(arrSplit[4]));
+					if (!bCorrectDay) {
+						return false;
+					} else {
+						//检验18位身份证的校验码是否正确。 
+						//校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。 
+						var valnum;
+						var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+						var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+						var nTemp = 0,
+							i;
+						for (i = 0; i < 17; i++) {
+							nTemp += num.substr(i, 1) * arrInt[i];
+						}
+						valnum = arrCh[nTemp % 11];
+						if (valnum != num.substr(17, 1)) {
+							return false;
+						}
+						return true;
+					}
+				}
+				return false;
 			}
-		}
+		},
+		
 	};
 </script>
 

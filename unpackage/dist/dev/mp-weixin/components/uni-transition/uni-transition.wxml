@@ -1,1 +1,1 @@
-<block wx:if="{{isShow}}"><view data-ref="ani" data-event-opts="{{[['tap',[['change',['$event']]]]]}}" class="{{['uni-transition data-v-478d279e vue-ref',ani.in]}}" style="{{('transform:'+transform+';'+stylesObject)}}" bindtap="__e"><slot></slot></view></block>
+<block wx:if="{{isShow}}"><view data-ref="ani" data-event-opts="{{[['tap',[['change',['$event']]]]]}}" class="{{['uni-transition data-v-207e9d5d vue-ref',ani.in]}}" style="{{('transform:'+transform+';'+stylesObject)}}" bindtap="__e"><slot></slot></view></block>

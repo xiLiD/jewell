@@ -27,6 +27,11 @@ page {
 	width: 550rpx;
 	margin: 0 auto;
 	margin-top: 50rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
 }
 .top .bt-tx {
 	color: #FFFFFF;

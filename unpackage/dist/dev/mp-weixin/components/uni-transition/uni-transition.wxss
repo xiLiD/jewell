@@ -1,5 +1,5 @@
 
-.uni-transition.data-v-478d279e {
+.uni-transition.data-v-207e9d5d {
 	-webkit-transition-timing-function: ease;
 	        transition-timing-function: ease;
 	-webkit-transition-duration: 0.3s;
@@ -9,56 +9,56 @@
 	transition-property: transform, opacity;
 	transition-property: transform, opacity, -webkit-transform;
 }
-.fade-in.data-v-478d279e {
+.fade-in.data-v-207e9d5d {
 	opacity: 0;
 }
-.fade-active.data-v-478d279e {
+.fade-active.data-v-207e9d5d {
 	opacity: 1;
 }
-.slide-top-in.data-v-478d279e {
+.slide-top-in.data-v-207e9d5d {
 	/* transition-property: transform, opacity; */
 	-webkit-transform: translateY(-100%);
 	        transform: translateY(-100%);
 }
-.slide-top-active.data-v-478d279e {
+.slide-top-active.data-v-207e9d5d {
 	-webkit-transform: translateY(0);
 	        transform: translateY(0);
 	/* opacity: 1; */
 }
-.slide-right-in.data-v-478d279e {
+.slide-right-in.data-v-207e9d5d {
 	-webkit-transform: translateX(100%);
 	        transform: translateX(100%);
 }
-.slide-right-active.data-v-478d279e {
+.slide-right-active.data-v-207e9d5d {
 	-webkit-transform: translateX(0);
 	        transform: translateX(0);
 }
-.slide-bottom-in.data-v-478d279e {
+.slide-bottom-in.data-v-207e9d5d {
 	-webkit-transform: translateY(100%);
 	        transform: translateY(100%);
 }
-.slide-bottom-active.data-v-478d279e {
+.slide-bottom-active.data-v-207e9d5d {
 	-webkit-transform: translateY(0);
 	        transform: translateY(0);
 }
-.slide-left-in.data-v-478d279e {
+.slide-left-in.data-v-207e9d5d {
 	-webkit-transform: translateX(-100%);
 	        transform: translateX(-100%);
 }
-.slide-left-active.data-v-478d279e {
+.slide-left-active.data-v-207e9d5d {
 	-webkit-transform: translateX(0);
 	        transform: translateX(0);
 	opacity: 1;
 }
-.zoom-in-in.data-v-478d279e {
+.zoom-in-in.data-v-207e9d5d {
 	-webkit-transform: scale(0.8);
 	        transform: scale(0.8);
 }
-.zoom-out-active.data-v-478d279e {
+.zoom-out-active.data-v-207e9d5d {
 	-webkit-transform: scale(1);
 	        transform: scale(1);
 }
-.zoom-out-in.data-v-478d279e {
+.zoom-out-in.data-v-207e9d5d {
 	-webkit-transform: scale(1.2);
 	        transform: scale(1.2);
 }

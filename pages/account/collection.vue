@@ -2,7 +2,7 @@
 	<view class="container">
 		<!--用户信息-->
 		<view class="box-s">
-			<view class="menu-list" @click="dump('/pages/account/setCard')">
+			<!-- <view class="menu-list" @click="dump('/pages/account/setCard')">
 				<text class="iconfont">支付宝收款码</text>
 				<text class="menu-r">{{mainData.weiCode?'修改':'设置'}}
 					<text class="uni-icon">&#xe470;</text></text>
@@ -13,6 +13,11 @@
 					<text class="uni-icon">&#xe470;</text></text>
 			</view>
 			<view class="menu-list" @click="dump('/pages/account/setCard')">
+				<text class="iconfont">银行卡</text>
+				<text class="menu-r">{{mainData.bankCode?'修改':'设置'}}
+					<text class="uni-icon">&#xe470;</text></text>
+			</view> -->
+			<view class="menu-list" @click="dump('/pages/account/finBank')">
 				<text class="iconfont">银行卡</text>
 				<text class="menu-r">{{mainData.bankCode?'修改':'设置'}}
 					<text class="uni-icon">&#xe470;</text></text>

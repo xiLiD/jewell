@@ -31,6 +31,15 @@ export default {
 				data: data, //请求数据
 			})
 		},
+		// 入场券购买
+		getcode: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Common/getcode",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
 	},
 	//会员
 	user: {
@@ -128,6 +137,33 @@ export default {
 				data: data, //请求数据
 			})
 		},
+		// 添加银行卡
+		addblank: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Personal/addblank",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 查询银行卡
+		findblank: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Personal/findblank",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 开分公司
+		setZiAdmin: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/User/setZiAdmin",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		}
 	},
 	//收货地址
 	address: {
@@ -357,7 +393,7 @@ export default {
 				data: data, //请求数据
 			})
 		},
-		//转拍查询
+		//转拍提交
 		transfer: function(data) {
 			data = getToken(data)
 			return request({
@@ -375,20 +411,29 @@ export default {
 				data: data, //请求数据
 			})
 		},
-		//转拍提交
-		transfer: function(data) {
-			data = getToken(data)
-			return request({
-				url: "/gzh/Order/transfer",
-				method: "POST", //请求方式
-				data: data, //请求数据
-			})
-		},
+		// //转拍提交
+		// transfer: function(data) {
+		// 	data = getToken(data)
+		// 	return request({
+		// 		url: "/gzh/Order/transfer",
+		// 		method: "POST", //请求方式
+		// 		data: data, //请求数据
+		// 	})
+		// },
 		//置换成银元宝
 		receivingGoods: function(data) {
 			data = getToken(data)
 			return request({
 				url: "/gzh/Order/receivingGoods",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		//确认付款
+		comfirmmoney: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Order/comfirmmoney",
 				method: "POST", //请求方式
 				data: data, //请求数据
 			})
@@ -486,6 +531,15 @@ export default {
 				data: data, //请求数据
 			})
 		},
+		//查询流水类型
+		billType: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/getbilltype",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
 	},
 	//入场券
 	card: {
@@ -499,6 +553,16 @@ export default {
 			})
 		},
 	},
+	passway : {
+		greenload: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/User/greenload",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+	}
 }
 /*
 请求样式：

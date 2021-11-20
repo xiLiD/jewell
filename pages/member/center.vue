@@ -12,6 +12,16 @@
 					<view class="m-rank-up" v-if="mainData.up==1">
 						<image src="../../static/images/up.png" mode="aspectFill"></image>
 					</view>
+					<view class="up-level" v-if="user.zi_admin_state == 0" @click="dump('/pages/company/company')">
+						<i class="iconfont icon-fengongsi" style="font-size: 28rpx;"></i>
+						<text>申请开分公司</text>
+					</view>
+					<view class="up-level get-level" v-else>
+						<i class="iconfont icon-fengongsi" style="font-size: 28rpx;"></i>
+						<text>已入驻分公司</text>
+					</view>
+					
+					
 				</view>
 				<view class="m-ask">邀请码：{{mainData.nvitationCode}}
 					<text class="bth-ask" @click="copyCode">复制</text>
@@ -52,7 +62,7 @@
 				<image src="/static/images/c-4.png" mode="aspectFill"></image>
 				<view>邀请函</view>
 			</view>
-			<view class="center-item" @click="dump('/pages/account/setCard')">
+			<view class="center-item" @click="dump('/pages/account/findBank')">
 				<image src="/static/images/c-5.png" mode="aspectFill"></image>
 				<view>收款设置</view>
 			</view>
@@ -68,6 +78,22 @@
 				<image src="/static/images/c-8.png" mode="aspectFill"></image>
 				<view>我的入场券</view>
 			</view>
+			<view class="center-item" @click="dump('/pages/passway/explain')">
+				<image src="/static/images/icon-explain.png" mode="aspectFill"></image>
+				<view>体验通道</view>
+			</view>
+			<view class="center-item" @click="dump('/pages/passway/passfare')">
+				<image src="/static/images/icon-passfare.png" mode="aspectFill"></image>
+				<view>绿色通道</view>
+			</view>
+			<view class="center-item" @click="dump('/pages/customer/customer')">
+				<image src="/static/images/customer.png" mode="aspectFill"></image>
+				<view>人工客服</view>
+			</view>
+<!-- 			<view class="center-item" @click="dump('/pages/passway/company')">
+				<image src="/static/images/company.png" mode="aspectFill"></image>
+				<view>开分公司</view>
+			</view> -->
 		</view>
 		<view class="dbh"></view>
 
@@ -140,6 +166,9 @@
 					name: '',
 					type: 1,
 					id: 0
+				},
+				user : {
+					
 				}
 			};
 		},
@@ -183,6 +212,7 @@
 							_this.gold_balance = data.data.gold_balance;
 							this.mainData.user_type = data.data.user_type;
 							this.mainData.up = data.data.up;
+							this.user = data.data;
 							if (_this.mainData.up == 1) {
 								uni.setTabBarBadge({
 									index: 3,
@@ -190,7 +220,8 @@
 								})
 							} else {
 								uni.setTabBarBadge({
-									index: 3
+									index: 3,
+									text: ''
 								})
 							}
 						} else {
@@ -436,7 +467,7 @@
 	.m-center {
 		width: 750upx;
 		background-color: #FFFFFF;
-		height: 350upx;
+		height: 500upx;
 		margin-top: 100upx;
 	}
 
@@ -512,5 +543,24 @@
 		background-color: #313035;
 		color: #f3d59f;
 		float: right;
+	}
+	.up-level {
+		margin-top: 6rpx;
+		line-height: 36rpx;
+		border: 1px solid #fff;
+		border-radius: 10upx;
+		padding : 2upx 20upx;
+		margin-left: 15upx;
+		float: left;
+		font-size: 24upx;
+		display: flex;
+		align-items: center;
+	}
+	.up-level text {
+		margin-left: 10rpx;
+	}
+	.get-level {
+		border-color: #333;
+		background-color: #333;
 	}
 </style>

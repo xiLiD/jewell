@@ -38,10 +38,11 @@
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
-		},
-		onLoad(option) {
 			this.initData();
 			this.getUserUp();
+		},
+		onLoad(option) {
+			
 		},
 		onUnload() {
 			(this.PageNo = 1), (this.mainItem = []), (this.loadMoreText = '加载更多'), (this.showLoadMore = false);
@@ -148,7 +149,8 @@
 								})
 							} else {
 								uni.setTabBarBadge({
-									index: 3
+									index: 3,
+									text  : ''
 								})
 							}
 						}

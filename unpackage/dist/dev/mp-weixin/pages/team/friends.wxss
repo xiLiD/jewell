@@ -3,6 +3,13 @@
 page {
 	background-color: #f4f5f6;
 }
+.color-btn{
+	color: #f37483;
+}
+.team-nums{
+	padding: 20rpx 30rpx;
+	color: #f37483;
+}
 .t_se {
 	width: 750rpx;
 	margin: 0 auto;

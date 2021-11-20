@@ -78,4 +78,10 @@
 	color: #000000;
 	font-weight: 600;
 }
+.time_str {
+	text-align: center;
+	font-size: 32rpx;
+	font-weight: bold;
+	color:#e0664f !important
+}
 

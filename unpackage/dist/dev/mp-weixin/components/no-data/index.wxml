@@ -1,0 +1,1 @@
+<view class="noDate"><image src="{{nodata}}" alt class="_img"></image><view>{{value}}</view></view>

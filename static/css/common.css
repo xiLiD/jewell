@@ -84,3 +84,11 @@ page {
 .fl{
 	float: left;
 }
+
+@font-face {
+	font-family:firstFont;
+	src: url('static/font.TTF');
+}
+.firstFont {
+	font-family: firstFont;
+}

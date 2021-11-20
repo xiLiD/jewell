@@ -63,6 +63,8 @@
 	@import './common/colorui/main.css';
 	@import './common/base.scss';
 	@import '/static/css/common.css';
+	@import '/static/font/iconfont.css';
+	// @import 'https://at.alicdn.com/t/font_2910543_rbzgn7v8nz.css';
 
 	/* #ifndef APP-PLUS-NVUE */
 	/* uni.css - 通用组件、模板样式库，可以当作一套ui库应用 */
@@ -104,4 +106,5 @@
 	}
 
 	/* #endif*/
+	
 </style>

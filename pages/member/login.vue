@@ -1,28 +1,41 @@
 <template>
 	<view class="container">
-		<view class="t-box">
-			<view class="t-item">
-				<input type="text" class="t-input" v-model="userName" placeholder="用户名" autocomplete="off" /></view>
-			<view class="t-item">
-				<!-- <input :type="type" name="userPwd" ref="userPwd" class="t-input" v-model="userPwd" @focus="type = 'password'" autocomplete="off" placeholder="登录密码"  /> -->
-				<pwInput  :inputInfo="{name:'userPwd',placeholder:'登录密码'}" ref='pwInput'></pwInput>
+		<view class="type-box">
+			<view :class="['type-pwd firstFont',{'line-active':currentIndex == 0}]" @click="currentIndex=0">账号登录</view>
+			<view :class="['type-code firstFont',{'line-active':currentIndex == 1}]" @click="currentIndex=1">短信登录</view>
+		</view>
+		<template v-if="currentIndex == 0">
+			<view class="t-box">
+				<view class="t-item">
+					<i class="iconfont icon-yonghu"></i>
+					<input type="text" class="t-input" v-model="userName" placeholder="用户名" autocomplete="off" /></view>
+				<view class="t-item">
+					<i class="iconfont icon-ziyuanxhdpi"></i>
+					<!-- <input :type="type" name="userPwd" ref="userPwd" class="t-input" v-model="userPwd" @focus="type = 'password'" autocomplete="off" placeholder="登录密码"  /> -->
+					<pwInput :inputInfo="{name:'userPwd',placeholder:'登录密码'}" ref='pwInput' class="t-input"></pwInput>
+					<view class="to-other">
+						<view class="blt-r" @click="dump('/pages/member/registered?nvitationCode='+invitation)">快速注册</view>
+						<view class="blt-z" @click="dump('/pages/member/retrieve')">忘记密码？</view>
+					</view>
+				</view>
 			</view>
-		</view>
+			<view class="b-box">
+				<view class="blt-botton" @click="btnLogin">{{btnName}}</view>
+				<!-- 			<text class="blt-r" @click="dump('/pages/member/registered')">快速注册</text>
+						<text class="blt-z" @click="dump('/pages/member/retrieve')">忘记密码？</text> -->
+			</view>
+			<view class="bt-x" @click="dump('/pages/member/protocol')">
+				登录即同意
+				<text>《禅艺珠宝用户协议》</text>
+			</view>
+		</template>
 
 
-
-		<view class="b-box">
-			<view class="blt-botton" @click="btnLogin">{{btnName}}</view>
-			<text class="blt-r" @click="dump('/pages/member/registered')">快速注册</text>
-			<text class="blt-z" @click="dump('/pages/member/retrieve')">忘记密码？</text>
-		</view>
+		<template v-else>
+			<smsLogin></smsLogin>
+		</template>
 
 
-
-		<view class="bt-x" @click="dump('/pages/member/protocol')">
-			登录即同意
-			<text>《禅艺珠宝用户协议》</text>
-		</view>
 
 		<!-- <uni-login ref="uniLogin" :isFullScreen="isFullScreen" :isWeiAutomatic="isAutomatic"></uni-login>? -->
 	</view>
@@ -30,7 +43,8 @@
 
 <script>
 	// import uniLogin from '@/components/uni-login/nui-login.vue';
-		import pwInput from '@/components/input/PwInput'
+	import pwInput from '@/components/input/PwInput'
+	import smsLogin from '@/pages/member/smsLogin'
 	import {
 		mapState,
 		mapMutations
@@ -39,7 +53,8 @@
 	export default {
 		components: {
 			// uniLogin
-			pwInput
+			pwInput,
+			smsLogin
 		},
 		data() {
 			return {
@@ -57,7 +72,8 @@
 					UserImg: '',
 					UserNickName: ''
 				},
-				type : 'text'
+				type: 'text',
+				currentIndex: 0
 			};
 		},
 		onShow() {
@@ -72,10 +88,14 @@
 			if (option.isBack) this.isBack = false;
 
 			//推荐码
+			if(option.invitation){
+				this.invitation = option.invitation;
+			}
 			var invitation = uni.getStorageSync('invitation');
 			if (invitation != '') {
 				this.invitation = invitation;
 			}
+			
 			//#ifdef H5
 			var code = this.getUrlCode();
 			if (code) this.isAutomatic = false;
@@ -93,7 +113,7 @@
 			uni.redirectTo({
 				url: '/pages/member/smsLogin'
 			})
-		
+
 			// 修改buttons    
 			// index: 按钮索引, style {WebviewTitleNViewButtonStyles }    
 			// webView.setTitleNViewButtonStyle(0, {    
@@ -102,8 +122,8 @@
 		},
 		methods: {
 			...mapMutations(['login']),
-			getFocus(){
-				this.$refs.userPwd.type = "password"  
+			getFocus() {
+				this.$refs.userPwd.type = "password"
 				this.userPwd = '';
 				this.userName = this.userName;
 			},
@@ -128,14 +148,14 @@
 					that.$tools.toast('请输入密码')
 					return false;
 				}
-				that.$tools.loading('数据提交中')	
+				that.$tools.loading('数据提交中')
 				that.$request.user
 					.login({
 						userName: that.userName,
 						passWord: userPwd
 					})
 					.then(data => {
-						that.$tools.loadingHide();	
+						that.$tools.loadingHide();
 						if (data.status == 200) {
 							that.dealLogin(data.data);
 						} else {
@@ -145,7 +165,7 @@
 					.catch(err => {
 						console.log(err);
 						that.$tools.loadingHide();
-					    that.$tools.toast('数据加载异常');	
+						that.$tools.toast('数据加载异常');
 					});
 			},
 			dealLogin(data) {
@@ -247,17 +267,24 @@
 	}
 
 	.t-box {
-		background-color: #ffffff;
-		width: 92%;
-		margin-left: 4%;
+		/* background-color: #ffffff; */
+		width: 100%;
+		/* margin: 0 auto; */
 		padding: 11.25upx 0 7.5upx 0;
-		margin-top: 37.5upx;
+		/* margin-top: 37.5upx; */
 	}
 
 	.t-item {
-		border-bottom: 1px solid #efefef;
+		border: 1px solid rgb(194, 21, 7);
+		background-color: rgb(240, 240, 240);
+		/* border-bottom: 1px solid #efefef; */
 		margin: 37.5upx 0 56upx 0;
 		clear: both;
+		padding: 10upx 20upx;
+		border-radius: 40upx;
+		display: flex;
+		align-items: center;
+		position: relative;
 	}
 
 	.t-t {
@@ -268,45 +295,50 @@
 	}
 
 	.t-input {
-		margin: 19upx 0 3.75upx 0;
+		/* margin: 19upx 0 3.75upx 0; */
 		height: 49upx;
 		line-height: 49upx;
 		font-size: 26upx;
+		width: 100%;
+		padding-left: 15upx;
+		box-sizing: border-box;
 	}
 
-	.b-box {
-		width: 92%;
-		margin-left: 4%;
+	.t-input uni-input {
+		padding: 0;
 	}
+
 
 	.blt-botton {
-		color: #f8d79f;
-		background-color: #201f24;
+		/* color: #f8d79f; */
+		color: #fff;
+		background-color: rgb(194, 21, 7);
+		/* background-color: #201f24; */
 		margin-bottom: 19upx;
 		width: 100%;
 		text-align: center;
 		height: 86upx;
 		line-height: 86upx;
-		border-radius: 11upx;
+		border-radius: 40upx;
 		font-size: 30upx;
 	}
 
 	.blt-r {
 		color: #5e5e5e;
 		font-size: 22.5upx;
-		float: left;
+		/* float: left; */
 	}
 
 	.blt-z {
 		color: #5e5e5e;
 		font-size: 22.5upx;
-		float: right;
+		/* float: right; */
 	}
 
 	.bt-x {
 		position: fixed;
 		bottom: 75upx;
-		width: 100%;
+		width: 60%;
 		text-align: center;
 		font-size: 22.5upx;
 	}
@@ -318,5 +350,94 @@
 	.b-phone {
 		position: fixed;
 		bottom: 60upx;
+	}
+
+	uni-page-body {
+		width: 100%;
+		height: 100%;
+		background-image: url('../../static/images/login_bg.jpg');
+		background-size: cover;
+		background-position: top left;
+		background-repeat: no-repeat;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.container {
+		width: 65%;
+	}
+
+	.type-box {
+		padding: 20upx 0;
+		width: 360upx;
+		display: flex;
+		justify-content: space-around;
+		border-top: 6upx solid rgb(140, 140, 140);
+		margin: 0 auto 20upx;
+		position: relative;
+	}
+
+/* 	.type-code {
+		position: relative;
+	} */
+
+	.type-box::before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		top:50%;
+		transform: translate(-50%,-50%);
+		width: 6upx;
+		height: 50upx;
+		background-color: rgb(140, 140, 140);
+	}
+
+	.line-active {
+		position: relative;
+	}
+
+	.line-active::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: -10upx;
+		width: 100%;
+		height: 6upx;
+		background-color: rgb(140, 140, 140);
+	}
+
+	.iconfont {
+		color: rgb(194, 21, 7);
+	}
+
+	.to-other {
+		position: absolute;
+		right: -140upx;
+		top: 0upx;
+	}
+
+	.sends {
+		display: inline-block;
+		min-width: 150upx;
+		height: 52.5upx;
+		line-height: 52.5upx;
+		font-size: 22.5upx;
+		border-radius: 7.5upx;
+		text-align: center;
+		background-color: #ffffff;
+		border: 1px solid #9a9a9a;
+		color: #9a9a9a;
+		text-decoration: none;
+		padding: 0 5.625upx;
+		float: right;
+		/* margin-top: -60upx; */
+		z-index: 100;
+	}
+	.type-box view {
+		font-size: 36rpx;
+		font-weight: bold;
+		letter-spacing: 0;
+		
 	}
 </style>

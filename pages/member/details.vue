@@ -31,6 +31,11 @@
 				<text class="menu-r">设置
 					<text class="uni-icon flr">&#xe470;</text></text>
 			</view>
+			<view class="menu-list" @click="dump('/pages/member/retrieve')">
+				<text class="iconfont">账号密码</text>
+				<text class="menu-r">修改
+					<text class="uni-icon flr">&#xe470;</text></text>
+			</view>
 		</view>
 		<view class="otc" @click="loginOut">退出登录</view>
 	</view>

@@ -1,11 +1,14 @@
 <template>
-	<view class="container">
+	<view class="page-container">
 		<template>
 			<form @submit="formSubmit">
 				<view class="t-box">
-					<view class="t-item"><input type="text" class="t-input" name="userName" v-model="userName"
+					<view class="t-item">
+						<i class="iconfont icon-shouji"></i>
+						<input type="text" class="t-input" name="userName" v-model="userName"
 							placeholder="请输入手机号码" /></view>
 					<view class="t-item">
+						<i class="iconfont icon-yduiyanzhengma"></i>
 						<input type="text" class="t-input" name="code" v-model="code" placeholder="请输入验证码" />
 						<button class="seehouse_get_nub" @click="sendCode" v-if="showText == true">获取验证码</button>
 						<view v-else class="sends">({{ second }}秒)重新获取</view>
@@ -172,17 +175,29 @@
 	}
 
 	.t-box {
-		background-color: #ffffff;
-		width: 92%;
-		margin-left: 4%;
+		/* background-color: #ffffff; */
+		width: 100%;
+		/* margin: 0 auto; */
 		padding: 11.25upx 0 7.5upx 0;
-		margin-top: 37.5upx;
+		/* margin-top: 37.5upx; */
 	}
-
-	.t-item {
+/* 	.t-item {
 		border-bottom: 1px solid #efefef;
 		margin: 37.5upx 0 56upx 0;
 		clear: both;
+	} */
+	
+	.t-item {
+		border: 1px solid rgb(194,21,7);
+		background-color: rgb(240,240,240);
+		/* border-bottom: 1px solid #efefef; */
+		margin: 37.5upx 0 56upx 0;
+		clear: both;
+		padding: 10upx 20upx;
+		border-radius: 40upx;
+		display: flex;
+		align-items: center;
+		position: relative;
 	}
 
 	.t-t {
@@ -193,26 +208,29 @@
 	}
 
 	.t-input {
-		margin: 19upx 0 3.75upx 0;
+		/* margin: 19upx 0 3.75upx 0; */
 		height: 49upx;
 		line-height: 49upx;
 		font-size: 26upx;
+		padding-left: 10upx;
 	}
 
 	.b-box {
-		width: 92%;
-		margin-left: 4%;
+		width: 100%;
+		/* margin-left: 4%; */
 	}
 
-	.blt-botton {
-		color: #f8d79f;
-		background-color: #201f24;
+.blt-botton {
+		/* color: #f8d79f; */
+		color:#fff;
+		background-color: rgb(194,21,7);
+		/* background-color: #201f24; */
 		margin-bottom: 19upx;
 		width: 100%;
 		text-align: center;
 		height: 86upx;
 		line-height: 86upx;
-		border-radius: 11upx;
+		border-radius: 40upx;
 		font-size: 30upx;
 	}
 
@@ -230,7 +248,7 @@
 
 	.seehouse_get_nub {
 		display: inline-block;
-		min-width: 150upx;
+		min-width: 200upx;
 		height: 52.5upx;
 		line-height: 52.5upx;
 		font-size: 22.5upx;
@@ -240,14 +258,14 @@
 		border: 1px solid #9a9a9a;
 		color: #9a9a9a;
 		text-decoration: none;
-		float: right;
-		margin-top: -60upx;
+		/* float: right; */
+		/* margin-top: -60upx; */
 		z-index: 100;
 	}
 
 	.sends {
 		display: inline-block;
-		min-width: 150upx;
+		min-width: 200upx;
 		height: 52.5upx;
 		line-height: 52.5upx;
 		font-size: 22.5upx;
@@ -259,7 +277,10 @@
 		text-decoration: none;
 		padding: 0 5.625upx;
 		float: right;
-		margin-top: -60upx;
+		/* margin-top: -60upx; */
 		z-index: 100;
+	}
+	.iconfont {
+		color: rgb(194, 21, 7);
 	}
 </style>
