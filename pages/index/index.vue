@@ -540,7 +540,7 @@
 		display: inline-block;
 		/* margin-left: 20upx; */
 		position: absolute;
-		left: 20upx;
+		left: 10upx;
 		top: 10upx;
 		line-height: 1.1;
 		/* margin-top:10upx; */

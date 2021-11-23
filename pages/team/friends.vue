@@ -17,11 +17,7 @@
 				<view>{{item.user_name}}</view>
 				<view>{{item.nub}}</view>
 				<view>{{typeItem.find(p=>p.id==item.user_type).name}}</view>
-				<view class="uni-list-cell-db">
-				    <picker @change="bindPickerChange" :value="index" :range="array">
-				        <view class="color-btn">打赏</view>
-				    </picker>
-				</view>
+				<view class="color-btn" @click="dump(`/pages/account/reward?id=${item.id}`)">打赏</view>
 			</view>
 			<view v-if="mainItem.length == 0">
 				<noData ref="noData"></noData>
@@ -80,11 +76,17 @@
 				this.setListData();
 			}, 300);
 		},
+
 		onPullDownRefresh() {
 			//上拉刷新
 			this.initData();
 		},
 		methods: {
+			dump(url) {
+				uni.navigateTo({
+					url: url
+				});
+			},
 			search(res) {
 				this.keyWords = res.value;
 				this.initData();
@@ -121,9 +123,9 @@
 					.then(data => {
 						_this.$tools.loadingHide();
 						if (data.status == 1) {
-							this.amount_record = data.data.amount_record
+							_this.amount_record = data.data.amount_record
 							_this.mainItem = _this.mainItem.concat(data.data.friend);
-							if (data.data.length < _this.PageSize) {
+							if (data.data.friend.length < _this.PageSize) {
 								this.loadMoreText = '没有更多数据了';
 								_this.isMore = false;
 							} else {
@@ -142,7 +144,10 @@
 						//消息异常
 						_this.$tools.toast('数据加载异常')
 					});
-			}
+			},
+			bindPickerChange(e){
+				console.log(e.detail.value,'11111')
+			},
 		}
 	};
 </script>

@@ -68,7 +68,11 @@
         ,{
             "path" : "pages/company/company",
             "style": {"navigationBarTitleText": "开分公司"}
-        }
+        },
+		{
+		    "path" : "pages/account/reward",
+		    "style": {"navigationBarTitleText": "打赏"}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

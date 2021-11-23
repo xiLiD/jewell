@@ -128,6 +128,16 @@ export default {
 				data: data, //请求数据
 			})
 		},
+		// 我的好友  打赏
+		  reward: function(data) {
+		   data = getToken(data)
+		   return request({
+		    url: "/gzh/Bill/reward",
+		    method: "POST", //请求方式
+		    data: data, //请求数据
+		   })
+		  },
+		  
 		// 升级信息
 		getUp: function(data) {
 			data = getToken(data)
@@ -136,6 +146,15 @@ export default {
 				method: "POST", //请求方式
 				data: data, //请求数据
 			})
+		},
+		// 订单拆分
+		substitution: function(data) {
+		 data = getToken(data)
+		 return request({
+		  url: "/gzh/Order/substitution",
+		  method: "POST", //请求方式
+		  data: data, //请求数据
+		 })
 		},
 		// 添加银行卡
 		addblank: function(data) {
@@ -564,15 +583,3 @@ export default {
 		},
 	}
 }
-/*
-请求样式：
-    自定义名字: function(data) {
-        return request({
-            url: "/banner", //请求头
-            method: "GET", //请求方式 
-            data: data,    //请求数据
-            token: token, // 可传  
-            hideLoading: false, //加载样式
-        })
-    },
-*/
