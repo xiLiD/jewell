@@ -129,6 +129,11 @@
 				clearInterval(this.timer);
 			}
 		},
+		beforeDestroy(){
+			if(this.timer){
+				clearInterval(this.timer);
+			}
+		},
 		onUnload() {
 			if (this.timer) {
 				clearInterval(this.timer);

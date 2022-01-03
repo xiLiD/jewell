@@ -12,6 +12,86 @@ const getToken = (data) => {
 }
 //全局定义请求头
 export default {
+	blind : {
+		// 查询用户抽奖次数
+		usergiftinfo: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/gift/usergiftinfo",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 用户抽奖接口
+		havegift: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/gift/havegift",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 查询最近10条所有用户中奖记录
+		selectgift: function(data) {
+			data = getToken(data)
+			
+			return request({
+
+				url: "/gzh/gift/selectgift",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 查询奖品列表
+		recentlog: function(data) {
+			data = getToken(data)
+			
+			return request({
+				hideLoading : true,				
+				url: "/gzh/gift/recentlog",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 查询我的中奖记录
+		mygift: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/gift/mygift",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 根据奖品ID查询奖品详细信息
+		giftinfo: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/giftinfo",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+	},
+	income : {
+		// 查询当天订单收益
+		earning: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/earning",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 查询当月订单收益
+		monthearning: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/monthearning",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+	},
 	common: {
 		// //支付
 		paySundries: function(data) {
@@ -555,6 +635,44 @@ export default {
 			data = getToken(data)
 			return request({
 				url: "/gzh/Bill/getbilltype",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		
+		
+		// 当天团队
+		teamearning: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/teamearning",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 本月团队
+		monthteam: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/monthteam",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 佣金
+		billbalance: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/billbalance",
+				method: "POST", //请求方式
+				data: data, //请求数据
+			})
+		},
+		// 团队佣金
+		monthbalance: function(data) {
+			data = getToken(data)
+			return request({
+				url: "/gzh/Bill/monthbalance",
 				method: "POST", //请求方式
 				data: data, //请求数据
 			})

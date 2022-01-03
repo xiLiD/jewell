@@ -77,6 +77,7 @@
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
+			// this.getStartTime();
 		},
 		onLoad(option) {
 			var user = uni.getStorageSync('uerInfo');
@@ -92,6 +93,23 @@
 			}
 		},
 		methods: {
+			getStartTime(id){
+				let _this = this;
+				_this.$request.product
+					.getTime({
+						class_id: id,
+					}).then((res)=>{
+						if(res.data.count_down != -1){
+							_this.$tools.toast('未到开始时间！')
+							setTimeout(()=>{
+								uni.reLaunch({
+									url : '/pages/index/index'
+								})
+							},500)
+							
+						}
+					})
+			},
 			getProduct() {
 				var _this = this;
 
@@ -107,6 +125,7 @@
 							data.data.num = num;
 							_this.mainItem = _this.mainItem.concat(data.data);
 							_this.dealNum();
+							this.getStartTime(data.data.class_id);
 						} else {
 							_this.$tools.toast(data.msg)
 						}

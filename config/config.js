@@ -1,9 +1,12 @@
 module.exports = {
-	// API_SITE: "http://cypaipai.com/index.php", //请求地址
+	API_SITE: "https://zypaipai.cn/index.php", //请求地址
+	// API_SITE: "https://zypaipai.cn/index.php",
+	files : 'https://zypaipai.cn',
 	// API_SITE: "http://ningjingkj.com/index.php", //请求地址
-	API_SITE : 'http://119.23.77.226/index.php', // 请求地址
-	SITE: "http://119.23.77.226/home/", //地址,
-	// SITE: "http://cypaipai.com/home/", //地址,
+	// API_SITE : 'http://119.23.77.226/index.php', // 请求地址
+	// SITE: "http://119.23.77.226/home/", //地址,
+	
+	SITE: "https://zypaipai.cn/home/", //地址,
 	H5Wei:{
 		AppId:'wxec649220f8b334dc'
 	},

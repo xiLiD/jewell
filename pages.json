@@ -73,6 +73,20 @@
 		    "path" : "pages/account/reward",
 		    "style": {"navigationBarTitleText": "打赏"}
 		}
+        ,{
+            "path" : "pages/blindbox/index",
+            "style": {"navigationBarTitleText": "盲盒"}
+        },{
+            "path" : "pages/income/index",
+            "style": {"navigationBarTitleText": "收益统计"}
+        }
+        ,{
+            "path" : "pages/account/teamView",
+            "style": {"navigationBarTitleText": "团队奖"}
+        },{
+            "path" : "pages/account/balanceView",
+            "style": {"navigationBarTitleText": "佣金报表"}
+        } 
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

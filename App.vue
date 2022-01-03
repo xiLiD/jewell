@@ -104,7 +104,13 @@
 		font-size: 38rpx;
 		color: #808080;
 	}
-
+	
+	.uni-pagination {
+		width: 100%;
+	}
+	.uni-tabbar__reddot {
+		display: none;
+	}
 	/* #endif*/
 	
 </style>

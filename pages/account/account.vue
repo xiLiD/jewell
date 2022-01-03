@@ -25,7 +25,12 @@
 				<view class="m-num">￥{{recommend}}</view>
 				<view class="m-link">奖励明细<text class="uni-icon">&#xe470;</text></view>
 			</view>
-			<view class="m-item" @click="dump('/pages/account/recommend?type=2')">
+<!-- 			<view class="m-item" @click="dump('/pages/account/recommend?type=2')">
+				<view class="m-title">团队奖</view>
+				<view class="m-num">￥{{reward}}</view>
+				<view class="m-link">奖励明细<text class="uni-icon">&#xe470;</text></view>
+			</view> -->
+			<view class="m-item" @click="dump('/pages/account/teamView')">
 				<view class="m-title">团队奖</view>
 				<view class="m-num">￥{{reward}}</view>
 				<view class="m-link">奖励明细<text class="uni-icon">&#xe470;</text></view>

@@ -121,9 +121,12 @@
 						.then(data => {
 							_this.$tools.loadingHide();
 							if (data.status == 200 || data.status == 201) {
-								uni.navigateTo({
-									url: '/pages/member/login'
-								});
+								_this.$tools.toast('修改成功')
+								setTimeout(()=>{
+									uni.navigateTo({
+										url: '/pages/member/login'
+									});
+								},1500)
 							} else {
 								_this.$tools.toast(data.msg)
 							}

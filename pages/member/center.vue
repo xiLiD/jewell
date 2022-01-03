@@ -46,19 +46,19 @@
 		</view>
 
 		<view class="m-center">
-			<view class="center-item" @click="dump('/pages/order/list?type=1')">
+			<view class="center-item no-top" @click="dump('/pages/order/list?type=1')">
 				<image src="/static/images/c-1.png" mode="aspectFill"></image>
 				<view>我的买单</view>
 			</view>
-			<view class="center-item" @click="dump('/pages/order/list?type=2')">
+			<view class="center-item no-top" @click="dump('/pages/order/list?type=2')">
 				<image src="/static/images/c-2.png" mode="aspectFill"></image>
 				<view>我的卖单</view>
 			</view>
-			<view class="center-item" @click="dump('/pages/order/buyList')">
+			<view class="center-item no-top" @click="dump('/pages/order/buyList')">
 				<image src="/static/images/c-3.png" mode="aspectFill"></image>
 				<view>实物订单</view>
 			</view>
-			<view class="center-item" @click="dump('/pages/team/invitation')">
+			<view class="center-item no-top" @click="dump('/pages/team/invitation')">
 				<image src="/static/images/c-4.png" mode="aspectFill"></image>
 				<view>邀请函</view>
 			</view>
@@ -89,6 +89,14 @@
 			<view class="center-item" @click="dump('/pages/customer/customer')">
 				<image src="/static/images/customer.png" mode="aspectFill"></image>
 				<view>人工客服</view>
+			</view>
+			<view class="center-item" @click="dump('/pages/income/index')">
+				<image src="/static/images/income.png" mode="aspectFill"></image>
+				<view>收益统计</view>
+			</view>
+			<view class="center-item" @click="dump('/pages/blindbox/index')">
+				<image src="/static/images/blind-logo.png" mode="aspectFill"></image>
+				<view>盲盒</view>
 			</view>
 <!-- 			<view class="center-item" @click="dump('/pages/passway/company')">
 				<image src="/static/images/company.png" mode="aspectFill"></image>
@@ -465,18 +473,25 @@
 	}
 
 	.m-center {
-		width: 750upx;
+		width: 100%;
 		background-color: #FFFFFF;
-		height: 500upx;
+		/* height: 500upx; */
 		margin-top: 100upx;
+		display: flex;
+		flex-wrap: wrap;
+		padding : 30upx 0;
+		box-sizing: border-box;
 	}
 
 	.center-item {
 		width: 180upx;
-		float: left;
+		/* float: left; */
 		text-align: center;
 		color: #9c9c9c;
 		margin-top: 30upx;
+	}
+	.no-top {
+		margin-top: 0;
 	}
 
 	.center-item image {

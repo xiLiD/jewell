@@ -6,14 +6,14 @@
 		<view class="team-nums">今日团队成交量: {{amount_record}}</view>
 		<view class="t-main">
 			<view class="main-title">
-				<view>ID</view>
-				<view>昵称</view>
-				<view>会员数</view>
-				<view>会员等级</view>
+				<view>姓名</view>
+				<view>总交易量</view>
+				<view>本日交易量</view>
+				<view>等级</view>
 				<view></view>
 			</view>
 			<view class="main-item" v-for="(item, index) in mainItem" :key="index">
-				<view>{{item.id}}</view>
+				<view>{{item.user_name}}</view>
 				<view>{{item.user_name}}</view>
 				<view>{{item.nub}}</view>
 				<view>{{typeItem.find(p=>p.id==item.user_type).name}}</view>

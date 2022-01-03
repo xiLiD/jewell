@@ -76,19 +76,34 @@ page {
 .clear {
 	clear: both;
 }
+
 .dbh {
 	height: 3.5rem;
 	width: 100%;
 	overflow: hidden;
 }
-.fl{ 
+
+.fl {
 	float: left;
 }
 
 @font-face {
-	font-family:firstFont;
+	font-family: firstFont;
 	src: url('static/font.TTF');
 }
+
 .firstFont {
 	font-family: firstFont;
+}
+
+.font-weight {
+	font-weight: bold;
+}
+
+.space-mini {
+	letter-spacing: 1px;
+}
+
+.space-middle {
+	letter-spacing: 2px;
 }

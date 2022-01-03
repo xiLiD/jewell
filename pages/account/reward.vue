@@ -3,7 +3,7 @@
 		<template>
 			<form @submit="formSubmit">
 				<view class="t-box">
-					<view class="t-item">账户数额：{{balance}}</view>
+					<view class="t-item">账户数额：{{ index == 0 ? userInfo.gold_balance : userInfo.acer_truncatum }}</view>
 					<view class="t-item">
 						<view class="">
 						    选择打赏类型:
@@ -36,19 +36,20 @@
 		},
 		data() {
 			return {
-				phone: '',
+				id: '',
 				balance: 0,
 				isSubmit: false, //是否提交中
 				array: ['佣金', '金元宝'],
-				index:'',
-				price: ''
+				index:0,
+				price: '',
+				userInfo : {}
 			};
 		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
 		},
 		onLoad(option) {
-			this.phone = option.id;
+			this.id = option.id;
 			this.getUserAccont();
 		},
 		methods: {
@@ -59,11 +60,12 @@
 					.getUserData({})
 					.then(data => {
 						if (data.status == 1) {
-							if (_this.type == 2) {
-								_this.balance = data.data.gold_balance;
-							} else {
-								_this.balance = data.data.acer_truncatum;
-							}
+							// if (_this.type == 2) {
+							// 	_this.balance = data.data.gold_balance;
+							// } else {
+							// 	_this.balance = data.data.acer_truncatum;
+							// }
+							_this.userInfo = data.data;
 						} else {
 							_this.$tools.toast(data.msg);
 						}
@@ -79,8 +81,8 @@
 			},
 			openPwd() {
 				var _this = this;
-				if (_this.phone == '') {
-					_this.$tools.toast('请输入正确的转赠手机号')
+				if (_this.id == '') {
+					_this.$tools.toast('请输入正确的打赏id')
 					return false;
 				}
 				if (_this.index === '') {
@@ -115,9 +117,9 @@
 				_this.$tools.loading('数据提交中')
 				_this.$request.user
 					.reward({
-						type: _this.index,
+						type: _this.index == 0 ? 2 : 1,
 						money: _this.price,
-						phone: _this.phone,
+						user_id: _this.id,
 						pwdPay: e.value
 					})
 					.then(data => {

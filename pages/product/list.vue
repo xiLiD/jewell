@@ -1,14 +1,22 @@
 <template>
 	<view class="container">
-		<view class="t_se">
-			<uni-search-bar radius="100" placeholder="请输入关键词" cancelButton="none" @confirm="search" />
+		<view class="t_top">
+			<view class="t_se">
+				<uni-search-bar radius="100" placeholder="请输入关键词" cancelButton="none" @confirm="search" />
+			</view>
+			<view class="time_str">{{ countDownObject.countDownStr }}</view>
+			<uni-pagination title="标题文字" show-icon="true" :pageSize="PageSize" :total="PageTotal" :current="PageNo" @change="handleChange"></uni-pagination>
 		</view>
-		<view class="time_str">{{ countDownObject.countDownStr }}</view>
 		<view class="t_main">
 			<view class="t_item" v-for="(item, index) in mainItem" :key="index" @click="dumpInfo(item.id)">
-				<view class="t-status t-status-a" v-if="item.start_auction==0">待开始</view>
+<!-- 				<view class="t-status t-status-a" v-if="item.start_auction==0">待开始</view>
 				<view class="t-status t-status-b" v-else-if="item.purchase_state==1">已售罄</view>
-				<view class="t-status t-status-b" v-else-if="item.purchase_state==2">进行中</view>
+				<view class="t-status t-status-b" v-else-if="item.purchase_state==2">进行中</view> -->
+				
+				<view class="t-status t-status-a" v-if="countDownObject.count_down>0">待开始</view>
+				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-1">进行中</view>
+				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-2">已结束</view>
+				<view class="t-status t-status-b" v-else-if="item.purchase_state==1">已售罄</view>
 				<view class="t_img">
 					<image :src="item.goods_imgs" mode="aspectFill"></image>
 				</view>
@@ -32,14 +40,15 @@
 				showLoadMore: false,
 				isMore: true,
 				PageNo: 1,
-				PageSize: 10,
+				PageSize: 30,
+				PageTotal : 0,
 				mainItem: [],
 				keyWords: '' ,//搜索关键词
 				countDownObject : {
 					countDownStr : '',
 					count_down : 0
 				},
-				timer : null
+				timer : null,
 			};
 		},
 		onShow() {
@@ -47,7 +56,13 @@
 			this.getStartTime();
 		},
 		onHide(){
-			console.log('页面隐藏')
+			console.log(this.timer)
+			if(this.timer){
+				clearInterval(this.timer);
+			}
+		},
+		beforeDestroy(){
+			console.log(this.timer)
 			if(this.timer){
 				clearInterval(this.timer);
 			}
@@ -76,18 +91,22 @@
 		  // // 此处一定姚要return为true，否则页面不会返回到指定路径
 		  // return true;
 		},
-		onReachBottom() {
-			//下拉加载
-			this.showLoadMore = true;
-			setTimeout(() => {
-				this.setListData();
-			}, 300);
-		},
+		// onReachBottom() {
+		// 	//下拉加载
+		// 	this.showLoadMore = true;
+		// 	setTimeout(() => {
+		// 		this.setListData();
+		// 	}, 300);
+		// },
 		onPullDownRefresh() {
 			//上拉刷新
 			this.initData();
 		},
 		methods: {
+			handleChange(params) {
+				this.PageNo = params.current;
+				this.getPage();
+			},
 			countdown() {
 				let that = this;
 				that.timer = setInterval(function() {
@@ -174,22 +193,32 @@
 					})
 					.then(data => {
 						uni.hideLoading();
-						if (data.status == 1) {
-							_this.mainItem = _this.mainItem.concat(data.data);
-							if (data.data.length < _this.PageSize) {
-								this.loadMoreText = '没有更多数据了';
-								_this.isMore = false;
-							} else {
-								_this.showLoadMore = false;
-								_this.isMore = true;
-							}
-						} else {
-							_this.showLoadMore = false;
-							uni.showToast({
-								icon: 'none',
-								title: data.msg
-							});
+						
+						if(data.status == 1){
+							_this.mainItem = data.data
+						}else {
+							_this.mainItem = []
 						}
+						console.log(data)
+						this.PageTotal = data.count;
+						// if (data.status == 1) {
+							
+						// 	_this.mainItem = _this.mainItem.concat(data.data);
+						// 	if (data.data.length < _this.PageSize) {
+						// 		this.loadMoreText = '没有更多数据了';
+						// 		_this.isMore = false;
+						// 	} else {
+						// 		_this.showLoadMore = false;
+						// 		_this.isMore = true;
+						// 	}
+						// } else {
+							
+						// 	_this.showLoadMore = false;
+						// 	uni.showToast({
+						// 		icon: 'none',
+						// 		title: data.msg
+						// 	});
+						// }
 					})
 					.catch(err => {
 						_this.showLoadMore = false;
@@ -206,10 +235,20 @@
 </script>
 
 <style>
+	page {
+		height: 100%;
+	}
+	.t_top {
+		position: sticky;
+		top: 44px;
+		background-color: #fff;
+		z-index: 99999;
+		padding: 10upx 0;
+	}
 	.t_se {
 		width: 690upx;
 		margin: 0 auto;
-		margin-top: 10upx;
+		/* margin-top: 10upx; */
 	}
 
 	.t_main {

@@ -150,6 +150,9 @@
 			console.log('页面隐藏')
 			clearInterval(this.timer)
 		},
+		beforeDestroy() {
+			clearInterval(this.timer)
+		},
 		onShow() {
 			this.$store.commit('judgeLogin'); //判断登录状态
 			// this.getStartTime();

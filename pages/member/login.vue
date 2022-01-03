@@ -26,7 +26,7 @@
 			</view>
 			<view class="bt-x" @click="dump('/pages/member/protocol')">
 				登录即同意
-				<text>《禅艺珠宝用户协议》</text>
+				<text>《艺拍拍(深圳)用户协议》</text>
 			</view>
 		</template>
 
@@ -186,7 +186,7 @@
 					user_name: data.user_name,
 					user_type: data.user_type
 				});
-
+					
 				uni.switchTab({
 					url: '/pages/member/center'
 				});

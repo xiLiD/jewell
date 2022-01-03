@@ -128,7 +128,7 @@
 									uni.navigateTo({
 										url: '/pages/member/details'
 									});
-								},500)
+								},1500)
 
 							} else {
 								_this.$tools.toast(data.msg)

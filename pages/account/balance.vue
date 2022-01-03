@@ -9,6 +9,7 @@
 		<view class="main-bottom">
 			<!-- <view class="btn-con" @click="dump('/pages/account/recharge')">充值</view> -->
 			<view class="btn-con" @click="dump('/pages/account/withdrawal?type=2')">提现</view>
+			<view class="btn-con" @click="dump('/pages/account/balanceView')" style="margin-top:20upx">佣金报表</view>
 		</view>
 	</view>
 </template>

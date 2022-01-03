@@ -40,7 +40,11 @@ const store = new Vuex.Store({
 			state.user_head = provider.user_head;
 			state.user_name = provider.user_name;
 			state.user_type = provider.user_type;
-				
+			
+			// state.token = '37f34f1a770233695df0fa00d4adcb9ca03688d9'
+			
+			console.log(state)
+			// return
 			uni.setStorage({ //将用户信息保存在本地  
 				key: 'uerInfo',
 				data: provider
@@ -104,7 +108,7 @@ const store = new Vuex.Store({
 				// 	});
 				// } else if (user_pay_state != 1) {
 				// 	uni.navigateTo({
-				// 		url: '/pages/account/setCard?source=1'
+				// 		url: '/pages/account/setCard?source=1'	
 				// 	});
 				// }
 			}

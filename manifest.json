@@ -144,7 +144,7 @@
         }
     },
     "h5" : {
-        "title" : "禅艺珠宝",
+        "title" : "艺拍拍(深圳)",
         "router" : {
             "mode" : "hash",
             "base" : "/home/"
@@ -170,6 +170,6 @@
                 }
             }
         },
-        "domain" : "http://119.23.77.226/home/"
+        "domain" : "https://zypaipai.cn/home/"
     }
 }

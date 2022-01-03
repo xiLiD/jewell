@@ -109,7 +109,7 @@
 					this.mainItem = [];
 
 					this.getPage();
-					this.getUserAccont();
+					// this.getUserAccont();
 					uni.stopPullDownRefresh();
 				}, 300);
 			},

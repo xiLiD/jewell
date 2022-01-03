@@ -5,6 +5,7 @@ import store from '../store/index.js'
 export default class Request {
     http(param) {
         // 请求参数
+		console.log(param)
         var url = param.url,
             method = param.method,
             header = {},
@@ -46,6 +47,7 @@ export default class Request {
         }
 
         //加载圈
+		console.log()
         if (!hideLoading) {
             uni.showLoading({
                 title: '加载中...'
@@ -87,6 +89,7 @@ export default class Request {
                     // }
                     // 将结果抛出
 					if(res.data.status == -1){
+						wx.hideTabBar()
 						uni.showToast({
 						        title: "登录失效!" + res.data.msg,
 						        icon: 'none'
@@ -94,6 +97,8 @@ export default class Request {
 							uni.redirectTo({
 								url : '/pages/member/login?back=0'
 							})
+					}else {
+						wx.showTabBar()
 					}
                     resolve(res.data)
                 },
