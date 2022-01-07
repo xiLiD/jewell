@@ -14,9 +14,11 @@
 				<view class="t-status t-status-b" v-else-if="item.purchase_state==2">进行中</view> -->
 				
 				<view class="t-status t-status-a" v-if="countDownObject.count_down>0">待开始</view>
-				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-1">进行中</view>
 				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-2">已结束</view>
 				<view class="t-status t-status-b" v-else-if="item.purchase_state==1">已售罄</view>
+				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-1">进行中</view>
+				
+				
 				<view class="t_img">
 					<image :src="item.goods_imgs" mode="aspectFill"></image>
 				</view>
@@ -132,7 +134,7 @@
 						// 进行判断 如果数据内所有的倒计时已经结束，那么结束定时器， 如果没有那么继续执行定时器
 						clearInterval(that.timer);
 						if (that.countDownObject.count_down == -1) {
-							that.$set(that.countDownObject,'countDownStr','已开始')
+							that.$set(that.countDownObject,'countDownStr','进行中')
 						} else if (that.countDownObject.count_down == -2) {
 							that.$set(that.countDownObject,'countDownStr','已结束')
 						}

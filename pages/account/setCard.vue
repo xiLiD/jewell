@@ -79,20 +79,20 @@
 			};
 		},
 		onShow() {
-			var user = uni.getStorageSync('uerInfo');
-			if (user == '') {
-				// #ifdef APP-PLUS
-				uni.navigateTo({
-					url: '/pages/member/login?isBack=0'
-				});
-				// #endif
-				// #ifndef APP-PLUS
-				uni.redirectTo({
-					url: '/pages/member/login?isBack=0'
-				});
-				// #endif
-				return;
-			}
+			// var user = uni.getStorageSync('uerInfo');
+			// if (user == '') {
+			// 	// #ifdef APP-PLUS
+			// 	uni.reLaunch({
+			// 		url: '/pages/member/login?isBack=0'
+			// 	})
+			// 	// #endif
+			// 	// #ifndef APP-PLUS
+			// 	uni.reLaunch({
+			// 		url: '/pages/member/login?isBack=0'
+			// 	})
+			// 	// #endif
+			// 	return;
+			// }
 		},
 		onLoad(option) {
 			if (option.source) this.isPerfect = true;

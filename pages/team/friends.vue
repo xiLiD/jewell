@@ -13,8 +13,8 @@
 				<view></view>
 			</view>
 			<view class="main-item" v-for="(item, index) in mainItem" :key="index">
-				<view>{{item.user_name}}</view>
-				<view>{{item.user_name}}</view>
+				<view>{{item.id_card_name}}</view>
+				<view>{{item.zongjiaoyi_money}}</view>
 				<view>{{item.nub}}</view>
 				<view>{{typeItem.find(p=>p.id==item.user_type).name}}</view>
 				<view class="color-btn" @click="dump(`/pages/account/reward?id=${item.id}`)">打赏</view>

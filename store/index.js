@@ -95,9 +95,12 @@ const store = new Vuex.Store({
 			//处理登录
 			var user = uni.getStorageSync('uerInfo');
 			if (user == '') {
-				uni.navigateTo({
-					url: '/pages/member/login?isBack=0'
-				});
+				// uni.navigateTo({
+				// 	url: '/pages/member/login?isBack=0'
+				// });
+				uni.reLaunch({
+					url: '/pages/member/login'
+				})
 				return;
 			} else {
 				var information_state = user.information_state; //基础信息

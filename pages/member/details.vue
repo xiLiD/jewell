@@ -63,7 +63,10 @@
 			loginOut() {
 				//退出登录
 				this.$store.commit('logout'); //判断登录状态
-				this.dump('/pages/member/login')
+				// this.dump('/pages/member/login')
+				uni.reLaunch({
+					url: '/pages/member/login'
+				})
 			},
 			getUserData() {
 				//获取用户信息

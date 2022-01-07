@@ -59,20 +59,26 @@
 			};
 		},
 		onShow() {
-			var user = uni.getStorageSync('uerInfo');
-			if (user == '') {
-				// #ifdef APP-PLUS
-				uni.navigateTo({
-					url: '/pages/member/login?isBack=0'
-				});
-				// #endif
-				// #ifndef APP-PLUS
-				uni.redirectTo({
-					url: '/pages/member/login?isBack=0'
-				});
-				// #endif
-				return;
-			}
+			// var user = uni.getStorageSync('uerInfo');
+			// if (user == '') {
+			// 	// #ifdef APP-PLUS
+			// 	// uni.navigateTo({
+			// 	// 	url: '/pages/member/login?isBack=0'
+			// 	// });
+			// 	uni.reLaunch({
+			// 		url: '/pages/member/login'
+			// 	})
+			// 	// #endif
+			// 	// #ifndef APP-PLUS
+			// 	// uni.redirectTo({
+			// 	// 	url: '/pages/member/login?isBack=0'
+			// 	// });
+			// 	uni.reLaunch({
+			// 		url: '/pages/member/login'
+			// 	})
+			// 	// #endif
+			// 	return;
+			// }
 		},
 		onLoad() {},
 		methods: {

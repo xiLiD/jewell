@@ -41,7 +41,7 @@
 		},
 		onNavigationBarButtonTap(e) { //点击事件
 			console.log("success-------------", e)
-			uni.redirectTo({
+			uni.reLaunch({
 				url: '/pages/member/login'
 			})
 		

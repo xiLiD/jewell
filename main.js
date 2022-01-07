@@ -38,6 +38,8 @@ Vue.prototype.$tools = tools;
 
 Vue.component('uni-popup',uniPopup)
 
+
+
 Vue.prototype.$request = api;
 
 App.mpType = 'app'
@@ -46,6 +48,9 @@ App.mpType = 'app'
 import noData from 'components/no-data/index'
 
 Vue.component('noData',noData)
+
+
+
 
 const app = new Vue({
     ...App

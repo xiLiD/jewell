@@ -77,8 +77,10 @@ export default {
 }
 input {
 	font-size:12px;
-	padding: 10upx 0;
-	height: initial;
+	// padding: 10upx 0;
+	height: 48upx;
+	height: 100%;
+	font-size: 26upx;
 	line-height: initial;
 }
 </style>

@@ -57,12 +57,12 @@
 
 		<view class="dbh"></view>
 		<view v-show="countDownObject.count_down !== ''">
-			<view class="btn-b" v-if="mainData.purchase_state==1">已售罄</view>
-			<view class="btn-b" v-else-if="countDownObject.count_down == -2">已结束</view>
-			<view class="btn-a" v-else-if="countDownObject.count_down > 0">
+			<view class="btn-a" v-if="countDownObject.count_down > 0">
 				{{ countDownObject.countDownStr }}
 			</view>
-			<view class="bt-cn" v-if="mainData.purchase_state!=1 && countDownObject.countDownStr == '已开始'">
+			<view class="btn-b" v-else-if="countDownObject.count_down == -2">已结束</view>
+			<view class="btn-b" v-else-if="mainData.purchase_state==1">已售罄</view>
+			<view class="bt-cn" v-if="mainData.purchase_state!=1 && countDownObject.countDownStr == '进行中'">
 				<view class="t-b-p">￥{{ mainData.money }}</view>
 				<view class="t-b-a" @click="saveOrder">立即购买</view>
 			</view>
@@ -234,7 +234,7 @@
 						clearInterval(that.timer);
 						if (that.countDownObject.count_down == -1 || that.countDownObject.count_down == 1) {
 							// that.countDownObject.countDownStr = '已开始'
-							that.$set(that.countDownObject,'countDownStr','已开始')
+							that.$set(that.countDownObject,'countDownStr','进行中')
 						} else if (that.countDownObject.count_down == -2) {
 							// that.countDownObject.countDownStr = '已结束'
 							that.$set(that.countDownObject,'countDownStr','已结束')

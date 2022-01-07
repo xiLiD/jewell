@@ -264,6 +264,15 @@ export default {
 			})
 		}
 	},
+	// 排行榜
+	  paihang: function(data) {
+	   data = getToken(data)
+	   return request({
+	    url: "/gzh/user/paihang",
+	    method: "POST", //请求方式
+	    data: data, //请求数据
+	   })
+	  },
 	//收货地址
 	address: {
 		// 列表

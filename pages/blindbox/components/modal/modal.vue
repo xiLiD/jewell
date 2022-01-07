@@ -6,6 +6,7 @@
 			<view class="modal-desc space-mini">
 				<view>1、每周每五个订单获得一次抽盲盒机会</view>
 				<view>2、每周最多获得两次机会</view>
+				<view>3、完成订单数量每周清空，不累积至下周</view>
 			</view>
 		</view>
 	</view>

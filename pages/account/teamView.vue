@@ -2,7 +2,7 @@
 	<view class="pager-box team-pager">
 		<view class="team-menu">
 			<view class="team-menu-box space-mini">
-				<view :class="['team-menu-item',{'active': menu == 1}]" @click="checkMenu(1)">昨日</view>
+				<view :class="['team-menu-item',{'active': menu == 1}]" @click="checkMenu(1)">今日</view>
 				<view :class="['team-menu-item',{'active': menu == 2}]" @click="checkMenu(2)">本月</view>
 			</view>
 			<view class="team-income">

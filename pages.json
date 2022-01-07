@@ -77,9 +77,13 @@
             "path" : "pages/blindbox/index",
             "style": {"navigationBarTitleText": "盲盒"}
         },{
-            "path" : "pages/income/index",
-            "style": {"navigationBarTitleText": "收益统计"}
-        }
+            "path" : "pages/income/paihang",
+            "style": {"navigationBarTitleText": "排行榜"}
+        },
+		{
+		    "path" : "pages/income/index",
+		    "style": {"navigationBarTitleText": "收益统计"}
+		}
         ,{
             "path" : "pages/account/teamView",
             "style": {"navigationBarTitleText": "团队奖"}

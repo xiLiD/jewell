@@ -169,10 +169,12 @@
 								_this.$tools.loading('前往登录中...')
 								setTimeout(() => {
 									_this.$tools.loadingHide();
-									uni.navigateTo({
+									// uni.navigateTo({
+									// 	url: '/pages/member/login'
+									// });
+									uni.reLaunch({
 										url: '/pages/member/login'
-									});
-
+									})
 								}, 500)
 
 							} else {

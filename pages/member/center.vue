@@ -94,6 +94,10 @@
 				<image src="/static/images/income.png" mode="aspectFill"></image>
 				<view>收益统计</view>
 			</view>
+			<view class="center-item" @click="dump('/pages/income/paihang')">
+				<image src="/static/images/paihang.png" mode="aspectFill"></image>
+				<view>排行榜</view>
+			</view>
 			<view class="center-item" @click="dump('/pages/blindbox/index')">
 				<image src="/static/images/blind-logo.png" mode="aspectFill"></image>
 				<view>盲盒</view>
@@ -186,6 +190,7 @@
 			this.getUserData();
 		},
 		onLoad(option) {
+			uni.showTabBar()
 			var user = uni.getStorageSync('uerInfo');
 			this.mainData.nickName = user.user_name;
 			this.mainData.headImg = user.user_head;

@@ -3,7 +3,7 @@
 		<template>
 			<form @submit="formSubmit">
 				<view class="t-box">
-					<view class="t-item">账户数额：{{ index == 0 ? userInfo.gold_balance : userInfo.acer_truncatum }}</view>
+					<view class="t-item">账户数额：{{ index == 0 ? userInfo.balance : userInfo.acer_truncatum }}</view>
 					<view class="t-item">
 						<view class="">
 						    选择打赏类型:
@@ -93,7 +93,7 @@
 					_this.$tools.toast('请输入打赏金额')
 					return false;
 				}
-				if (parseFloat(_this.price) > _this.balance) {
+				if (parseFloat(_this.price) < _this.balance) {
 					_this.$tools.toast('账户余额不足')
 					return false;
 				}
@@ -109,7 +109,7 @@
 					_this.$tools.toast('请输入正确的转赠金额')
 					return false;
 				}
-				if (parseFloat(_this.price) > _this.balance) {
+				if (parseFloat(_this.price) < _this.balance) {
 					_this.$tools.toast('账户余额不足')
 					return false;
 				}

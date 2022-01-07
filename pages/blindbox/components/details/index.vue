@@ -104,9 +104,9 @@
 	padding: 0 30upx;
 }
 .gift-image {
-	width: 400upx;
+	width: 240upx;
 /* 	height: 300upx; */
-	margin: 40upx auto;
+	margin: 20upx auto;
 }
 .gift-image image {
 	width: 100%;

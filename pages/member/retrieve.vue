@@ -172,9 +172,12 @@
 						.then(data => {
 							_this.$tools.loadingHide();
 							if (data.status == 200 || data.status == 201) {
-								uni.navigateTo({
+								// uni.navigateTo({
+								// 	url: '/pages/member/login'
+								// });
+								uni.reLaunch({
 									url: '/pages/member/login'
-								});
+								})
 							} else {
 								_this.$tools.toast(data.msg)
 							}

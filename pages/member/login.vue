@@ -26,7 +26,7 @@
 			</view>
 			<view class="bt-x" @click="dump('/pages/member/protocol')">
 				登录即同意
-				<text>《艺拍拍(深圳)用户协议》</text>
+				<text>《艺拍拍(深圳)拍卖有限公司用户协议》</text>
 			</view>
 		</template>
 
@@ -84,6 +84,7 @@
 			// uni.switchTab({
 			// 	url: '/pages/member/center'
 			// });
+			console.log('隐藏')
 			if (option.source) this.isAutomatic = false;
 			if (option.isBack) this.isBack = false;
 
@@ -186,7 +187,7 @@
 					user_name: data.user_name,
 					user_type: data.user_type
 				});
-					
+				// uni.showTabBar()
 				uni.switchTab({
 					url: '/pages/member/center'
 				});
@@ -338,7 +339,6 @@
 	.bt-x {
 		position: fixed;
 		bottom: 75upx;
-		width: 60%;
 		text-align: center;
 		font-size: 22.5upx;
 	}

@@ -172,7 +172,7 @@
 							let flag = that.mainItem.every((val, ind) => val.count_down <= 0);
 							if (flag) clearInterval(that.timer);
 							if (item.count_down == -1) {
-								item.countDownStr = '已开始'
+								item.countDownStr = '进行中'
 								that.$set(that.mainItem, index, item)
 								// that.$set(that.mainItem, index, '已开始')
 								// item.countDownStr = `已开始`; // 结束文案
