@@ -12,16 +12,16 @@
 				<thead class="space-mini">
 					<tr>
 						<td>排名</td>
-						<td>名称</td>
+						<td width="30%">名称</td>
 						<!-- <td>订单数量</td> -->
-						<td>金额</td>
+						<td width="30%">金额</td>
 						<td>收益(元)</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(item,index) in dayList" :key="item.id" :index ="item.index + 1">
 						<td>{{index + 1}}</td>
-						<td>{{item.receiving_name}}</td>
+						<td>{{item.user_name}}</td>
 						<!-- <td>{{item.user_increase}}</td> -->
 						<td>{{item.money}}</td>
 						<td>{{item.earnings}}</td>
@@ -64,9 +64,7 @@
 						type : type
 					})
 					.then(data => {
-						this.dayList = data.data
-						
-						// this.$tools.toast(data.msg)
+						this.dayList = data.data || []
 					}).catch((err) => {
 						console.log(err)
 					})

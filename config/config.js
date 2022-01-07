@@ -6,7 +6,10 @@ module.exports = {
 	// API_SITE : 'http://119.23.77.226/index.php', // 请求地址
 	// SITE: "http://119.23.77.226/home/", //地址,
 	
-	SITE: "https://zypaipai.cn/home/", //地址,
+	// SITE: "https://zypaipai.cn/home/", //地址,
+	
+	SITE: "https://hnzypaipai.cn/home/", //地址,
+	
 	H5Wei:{
 		AppId:'wxec649220f8b334dc'
 	},

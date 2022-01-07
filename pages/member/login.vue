@@ -81,10 +81,22 @@
 			// this.$tools.tosat('123s')
 		},
 		onLoad(option) {
-			// uni.switchTab({
-			// 	url: '/pages/member/center'
-			// });
-			console.log('隐藏')
+			
+			// #ifdef APP-PLUS
+			let webView = this.$scope.$getAppWebview();
+			webView.setStyle({
+				titleNView:{
+					autoBackButton:false
+				}
+			})
+			// #endif
+			
+			// #ifdef H5
+			var webH5 = document.getElementsByClassName('uni-page-head-btn')[0];
+			webH5.style.display = 'none';
+			// #endif
+			
+			
 			if (option.source) this.isAutomatic = false;
 			if (option.isBack) this.isBack = false;
 
@@ -101,14 +113,17 @@
 			var code = this.getUrlCode();
 			if (code) this.isAutomatic = false;
 			//#endif
+			
+			
+
 		},
-		onBackPress(options) {
-			if (options.from === 'navigateBack') {
-				return false;
-			}
-			this.back();
-			return true;
-		},
+		// onBackPress(options) {
+		// 	if (options.from === 'navigateBack') {
+		// 		return false;
+		// 	}
+		// 	this.back();
+		// 	return true;
+		// },
 		onNavigationBarButtonTap(e) { //点击事件
 			console.log("success-------------", e)
 			uni.redirectTo({
@@ -341,6 +356,9 @@
 		bottom: 75upx;
 		text-align: center;
 		font-size: 22.5upx;
+		left:50%;
+		transform: translateX(-50%);
+		width: 90%;
 	}
 
 	.bt-x text {
@@ -439,5 +457,8 @@
 		font-weight: bold;
 		letter-spacing: 0;
 		
+	}
+	.uni-page-head-btn {
+		display: none;
 	}
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="t_se">
-			<uni-search-bar radius="100" placeholder="手机号搜索" cancelButton="none" @confirm="search" />
+			<uni-search-bar radius="100" placeholder="输入下级手机号" cancelButton="none" @confirm="search" />
 		</view>
 		<view class="team-nums">今日团队成交量: {{amount_record}}</view>
 		<view class="t-main">
@@ -15,7 +15,7 @@
 			<view class="main-item" v-for="(item, index) in mainItem" :key="index">
 				<view>{{item.id_card_name}}</view>
 				<view>{{item.zongjiaoyi_money}}</view>
-				<view>{{item.nub}}</view>
+				<view>{{item.dangtian_money}}</view>
 				<view>{{typeItem.find(p=>p.id==item.user_type).name}}</view>
 				<view class="color-btn" @click="dump(`/pages/account/reward?id=${item.id}`)">打赏</view>
 			</view>
@@ -88,6 +88,10 @@
 				});
 			},
 			search(res) {
+				if(!this.isPoneAvailable(res.value) && res.value){
+					this.$tools.toast('请输入正确手机号!')
+					return
+				}
 				this.keyWords = res.value;
 				this.initData();
 			},
@@ -111,6 +115,14 @@
 				this.PageNo += 1;
 				if (this.isMore) this.getPage();
 			},
+			isPoneAvailable: function (pone) {
+			    var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+			    if (!myreg.test(pone)) {
+			      return false;
+			    } else {
+			      return true;
+			    }
+			},
 			getPage() {
 				var _this = this;
 				uni.showLoading({
@@ -118,7 +130,8 @@
 				});
 				_this.$request.user
 					.friends({
-						page: _this.PageNo
+						page: _this.PageNo,
+						phone : this.keyWords
 					})
 					.then(data => {
 						_this.$tools.loadingHide();
