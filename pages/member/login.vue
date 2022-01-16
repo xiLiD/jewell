@@ -20,22 +20,29 @@
 				</view>
 			</view>
 			<view class="b-box">
-				<view class="blt-botton" @click="btnLogin">{{btnName}}</view>
+				<view :class="['blt-botton',{'n-agree-check': !agreeCheck }]" @click="btnLogin">{{btnName}}</view>
 				<!-- 			<text class="blt-r" @click="dump('/pages/member/registered')">快速注册</text>
 						<text class="blt-z" @click="dump('/pages/member/retrieve')">忘记密码？</text> -->
 			</view>
-			<view class="bt-x" @click="dump('/pages/member/protocol')">
-				登录即同意
-				<text>《艺拍拍(深圳)拍卖有限公司用户协议》</text>
-			</view>
+
+			
 		</template>
 
 
 		<template v-else>
-			<smsLogin></smsLogin>
+			<smsLogin :value="agreeCheck"></smsLogin>
 		</template>
 
-
+		<view class="bt-bottom">
+			<switch type="checkbox" :checked="agreeCheck" color="#201f24" style="transform:scale(0.7)"
+				@change="checkChange"></switch>
+			<!-- <checkbox value="cb" :checked="loginLock" style="transform:scale(0.7)" @click="loginLock = !loginLock" /> -->
+			<!-- <label class="radio"> <checkbox value="cb" :checked="loginLock" /></label> -->
+			<view class="bt-x" @click="dump('/pages/member/protocol')">
+				已阅读
+				<text>《艺拍拍(深圳)拍卖有限公司用户协议》</text>
+			</view>
+		</view>	
 
 		<!-- <uni-login ref="uniLogin" :isFullScreen="isFullScreen" :isWeiAutomatic="isAutomatic"></uni-login>? -->
 	</view>
@@ -58,6 +65,7 @@
 		},
 		data() {
 			return {
+				agreeCheck : false,
 				userName: '',
 				userPwd: '',
 				invitation: '', //邀请码
@@ -138,6 +146,9 @@
 		},
 		methods: {
 			...mapMutations(['login']),
+			checkChange(e) {
+				this.agreeCheck = e.detail.value;
+			},
 			getFocus() {
 				this.$refs.userPwd.type = "password"
 				this.userPwd = '';
@@ -155,6 +166,9 @@
 			},
 			btnLogin() {
 				var that = this;
+				if(!that.agreeCheck){
+					return
+				}
 				if (that.userName == '') {
 					that.$tools.toast('请输入账号')
 					return false;
@@ -351,7 +365,7 @@
 		/* float: right; */
 	}
 
-	.bt-x {
+	.bt-bottom {
 		position: fixed;
 		bottom: 75upx;
 		text-align: center;
@@ -359,6 +373,17 @@
 		left:50%;
 		transform: translateX(-50%);
 		width: 90%;
+		display: flex;
+	}
+
+	.bt-x {
+/* 		position: fixed;
+		bottom: 75upx;
+		text-align: center;
+		font-size: 22.5upx;
+		left:50%;
+		transform: translateX(-50%);
+		width: 90%; */
 	}
 
 	.bt-x text {
@@ -460,5 +485,10 @@
 	}
 	.uni-page-head-btn {
 		display: none;
+	}
+	.n-agree-check {
+		color: #fff;
+		    background-color: #c8c9cc;
+		    border-color: #c8c9cc;
 	}
 </style>

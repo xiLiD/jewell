@@ -1,0 +1,109 @@
+/* #ifndef APP-PLUS-NVUE */
+page {
+	min-height: 99%;
+	height: auto;
+}
+
+/* #endif */
+
+/* 解决头条小程序字体图标不显示问题，因为头条运行时自动插入了span标签，且有全局字体 */
+/* #ifdef MP-TOUTIAO */
+/* text :not(view) {
+    font-family: uniicons;
+} */
+/* #endif */
+
+
+.w100 {
+	width: 100%;
+}
+
+.l {
+	float: left;
+}
+
+.r {
+	float: right;
+}
+
+.uni-panel-icon {
+	margin-left: 15px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: normal;
+	transform: rotate(0deg);
+	transition-duration: 0s;
+	transition-property: transform;
+}
+
+.uni-panel-icon-on {
+	transform: rotate(180deg);
+}
+
+.uni-navigate-item {
+	flex-direction: row;
+	align-items: center;
+	background-color: #FFFFFF;
+	border-top-style: solid;
+	border-top-color: #f0f0f0;
+	border-top-width: 1px;
+	padding: 12px;
+}
+
+.uni-navigate-item:active {
+	background-color: #f8f8f8;
+}
+
+.uni-navigate-text {
+	flex: 1;
+	color: #000000;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.uni-navigate-icon {
+	margin-left: 15px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+
+.red {
+	color: #e0664f !important;
+}
+
+.clear {
+	clear: both;
+}
+
+.dbh {
+	height: 3.5rem;
+	width: 100%;
+	overflow: hidden;
+}
+
+.fl {
+	float: left;
+}
+
+@font-face {
+	font-family: firstFont;
+	src: url('static/font.TTF');
+}
+
+.firstFont {
+	font-family: firstFont;
+}
+
+.font-weight {
+	font-weight: bold;
+}
+
+.space-mini {
+	letter-spacing: 1px;
+}
+
+.space-middle {
+	letter-spacing: 2px;
+}

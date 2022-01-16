@@ -1,7 +1,7 @@
 {
-    "name" : "禅艺珠宝",
-    "appid" : "__UNI__D497715",
-    "description" : "禅艺珠宝",
+    "name" : "艺拍拍",
+    "appid" : "__UNI__7069107",
+    "description" : "艺拍拍",
     "versionName" : "1.0.0",
     "versionCode" : 1,
     "transformPx" : false,
@@ -9,7 +9,11 @@
         "nvueCompiler" : "uni-app",
         "compilerVersion" : 3,
         "modules" : {
-            "VideoPlayer" : {}
+            "VideoPlayer" : {},
+            "OAuth" : {},
+            "Payment" : {},
+            "Share" : {},
+            "Maps" : {}
         },
         "compatible" : {
             "ignoreVersion" : true //忽略版本检测
@@ -19,19 +23,31 @@
                 "permissions" : [
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
                     "<uses-permission android:name=\"android.permission.CAMERA\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CONTROL_LOCATION_UPDATES\"/>",
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
                     "<uses-permission android:name=\"android.permission.INSTALL_LOCATION_PROVIDER\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
                     "<uses-permission android:name=\"android.permission.LOCATION_HARDWARE\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
                     "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>"
+                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
             "ios" : {
@@ -74,10 +90,10 @@
             },
             "icons" : {
                 "android" : {
-                    "hdpi" : "unpackage/res/icons/72x72.png",
-                    "xhdpi" : "unpackage/res/icons/96x96.png",
-                    "xxhdpi" : "unpackage/res/icons/144x144.png",
-                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                    "hdpi" : "D:/project/uni-app/app/logo-72.png",
+                    "xhdpi" : "D:/project/uni-app/app/logo-96.png",
+                    "xxhdpi" : "D:/project/uni-app/app/logo-144.png",
+                    "xxxhdpi" : "D:/project/uni-app/app/logo-192.png"
                 },
                 "ios" : {
                     "appstore" : "unpackage/res/icons/1024x1024.png",
@@ -106,18 +122,18 @@
             },
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "unpackage/startup/b-480-762.png",
-                    "xhdpi" : "unpackage/startup/b-720-1242.png",
-                    "xxhdpi" : "unpackage/startup/b-1080-1882.png"
+                    "hdpi" : "",
+                    "xhdpi" : "",
+                    "xxhdpi" : ""
                 },
                 "ios" : {
                     "iphone" : {
-                        "portrait-896h@3x" : "unpackage/startup/b-1242-2688.png",
-                        "portrait-896h@2x" : "unpackage/startup/b-828-1792.png",
-                        "iphonex" : "unpackage/startup/b-1125-2436.png",
-                        "retina55" : "unpackage/startup/b-1242-2208.png",
-                        "retina47" : "unpackage/startup/b-750-1334.png",
-                        "retina40" : "unpackage/startup/b-640-1136.png"
+                        "portrait-896h@3x" : "",
+                        "portrait-896h@2x" : "",
+                        "iphonex" : "",
+                        "retina55" : "",
+                        "retina47" : "",
+                        "retina40" : ""
                     }
                 },
                 "androidStyle" : "common",

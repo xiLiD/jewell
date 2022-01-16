@@ -8,17 +8,13 @@
 			<uni-pagination title="标题文字" show-icon="true" :pageSize="PageSize" :total="PageTotal" :current="PageNo" @change="handleChange"></uni-pagination>
 		</view>
 		<view class="t_main">
-			<view class="t_item" v-for="(item, index) in mainItem" :key="index" @click="dumpInfo(item.id)">
-<!-- 				<view class="t-status t-status-a" v-if="item.start_auction==0">待开始</view>
-				<view class="t-status t-status-b" v-else-if="item.purchase_state==1">已售罄</view>
-				<view class="t-status t-status-b" v-else-if="item.purchase_state==2">进行中</view> -->
-				
+			<view class="t_item t_miss" v-for="(item, index) in mainItem" :key="index" @click="dumpInfo(item.id)">
 				<view class="t-status t-status-a" v-if="countDownObject.count_down>0">待开始</view>
 				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-2">已结束</view>
-				<view class="t-status t-status-b" v-else-if="item.purchase_state==1">已售罄</view>
+				<view class="png-status" v-else-if="item.purchase_state==1">
+					<image src="../../static/images/sell-out-r.png" mode="widthFix"></image>
+				</view>	
 				<view class="t-status t-status-b" v-else-if="countDownObject.count_down==-1">进行中</view>
-				
-				
 				<view class="t_img">
 					<image :src="item.goods_imgs" mode="aspectFill"></image>
 				</view>
@@ -44,7 +40,9 @@
 				PageNo: 1,
 				PageSize: 30,
 				PageTotal : 0,
-				mainItem: [],
+				mainItem: [
+					
+				],
 				keyWords: '' ,//搜索关键词
 				countDownObject : {
 					countDownStr : '',
@@ -265,6 +263,8 @@
 		width: 330upx;
 		float: left;
 		margin-top: 20upx;
+		position: relative;
+		/* z-index: 999; */
 	}
 
 	.t_item:nth-child(even) {
@@ -341,5 +341,14 @@
 		font-size: 32upx;
 		font-weight: bold;
 		color:#e0664f !important
+	}
+	.png-status {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+		width: 300upx;
+		height: 300upx;
+		z-index: 100;
 	}
 </style>

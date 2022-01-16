@@ -15,7 +15,7 @@
 					</view>
 				</view>
 
-				<view class="b-box"><button formType="submit" class="blt-botton">验证登录</button></view>
+				<view class="b-box"><button formType="submit" :class="['blt-botton',{'n-agree-check': !value }]">验证登录</button></view>
 			</form>
 		</template>
 	</view>
@@ -28,6 +28,11 @@
 	} from 'vuex';
 	var graceChecker = require('@/common/graceChecker.js');
 	export default {
+		props:{
+		    value:{
+		        type: Boolean
+		    }        
+		},
 		data() {
 			return {
 				userName: '',
@@ -37,6 +42,7 @@
 			};
 		},
 		onLoad(option) {
+			
 			if (option.nvitationCode) this.nvitationCode = parseInt(option.nvitationCode);
 		},
 		onNavigationBarButtonTap(e) { //点击事件
@@ -50,6 +56,9 @@
 			// webView.setTitleNViewButtonStyle(0, {    
 			//       text: '完成',    
 			// });
+		},
+		mounted(){
+			console.log(this.agreeCheck)
 		},
 		methods: {
 						...mapMutations(['login']),
@@ -124,6 +133,9 @@
 
 			formSubmit(e) {
 				var _this = this;
+				if(!_this.value){
+					return
+				}
 				//定义表单规则
 				var rule = [{
 						name: 'userName',
@@ -282,5 +294,10 @@
 	}
 	.iconfont {
 		color: rgb(194, 21, 7);
+	}
+	.n-agree-check {
+		color: #fff;
+		    background-color: #c8c9cc;
+		    border-color: #c8c9cc;
 	}
 </style>
