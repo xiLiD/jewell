@@ -86,45 +86,48 @@
                         "appsecret" : "db720521cb49562481f9ec30379380d5",
                         "UniversalLinks" : "https://www.ejoooo.com/"
                     }
+                },
+                "push" : {
+                    "unipush" : {}
                 }
             },
             "icons" : {
                 "android" : {
-                    "hdpi" : "D:/project/uni-app/app/logo-72.png",
-                    "xhdpi" : "D:/project/uni-app/app/logo-96.png",
-                    "xxhdpi" : "D:/project/uni-app/app/logo-144.png",
-                    "xxxhdpi" : "D:/project/uni-app/app/logo-192.png"
+                    "hdpi" : "unpackage/res/icons/ypp-72.png",
+                    "xhdpi" : "unpackage/res/icons/ypp-96.png",
+                    "xxhdpi" : "unpackage/res/icons/ypp-144.png",
+                    "xxxhdpi" : "unpackage/res/icons/ypp-192.png"
                 },
                 "ios" : {
-                    "appstore" : "unpackage/res/icons/1024x1024.png",
+                    "appstore" : "unpackage/res/icons/ypp-1024.png",
                     "ipad" : {
-                        "app" : "unpackage/res/icons/76x76.png",
-                        "app@2x" : "unpackage/res/icons/152x152.png",
-                        "notification" : "unpackage/res/icons/20x20.png",
-                        "notification@2x" : "unpackage/res/icons/40x40.png",
-                        "proapp@2x" : "unpackage/res/icons/167x167.png",
-                        "settings" : "unpackage/res/icons/29x29.png",
-                        "settings@2x" : "unpackage/res/icons/58x58.png",
-                        "spotlight" : "unpackage/res/icons/40x40.png",
-                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                        "app" : "unpackage/res/icons/ypp-76.png",
+                        "app@2x" : "unpackage/res/icons/ypp-152.png",
+                        "notification" : "unpackage/res/icons/ypp-20.png",
+                        "notification@2x" : "unpackage/res/icons/ypp-40.png",
+                        "proapp@2x" : "unpackage/res/icons/ypp-167.png",
+                        "settings" : "unpackage/res/icons/ypp-29.png",
+                        "settings@2x" : "unpackage/res/icons/ypp-58.png",
+                        "spotlight" : "unpackage/res/icons/ypp-40.png",
+                        "spotlight@2x" : "unpackage/res/icons/ypp-80.png"
                     },
                     "iphone" : {
-                        "app@2x" : "unpackage/res/icons/120x120.png",
-                        "app@3x" : "unpackage/res/icons/180x180.png",
-                        "notification@2x" : "unpackage/res/icons/40x40.png",
-                        "notification@3x" : "unpackage/res/icons/60x60.png",
-                        "settings@2x" : "unpackage/res/icons/58x58.png",
-                        "settings@3x" : "unpackage/res/icons/87x87.png",
-                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
-                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                        "app@2x" : "unpackage/res/icons/ypp-120.png",
+                        "app@3x" : "unpackage/res/icons/ypp-180.png",
+                        "notification@2x" : "unpackage/res/icons/ypp-40.png",
+                        "notification@3x" : "unpackage/res/icons/ypp-60.png",
+                        "settings@2x" : "unpackage/res/icons/ypp-58.png",
+                        "settings@3x" : "unpackage/res/icons/ypp-87.png",
+                        "spotlight@2x" : "unpackage/res/icons/ypp-80.png",
+                        "spotlight@3x" : "unpackage/res/icons/ypp-120.png"
                     }
                 }
             },
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "",
-                    "xhdpi" : "",
-                    "xxhdpi" : ""
+                    "hdpi" : "unpackage/res/drawable/drawable-hdpi/yipp480_9.9.png",
+                    "xhdpi" : "unpackage/res/drawable/drawable-xhdpi/yipp480_9.9.png",
+                    "xxhdpi" : "unpackage/res/drawable/drawable-xxhdpi/yipp480_9.9.png"
                 },
                 "ios" : {
                     "iphone" : {
@@ -136,12 +139,13 @@
                         "retina40" : ""
                     }
                 },
-                "androidStyle" : "common",
-                "iosStyle" : "common"
+                "androidStyle" : "default",
+                "iosStyle" : "common",
+                "useOriginalMsgbox" : true
             }
         },
         "splashscreen" : {
-            "waiting" : false
+            "waiting" : true
         },
         "nativePlugins" : {}
     },

@@ -9,6 +9,7 @@
 					<view class="t-item">
 						<input type="text" class="t-input" name="id_card" v-model="id_card" placeholder="身份证号码" />
 					</view>
+					<view class="t-item"><input type="text" class="t-input" maxlength="8" name="user_name" v-model="user_name" placeholder="昵称" /></view>
 					<view class="t-item"><input type="text" class="t-input" name="tel" v-model="tel" placeholder="请输入手机号码" /></view>
 					<view class="t-item">
 						<input type="text" class="t-input" name="code" v-model="code" placeholder="请输入验证码" />
@@ -58,7 +59,8 @@
 				second: 90,
 				showText: true,
 				id_card_name: '',
-				id_card: ''
+				id_card: '',
+				user_name : ''
 			};
 		},
 		onLoad(option) {
@@ -135,7 +137,10 @@
 						errorMsg: '邀请码为6个字符'
 					},
 				];
-
+				if(_this.user_name == ''){
+					this.$tools.toast('昵称不能为空!');
+					return;
+				}
 				if (_this.$refs['userPwd'].getPassWord() != _this.$refs['passWorda'].getPassWord()) {
 					this.$tools.toast('两次输入的密码不一致!')
 					return;
@@ -155,7 +160,8 @@
 					pay_paw: _this.$refs['payWord'].getPassWord(),
 					id_card : _this.id_card,
 					id_card_name : _this.id_card_name,
-					invitation: _this.nvitationCode
+					invitation: _this.nvitationCode,
+					user_name : _this.user_name
 				}
 				var checkRes = graceChecker.check(formData, rule);
 				if (checkRes) {
